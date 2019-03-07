@@ -14,23 +14,26 @@ int A_1 = 1, A_2 = 0;
 
 bool state1 = true, state2 = true;
 
-float theta1c=0, theta2c=0;
+float pwmx1=80, pwmx2=40, pwmx4=120;
+float theta1c=0, theta2c=0, zeroError1 = 62.513, zeroError2=51.58, minAngle1 = 21.30,minAngle2 = -39.3;  //58.8795  50.4
 int x;
 
 volatile int temp1, counter1 = 0;
 volatile int temp2 , counter2 = 0;
+
 void setup() {
   Serial.begin(9600);
   //Pins for encoders
   pinMode(a1, INPUT_PULLUP);                                           
   pinMode(b1, INPUT_PULLUP);
   attachInterrupt(A_1, ai2_3, CHANGE);
+  state1 = digitalRead(a1);
   
   pinMode(a2, INPUT_PULLUP);
   pinMode(b2, INPUT_PULLUP);
   PCintPort::attachInterrupt(a2, ai3_3, CHANGE);
-  state1 = digitalRead(a1);
   state2 = digitalRead(a2);
+  
   //Pins for Motors
   pinMode(motor1, OUTPUT);
   pinMode(motor1pwm, OUTPUT);
@@ -49,20 +52,20 @@ void loop() {
       {       
         digitalWrite(motor1, x - 1 );
         if(x==1)
-        analogWrite(motor1pwm , 60);
+        analogWrite(motor1pwm , pwmx1);
         else
-        analogWrite(motor1pwm , 30);
+        analogWrite(motor1pwm , pwmx2);
         
       }
-      if(x == 3 || (-theta1c+26)>62.513){         //62.513 65.0187
+      if(x == 3 || (-theta1c+minAngle1)>zeroError1){         //62.513 65.0187
         analogWrite(motor1pwm , 0);
         x=3;
         }
       if(x>3 && x<6){
         digitalWrite(motor2, x - 4 );
-        analogWrite(motor2pwm , 50);
+        analogWrite(motor2pwm , pwmx4);
         }
-      if(x == 6 || (-theta2c/4)>51.58){           //51.58 51.66
+      if(x == 6 || (-theta2c+minAngle2)>zeroError1){           //51.58 51.66
         analogWrite(motor2pwm , 0);
         x=6;
         }
@@ -86,7 +89,7 @@ void loop() {
         }
         theta2c = -(counter2 * 0.3);
         Serial.println ("theta2");
-        Serial.println (theta2c/4);
+        Serial.println (theta2c);
     }
 //      Serial.print("counter: ");
 //      Serial.println(counter2);

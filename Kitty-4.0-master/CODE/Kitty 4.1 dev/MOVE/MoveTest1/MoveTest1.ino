@@ -1,21 +1,20 @@
 #include <PinChangeInt.h>
 
-#define motor1 8
-#define motor2 10                                                              
-#define motor1pwm 9
-#define motor2pwm 11
+#define motor1  31
+#define motor2  29
+#define motor1pwm  5
+#define motor2pwm  10
+int A_1 = 2;
 
-int A_1 = 1, A_2 = 0;
-
-#define a1 3
-#define a2 2
-#define b1 4
-#define b2 5
+#define a1 21
+#define a2 A11
+#define b1 33
+#define b2 49
 
 bool state1 = true, state2 = true;
 
-float pwmx1=90, pwmx2=40, pwmx4=150;
-float theta1c=0, theta2c=0, zeroError1 = 53.728, zeroError2=42.68, minAngle1 = 22.20,minAngle2 = 39.3;  //53.728  42.68
+float pwmx1=80, pwmx2=40, pwmx4=120;
+float theta1c=0, theta2c=0, zeroError1 = 53.728, zeroError2=42.68, minAngle1 = 19.8,minAngle2 = 8.7;  //53.728  42.68
 int x; 
     
 volatile int temp1, counter1 = 0; 
@@ -31,7 +30,7 @@ void setup() {
   
   pinMode(a2, INPUT_PULLUP);  
   pinMode(b2, INPUT_PULLUP);
-  attachInterrupt(A_2, ai2, CHANGE);
+  PCintPort::attachInterrupt(a2, ai2, CHANGE);
   state2 = digitalRead(a2);
   
   pinMode(motor1, OUTPUT);

@@ -1,11 +1,15 @@
-#define a1_1 3
-#define a2_1 2
-#define b1_1 4
-#define b2_1 5
-#define motor1_1  8
-#define motor2_1  10
-#define motor1pwm_1  9
-#define motor2pwm_1  11
+#include <PinChangeInt.h>
+
+#define motor1_1  31
+#define motor2_1  29
+#define motor1pwm_1  5
+#define motor2pwm_1  10
+int A1_1 = 2;
+
+#define a1_1 21
+#define a2_1 A11
+#define b1_1 33
+#define b2_1 49
 
 double ll1=0.0, lm1=0.0, ul1=0.0, um1=0.0;
 double ll2=0.0, lm2=0.0, ul2=0.0, um2=0.0;
@@ -15,8 +19,8 @@ double Kd1 = 2.0, Kd2 = 2.0;
 
 int l1 = 25, l2 = 25;
 
-int A1_1 = 1;
-int A2_1 = 0;
+//int A1_1 = 1;
+//int A2_1 = 0;
 
 bool state1_1 = true;
 bool state2_1 = true;
@@ -39,9 +43,13 @@ void setup()
   pinMode(a2_1, INPUT_PULLUP);
   pinMode(b1_1, INPUT_PULLUP);
   pinMode(b2_1, INPUT_PULLUP);
+  pinMode(motor1_1, OUTPUT);
+  pinMode(motor2_1, OUTPUT);
+  pinMode(motor1pwm_1, OUTPUT);
+  pinMode(motor2pwm_1, OUTPUT);
 
   attachInterrupt(A1_1, ai1_1, CHANGE);
-  attachInterrupt(A2_1, ai2_1, CHANGE);
+  PCintPort::attachInterrupt(a2_1, ai2_1, CHANGE);
 
   state1_1 = digitalRead(a1_1);
   state2_1 = digitalRead(a2_1);
@@ -87,30 +95,35 @@ void loop()
     c1_1 = PID(theta1_1, theta1c_1, zeroError1_1 , Kp1+1.5 , Kd1+2.8 , prev_error1_1);
     else
     c1_1 = PID(theta1_1, theta1c_1, zeroError1_1 , Kp1+2.1 , (Kd1+2.2) , prev_error1_1);
-    c2_1 = PID(theta2_1, theta2c_1, zeroError2_1 , Kp2 , Kd2 , prev_error2_1);
-    ll1=0.0, lm1=70.0, ul1=33.0, um1=110.0;
+    c2_1 = PID(theta2_1, theta2c_1, zeroError2_1 , Kp2+2 , Kd2 , prev_error2_1);
+    ll1=0.0, lm1=70.0, ul1=33.0, um1=95.0;
 
 //    correction1_1 = (um1-ul1)/(lm1-ll1)*abs(c1_1)+ul1;
     
     if(t<0.5)
     correction1_1 = (um1-ul1)/(lm1-ll1)*abs(c1_1)+ul1;
     else{
-    ll1=0.0, lm1=70.0, ul1=24.0, um1=35.0;
+    ll1=0.0, lm1=70.0, ul1=17.0, um1=20.0;
     correction1_1 = (um1-ul1)/(lm1-ll1)*abs(c1_1)+ul1;      //TODO   0-60
     }
     
-    
-    ll2=0.0, lm2=90.0, ul2=100.0, um2=400.0;
-    
+    if(t<0.5){
+    ll2=0.0, lm2=70.0, ul2=100.0, um2=350.0;
     correction2_1 = (um2-ul2)/(lm2-ll2)*abs(c2_1) + ul2;      //TODO
+    }
+    else{
+      ll2=0.0, lm2=70.0, ul2=100.0, um2=300.0;
+    correction2_1 = (um2-ul2)/(lm2-ll2)*abs(c2_1) + ul2;
+    }
+    
 
     if(correction1_1 > um1)
     correction1_1=um1;
 
-    if(correction2_1 > um2)
-    correction2_1=um2;
+    if(correction2_1 > 255)
+    correction2_1=255;
     if(t>0.85)
-    correction1_1=15;
+    correction1_1=11;
     
     Serial.print("theta1_1=");
     Serial.println(theta1_1);
@@ -218,10 +231,10 @@ void loop()
     error1_1 = theta1_1 - theta1c_1 + zeroError1_1;
     error2_1 = theta2_1 - theta2c_1 + zeroError2_1;
     
-    c1_1 = PID(theta1_1, theta1c_1, zeroError1_1 , (Kp1+2.5) , (Kd1+0.6) , prev_error1_1);
+    c1_1 = PID(theta1_1, theta1c_1, zeroError1_1 , (Kp1+2.0) , (Kd1+1.2) , prev_error1_1);
     c2_1 = PID(theta2_1, theta2c_1, zeroError2_1 , Kp2 , Kd2 , prev_error2_1);
 
-    ll1=0.0, lm1=40.0, ul1=21.0, um1=50.0;
+    ll1=0.0, lm1=40.0, ul1=12.3, um1=48.0;
     ll2=0.0, lm2=90.0, ul2=0.0, um2=70.0;
 
     correction1_1 = (um1-ul1)/(lm1-ll1)*abs(c1_1)+ul1;
@@ -232,6 +245,10 @@ void loop()
 
     if(correction2_1 > um2)
     correction2_1=um2;
+
+    if(u>3.5){
+      correction1_1 = 10;
+    }
 
     Serial.print("theta1_1=");
     Serial.println(theta1_1);
@@ -322,10 +339,10 @@ void loop()
      error1_1 = theta1_1 - theta1c_1 + zeroError1_1;
     error2_1 = theta2_1 - theta2c_1 + zeroError2_1;
     
-    c1_1 = PID(theta1_1, theta1c_1, zeroError1_1 , (Kp1+1.3) , (Kd1+0.6) , prev_error1_1);
+    c1_1 = PID(theta1_1, theta1c_1, zeroError1_1 , (Kp1+2.1) , (Kd1+0.6) , prev_error1_1);
     c2_1 = PID(theta2_1, theta2c_1, zeroError2_1 , Kp2 , Kd2 , prev_error2_1);
 
-      ll1=0.0, lm1=30.0, ul1=23.0, um1=70.0;
+      ll1=0.0, lm1=30.0, ul1=16.5, um1=52.0;
     ll2=0.0, lm2=40.0, ul2=0.0, um2=150.0;
 
     correction1_1 = (um1-ul1)/(lm1-ll1)*abs(c1_1)+ul1;
@@ -425,10 +442,10 @@ void loop()
     error1_1 = theta1_1 - theta1c_1 + zeroError1_1;
     error2_1 = theta2_1 - theta2c_1 + zeroError2_1;
     
-    c1_1 = PID(theta1_1, theta1c_1, zeroError1_1 , (Kp1+1.4) , (Kd1+0.6) , prev_error1_1);
+    c1_1 = PID(theta1_1, theta1c_1, zeroError1_1 , (Kp1+2.2) , (Kd1+0.6) , prev_error1_1);
     c2_1 = PID(theta2_1, theta2c_1, zeroError2_1 , Kp2 , Kd2 , prev_error2_1);
 
-    ll1=0.0, lm1=30.0, ul1=28.0, um1=75.0;
+    ll1=0.0, lm1=30.0, ul1=18.5, um1=50.0;
     ll2=0.0, lm2=40.0, ul2=0.0, um2=260.0;
 
     correction1_1 = (um1-ul1)/(lm1-ll1)*abs(c1_1)+ul1;
