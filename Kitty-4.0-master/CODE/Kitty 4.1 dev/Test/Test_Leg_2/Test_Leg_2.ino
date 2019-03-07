@@ -1,15 +1,15 @@
 #include <PinChangeInt.h>
 
 #define motor1_1  31
-#define motor2_1  29
 #define motor1pwm_1  5
+#define motor2_1  29
 #define motor2pwm_1  10
 int A1_1 = 2;
 
 #define a1_1 21
+#define b1_1 A2
 #define a2_1 A11
-#define b1_1 33
-#define b2_1 49
+#define b2_1 A0
 
 double ll1=0.0, lm1=0.0, ul1=0.0, um1=0.0;
 double ll2=0.0, lm2=0.0, ul2=0.0, um2=0.0;
@@ -22,11 +22,11 @@ int l1 = 25, l2 = 25;
 //int A1_1 = 1;
 //int A2_1 = 0;
 
-bool state1_1 = true;
-bool state2_1 = true;
+//bool state1_1 = true;
+//bool state2_1 = true;
 
 double alpha_1;
-double theta1c_1 = 0.0 , theta2c_1 = 0.0, theta1_1, theta2_1,error1_1,error2_1, correction1_1, correction2_1, c1_1, c2_1, prev_error1_1 = 0.0 , prev_error2_1 = 0.0, zeroError1_1 = 53.728, zeroError2_1 = 42.68;
+double theta1c_1 = 0.0 , theta2c_1 = 0.0, theta1_1, theta2_1,error1_1,error2_1, correction1_1, correction2_1, c1_1, c2_1, prev_error1_1 = 0.0 , prev_error2_1 = 0.0, zeroError1_1 = 58.8795, zeroError2_1=50.4;
 
 volatile int temp1_1 , counter1_1 = 0;
 volatile int temp2_1 , counter2_1 = 0;
@@ -49,14 +49,117 @@ void setup()
   pinMode(motor2pwm_1, OUTPUT);
 
   attachInterrupt(A1_1, ai1_1, CHANGE);
-  PCintPort::attachInterrupt(a2_1, ai2_1, CHANGE);
+  attachInterrupt(A2_1, ai2_1, CHANGE);
 
-  state1_1 = digitalRead(a1_1);
-  state2_1 = digitalRead(a2_1);
+//  state1_1 = digitalRead(a1_1);
+//  state2_1 = digitalRead(a2_1);
 }
 
 void loop()
-{
+{  
+  for (double t = 0.1666, u = 0.887; t < 1, u < 5.333; t = t + 0.1666, u = u + 0.887)
+  {
+    Serial.println("line-3");
+    double xe_1 = 1.3333 + u + 5.3333;
+    double ye_1 = -45 ;
+
+    if ( counter1_1 != temp1_1 ) {
+      temp1_1 = counter1_1;
+
+      if (counter1_1 > 1200)
+      {
+        counter1_1 = 0;
+      }
+      theta1c_1 = (counter1_1 * 0.3);
+    }
+    if ( counter2_1 != temp2_1 ) {
+      temp2_1 = counter2_1;
+
+      if (counter2_1 > 1200)
+      {
+        counter2_1 = 0;
+      }
+      theta2c_1 = (counter2_1 * 0.3);
+    }
+
+    if (atan(ye_1 / xe_1) > 0)
+      alpha_1 = atan(ye_1 / xe_1) - 3.14159;
+
+    else
+      alpha_1 = atan(ye_1 / xe_1);
+
+    theta1_1 = 57.2958 * (cosine_rule(l1, l2, sqrt(xe_1 * xe_1 + ye_1 * ye_1)) + alpha_1);
+    theta2_1 = 57.2958 * (-3.14159 + cosine_rule(sqrt(xe_1 * xe_1 + ye_1 * ye_1), l1, l2));
+
+    error1_1 = theta1_1 - theta1c_1 + zeroError1_1;
+    error2_1 = theta2_1 - theta2c_1 + zeroError2_1;
+    
+    c1_1 = PID(theta1_1, theta1c_1, zeroError1_1 , (Kp1+2.2) , (Kd1+0.6) , prev_error1_1);
+    c2_1 = PID(theta2_1, theta2c_1, zeroError2_1 , Kp2 , Kd2 , prev_error2_1);
+
+    ll1=0.0, lm1=30.0, ul1=18.5, um1=50.0;
+    ll2=0.0, lm2=40.0, ul2=0.0, um2=260.0;
+
+    correction1_1 = (um1-ul1)/(lm1-ll1)*abs(c1_1)+ul1;
+    correction2_1 = (um2-ul2)/(lm2-ll2)*abs(c2_1)+ul2;
+
+//    correction1_1 = map(abs(c1_1), 0, 30, 0, 50);       //TODO
+//    correction2_1 = map(abs(c2_1), 0, 40, 125, 260);      //TODO
+
+    if(correction1_1 > um1)
+    correction1_1=um1;
+    
+    Serial.print("theta1_1=");
+    Serial.println(theta1_1);
+    Serial.print("theta1c_1=");
+    Serial.println(theta1c_1 - zeroError1_1);
+    Serial.print("theta2c_1=");
+    Serial.println(theta2c_1 - zeroError2_1);
+    Serial.print("theta2_1=");
+    Serial.println(theta2_1);
+    Serial.print("c1_1=");
+    Serial.println(c1_1);
+    Serial.print("c2_1=");
+    Serial.println(c2_1);
+    Serial.print("pwm1=");
+    Serial.println(correction1_1);
+    Serial.print("pwm2=");
+    Serial.println(correction2_1);
+    Serial.println("------------------------");
+
+    if (error1_1 < 0 ) {
+      upr_mtr_fwd_1();
+      analogWrite(motor1pwm_1, abs(correction1_1));
+    }
+
+    else if (error1_1 > 0) {
+      upr_mtr_bwd_1();
+      analogWrite(motor1pwm_1, abs(correction1_1));
+    }
+
+    if (error2_1 < 0) {
+      lwr_mtr_fwd_1();
+      analogWrite(motor2pwm_1, abs(correction2_1));
+    }
+
+    else if (error2_1 > 0) {
+      lwr_mtr_bwd_1();
+      analogWrite(motor2pwm_1, abs(correction2_1));
+    }
+
+//      do{
+//      if ( counter1_1 != temp1_1 ) {
+//        temp1_1 = counter1_1;
+//
+//        if (counter1_1 > 1200)
+//        {
+//          counter1_1 = 0;
+//        }
+//        theta1c_1 = (counter1_1 * 0.3);
+//      }
+//    }while(theta1_1 - theta1c_1 + zeroError1_1>0.1);
+  }
+
   for (double t = 0.1666, u = 0.887; t < 1, u < 5.333; t = t + 0.1666, u = u + 0.887)
   { 
 
@@ -405,108 +508,6 @@ void loop()
 //    }while(theta1_1 - theta1c_1 + zeroError1_1>0.1);
   }
 
-  for (double t = 0.1666, u = 0.887; t < 1, u < 5.333; t = t + 0.1666, u = u + 0.887)
-  {
-    Serial.println("line-3");
-    double xe_1 = 1.3333 + u + 5.3333;
-    double ye_1 = -45 ;
-
-    if ( counter1_1 != temp1_1 ) {
-      temp1_1 = counter1_1;
-
-      if (counter1_1 > 1200)
-      {
-        counter1_1 = 0;
-      }
-      theta1c_1 = (counter1_1 * 0.3);
-    }
-    if ( counter2_1 != temp2_1 ) {
-      temp2_1 = counter2_1;
-
-      if (counter2_1 > 1200)
-      {
-        counter2_1 = 0;
-      }
-      theta2c_1 = (counter2_1 * 0.3);
-    }
-
-    if (atan(ye_1 / xe_1) > 0)
-      alpha_1 = atan(ye_1 / xe_1) - 3.14159;
-
-    else
-      alpha_1 = atan(ye_1 / xe_1);
-
-    theta1_1 = 57.2958 * (cosine_rule(l1, l2, sqrt(xe_1 * xe_1 + ye_1 * ye_1)) + alpha_1);
-    theta2_1 = 57.2958 * (-3.14159 + cosine_rule(sqrt(xe_1 * xe_1 + ye_1 * ye_1), l1, l2));
-
-    error1_1 = theta1_1 - theta1c_1 + zeroError1_1;
-    error2_1 = theta2_1 - theta2c_1 + zeroError2_1;
-    
-    c1_1 = PID(theta1_1, theta1c_1, zeroError1_1 , (Kp1+2.2) , (Kd1+0.6) , prev_error1_1);
-    c2_1 = PID(theta2_1, theta2c_1, zeroError2_1 , Kp2 , Kd2 , prev_error2_1);
-
-    ll1=0.0, lm1=30.0, ul1=18.5, um1=50.0;
-    ll2=0.0, lm2=40.0, ul2=0.0, um2=260.0;
-
-    correction1_1 = (um1-ul1)/(lm1-ll1)*abs(c1_1)+ul1;
-    correction2_1 = (um2-ul2)/(lm2-ll2)*abs(c2_1)+ul2;
-
-//    correction1_1 = map(abs(c1_1), 0, 30, 0, 50);       //TODO
-//    correction2_1 = map(abs(c2_1), 0, 40, 125, 260);      //TODO
-
-    if(correction1_1 > um1)
-    correction1_1=um1;
-    
-    Serial.print("theta1_1=");
-    Serial.println(theta1_1);
-    Serial.print("theta1c_1=");
-    Serial.println(theta1c_1 - zeroError1_1);
-    Serial.print("theta2c_1=");
-    Serial.println(theta2c_1 - zeroError2_1);
-    Serial.print("theta2_1=");
-    Serial.println(theta2_1);
-    Serial.print("c1_1=");
-    Serial.println(c1_1);
-    Serial.print("c2_1=");
-    Serial.println(c2_1);
-    Serial.print("pwm1=");
-    Serial.println(correction1_1);
-    Serial.print("pwm2=");
-    Serial.println(correction2_1);
-    Serial.println("------------------------");
-
-    if (error1_1 < 0 ) {
-      upr_mtr_fwd_1();
-      analogWrite(motor1pwm_1, abs(correction1_1));
-    }
-
-    else if (error1_1 > 0) {
-      upr_mtr_bwd_1();
-      analogWrite(motor1pwm_1, abs(correction1_1));
-    }
-
-    if (error2_1 < 0) {
-      lwr_mtr_fwd_1();
-      analogWrite(motor2pwm_1, abs(correction2_1));
-    }
-
-    else if (error2_1 > 0) {
-      lwr_mtr_bwd_1();
-      analogWrite(motor2pwm_1, abs(correction2_1));
-    }
-
-//      do{
-//      if ( counter1_1 != temp1_1 ) {
-//        temp1_1 = counter1_1;
-//
-//        if (counter1_1 > 1200)
-//        {
-//          counter1_1 = 0;
-//        }
-//        theta1c_1 = (counter1_1 * 0.3);
-//      }
-//    }while(theta1_1 - theta1c_1 + zeroError1_1>0.1);
-  }
 }
 
 double PID(double theta, double thetac, double zeroError, double KP, double KD, double &prevError) {
@@ -555,22 +556,22 @@ void lwr_mtr_bwd_1() {
 }
 
 void ai1_1() {
-  if (digitalRead(b1_1) == state1_1) {
+  if (digitalRead(b1_1) == !digitalRead(a1_1)) {
     counter1_1++;
   }
   else {
     counter1_1--;
   }
-  state1_1 = !state1_1;
+//  state1_1 = !state1_1;
 }
 
 void ai2_1() {
-  if (digitalRead(b2_1) == state2_1) {
+  if (digitalRead(b2_1) == !digitalRead(a2_1)) {
     counter2_1++;
   }
   else {
     counter2_1--;
   }
-  state2_1 = !state2_1;
+//  state2_1 = !state2_1;
 }
 

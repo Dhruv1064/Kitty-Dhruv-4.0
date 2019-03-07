@@ -1,21 +1,21 @@
 #include <PinChangeInt.h>
 
-#define motor1 24
-#define motor2 22
-#define motor1pwm 6
-#define motor2pwm 7
+#define motor1  14
+#define motor1pwm  6
+#define motor2  22
+#define motor2pwm  7
 
-int A_1 = 1, A_2 = 0;
+int A_1 = 5, A_2 = -1;
 
-#define a1 3
-#define a2 A12
+#define a1 18
 #define b1 48
+#define a2 A12
 #define b2 53
 
-bool state1 = true, state2 = true;
+//bool state1 = true, state2 = true;
 
-float pwmx1=80, pwmx2=40, pwmx4=120;
-float theta1c=0, theta2c=0, zeroError1 = 62.513, zeroError2=51.58, minAngle1 = 21.30,minAngle2 = -39.3;  //58.8795  50.4
+float pwmx1=100, pwmx2=60, pwmx4=120;
+float theta1c=0, theta2c=0, zeroError1 = 62.513, zeroError2=51.58, minAngle1 = 16.5, minAngle2 = 33.9;  //62.513  51.58
 int x;
 
 volatile int temp1, counter1 = 0;
@@ -26,13 +26,13 @@ void setup() {
   //Pins for encoders
   pinMode(a1, INPUT_PULLUP);                                           
   pinMode(b1, INPUT_PULLUP);
-  attachInterrupt(A_1, ai2_3, CHANGE);
-  state1 = digitalRead(a1);
+  attachInterrupt(digitalPinToInterrupt(a1), ai2_3, CHANGE);
+//  state1 = digitalRead(a1);
   
   pinMode(a2, INPUT_PULLUP);
   pinMode(b2, INPUT_PULLUP);
   PCintPort::attachInterrupt(a2, ai3_3, CHANGE);
-  state2 = digitalRead(a2);
+//  state2 = digitalRead(a2);
   
   //Pins for Motors
   pinMode(motor1, OUTPUT);
@@ -81,6 +81,7 @@ void loop() {
         theta1c = (counter1 * 0.3);
         Serial.println ("theta1");
         Serial.println (theta1c);
+//        Serial.println(counter1);
      }
       if ( counter2 != temp2 ) {
         temp2 = counter2;
@@ -90,6 +91,7 @@ void loop() {
         theta2c = -(counter2 * 0.3);
         Serial.println ("theta2");
         Serial.println (theta2c);
+//        Serial.println(counter1);
     }
 //      Serial.print("counter: ");
 //      Serial.println(counter2);
@@ -97,24 +99,24 @@ void loop() {
 }
 // Encoder1
 void ai2_3() {
-  if (digitalRead(b1) == state1) {
+  if (digitalRead(b1) == !digitalRead(a1)) {
     counter1++;
   } else {
     counter1--;
   }
-  state1 = !state1;
+//  state1 = !state1;
 //  Serial.print("counter1: ");
 //  Serial.println(counter1);
 }
 
 ////  Encoder2
 void ai3_3() {
-  if (digitalRead(b2) == state2) {
+  if (digitalRead(b2) == !digitalRead(a2)) {
     counter2++;
   } else {
     counter2--;
   }
-  state2 = !state2;
+//  state2 = !state2;
 //  Serial.print("counter2: ");
 //  Serial.println(counter2);
 }

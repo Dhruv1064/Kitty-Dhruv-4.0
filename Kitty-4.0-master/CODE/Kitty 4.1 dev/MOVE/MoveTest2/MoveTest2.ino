@@ -1,20 +1,20 @@
 #include <PinChangeInt.h>
 
 #define motor1  31
-#define motor2  29
 #define motor1pwm  5
+#define motor2  29
 #define motor2pwm  10
 int A_1 = 2;
 
 #define a1 21
+#define b1 A2
 #define a2 A11
-#define b1 33
-#define b2 49
+#define b2 A0
 
 bool state1 = true, state2 = true;
 
-float pwmx1=80, pwmx2=40, pwmx4=120;
-float theta1c=0, theta2c=0, zeroError1 = 58.8795, zeroError2=50.4, minAngle1 = 19.8,minAngle2 = -8.7;  //58.8795  50.4
+float pwmx1=80, pwmx2=40, pwmx4=120; 
+float theta1c=0, theta2c=0, zeroError1 = 58.8795, zeroError2=50.4, minAngle1 = 19.8,minAngle2 = 35.1;  //58.8795  50.4
 int x;
 
 volatile int temp1, counter1 = 0;
@@ -90,22 +90,22 @@ void loop() {
 }
 
 void ai1(){
-  if(digitalRead(b1) == state1){
+  if(digitalRead(b1) == !digitalRead(a1)){
     counter1++;
   }
   else{
     counter1--;
   }
-  state1 = !state1;
+//  state1 = !state1;
 }
 
 void ai2(){
-  if(digitalRead(b2) == state2){
+  if(digitalRead(b2) == !digitalRead(a2)){
     counter2++;
   }
   else{
     counter2--;
   }
-  state2 = !state2;
+//  state2 = !state2;
 }
 
