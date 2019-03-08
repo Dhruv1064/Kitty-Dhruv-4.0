@@ -23,8 +23,8 @@ int l1 = 25, l2 = 25;
 //int A1_4 = 1;
 //int A2_4 = 0;
 
-//bool state1_4 = true;
-//bool state2_4 = true;
+bool state1_4 = true;
+bool state2_4 = true;
 
 double alpha_4;
 double theta1c_4 = 0.0 , theta2c_4 = 0.0, theta1_4, theta2_4,error1_4,error2_4, correction1_4, correction2_4, c1_4, c2_4, prev_error1_4 = 0.0, prev_error2_4 = 0.0, zeroError1_4 = 72.815, zeroError2_4 = 49.55;
@@ -48,11 +48,10 @@ void setup()
   pinMode(motor1pwm_4, OUTPUT);
   pinMode(motor2pwm_4, OUTPUT);
 
-  attachInterrupt(A1_4, ai1_4, CHANGE);
-  attachInterrupt(A2_4, ai2_4, CHANGE);
-
-//  state1_4 = digitalRead(a1_4);
-//  state2_4 = digitalRead(a2_4);
+  attachInterrupt(A1_4, ai4_4, CHANGE);
+PCintPort::attachInterrupt(a2_4, ai5_4, CHANGE);
+  state1_4 = digitalRead(a1_4);
+  state2_4 = digitalRead(a2_4);
 }
 
 void loop()
@@ -308,8 +307,8 @@ void loop()
     c1_4 = PID(theta1_4, theta1c_4, zeroError1_4 , (Kp1+2.2) , (Kd1+0.6) , prev_error1_4);
     c2_4 = PID(theta2_4, theta2c_4, zeroError2_4 , Kp2 , Kd2 , prev_error2_4);
 
-    ll1=0.0, lm1=30.0, ul1=18.5, um1=50.0;
-    ll2=0.0, lm2=40.0, ul2=0.0, um2=260.0;
+    ll1=0.0, lm1=30.0, ul1=25, um1=50.0;
+    ll2=0.0, lm2=40.0, ul2=0.0, um2=150.0;
 
     correction1_4 = (um1-ul1)/(lm1-ll1)*abs(c1_4)+ul1;
     correction2_4 = (um2-ul2)/(lm2-ll2)*abs(c2_4)+ul2;
@@ -410,19 +409,19 @@ void loop()
     else
     c1_4 = PID(theta1_4, theta1c_4, zeroError1_4 , Kp1+2.1 , (Kd1+2.2) , prev_error1_4);
     c2_4 = PID(theta2_4, theta2c_4, zeroError2_4 , Kp2+2 , Kd2 , prev_error2_4);
-    ll1=0.0, lm1=70.0, ul1=33.0, um1=95.0;
+    ll1=0.0, lm1=70.0, ul1=40.0, um1=95.0;
 
 //    correction1_4 = (um1-ul1)/(lm1-ll1)*abs(c1_4)+ul1;
     
     if(t<0.5)
     correction1_4 = (um1-ul1)/(lm1-ll1)*abs(c1_4)+ul1;
     else{
-    ll1=0.0, lm1=70.0, ul1=17.0, um1=20.0;
+    ll1=0.0, lm1=70.0, ul1=20.0, um1=40.0;
     correction1_4 = (um1-ul1)/(lm1-ll1)*abs(c1_4)+ul1;      //TODO   0-60
     }
     
     if(t<0.5){
-    ll2=0.0, lm2=70.0, ul2=100.0, um2=350.0;
+    ll2=0.0, lm2=70.0, ul2=90.0, um2=350.0;
     correction2_4 = (um2-ul2)/(lm2-ll2)*abs(c2_4) + ul2;      //TODO
     }
     else{
@@ -555,7 +554,7 @@ void lwr_mtr_bwd_4() {
   digitalWrite(motor2_4, LOW);
 }
 
-void ai1_4() {
+void ai4_4() {
   if (digitalRead(b1_4) == !digitalRead(a1_4)) {
     counter1_4++;
   }
@@ -565,7 +564,7 @@ void ai1_4() {
 //  state1_4 = !state1_4;
 }
 
-void ai2_4() {
+void ai5_4() {
   if (digitalRead(b2_4) == !digitalRead(a2_4)) {
     counter2_4++;
   }

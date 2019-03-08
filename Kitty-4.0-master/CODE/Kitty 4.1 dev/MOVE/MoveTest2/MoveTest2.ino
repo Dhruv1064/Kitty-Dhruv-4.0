@@ -9,11 +9,11 @@ int A_1 = 2;
 #define a1 21
 #define b1 A2
 #define a2 A11
-#define b2 A0
+#define b2 A0 
 
 bool state1 = true, state2 = true;
 
-float pwmx1=80, pwmx2=40, pwmx4=120; 
+float pwmx1=100, pwmx2=40, pwmx4=120; 
 float theta1c=0, theta2c=0, zeroError1 = 58.8795, zeroError2=50.4, minAngle1 = 19.8,minAngle2 = 35.1;  //58.8795  50.4
 int x;
 

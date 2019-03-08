@@ -13,7 +13,7 @@ int A_1 = 3, A_2 = 4;
 
 bool state1 = true, state2 = true;
 
-float pwmx1=100, pwmx2=50, pwmx4=120;
+float pwmx1=100, pwmx2=55, pwmx4=150;
 float theta1c=0, theta2c=0, zeroError1 = 53.728, zeroError2=42.68, minAngle1 = 21.6, minAngle2 = 28.5;  //53.728  42.68
 int x; 
     

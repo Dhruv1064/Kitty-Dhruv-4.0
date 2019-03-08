@@ -5,7 +5,7 @@
 #define motor2_3  22
 #define motor2pwm_3  7
 
-int A_3 = 5, A_2 = -1;
+int A1_3 = 5, A_2 = -1;
 
 #define a1_3 18
 #define b1_3 48
@@ -48,8 +48,8 @@ void setup()
   pinMode(motor1pwm_3, OUTPUT);
   pinMode(motor2pwm_3, OUTPUT);
 
-  attachInterrupt(A1_3, ai1_3, CHANGE);
-  attachInterrupt(A2_3, ai2_3, CHANGE);
+  attachInterrupt(A1_3, ai2_3, CHANGE);
+  PCintPort::attachInterrupt(a2_3, ai3_3, CHANGE);
 
 //  state1_3 = digitalRead(a1_3);
 //  state2_3 = digitalRead(a2_3);
@@ -79,7 +79,7 @@ void loop()
       {
         counter2_3 = 0;
       }
-      theta2c_3 = (counter2_3 * 0.3);
+      theta2c_3 = -(counter2_3 * 0.3);
     }
 
     if (atan(ye_3 / xe_3) > 0)
@@ -97,8 +97,8 @@ void loop()
     c1_3 = PID(theta1_3, theta1c_3, zeroError1_3 , (Kp1+2.1) , (Kd1+0.6) , prev_error1_3);
     c2_3 = PID(theta2_3, theta2c_3, zeroError2_3 , Kp2 , Kd2 , prev_error2_3);
 
-      ll1=0.0, lm1=30.0, ul1=16.5, um1=52.0;
-    ll2=0.0, lm2=40.0, ul2=0.0, um2=150.0;
+      ll1=0.0, lm1=30.0, ul1=35, um1=65.0;
+    ll2=0.0, lm2=40.0, ul2=30.0, um2=150.0;
 
     correction1_3 = (um1-ul1)/(lm1-ll1)*abs(c1_3)+ul1;
     correction2_3 = (um2-ul2)/(lm2-ll2)*abs(c2_3)+ul2;
@@ -108,6 +108,9 @@ void loop()
 
     if(correction1_3 > um1)
     correction1_3=um1;
+
+    if(correction2_3 >255)
+    correction2_3=255;
    
     Serial.print("theta1_3=");
     Serial.println(theta1_3);
@@ -161,7 +164,7 @@ void loop()
   }
 
   for (double t = 0.1666, u = 0.887; t < 1, u < 5.333; t = t + 0.1666, u = u + 0.887)
-  {
+  { 
     Serial.println("line-3");
     double xe_3 = 1.3333 + u + 5.3333;
     double ye_3 = -45 ;
@@ -182,7 +185,7 @@ void loop()
       {
         counter2_3 = 0;
       }
-      theta2c_3 = (counter2_3 * 0.3);
+      theta2c_3 = -(counter2_3 * 0.3);
     }
 
     if (atan(ye_3 / xe_3) > 0)
@@ -200,8 +203,8 @@ void loop()
     c1_3 = PID(theta1_3, theta1c_3, zeroError1_3 , (Kp1+2.2) , (Kd1+0.6) , prev_error1_3);
     c2_3 = PID(theta2_3, theta2c_3, zeroError2_3 , Kp2 , Kd2 , prev_error2_3);
 
-    ll1=0.0, lm1=30.0, ul1=18.5, um1=50.0;
-    ll2=0.0, lm2=40.0, ul2=0.0, um2=260.0;
+    ll1=0.0, lm1=30.0, ul1=35, um1=63.0;
+    ll2=0.0, lm2=40.0, ul2=30.0, um2=150.0;
 
     correction1_3 = (um1-ul1)/(lm1-ll1)*abs(c1_3)+ul1;
     correction2_3 = (um2-ul2)/(lm2-ll2)*abs(c2_3)+ul2;
@@ -211,6 +214,10 @@ void loop()
 
     if(correction1_3 > um1)
     correction1_3=um1;
+
+    
+    if(correction2_3 >255)
+    correction2_3=255;
     
     Serial.print("theta1_3=");
     Serial.println(theta1_3);
@@ -282,7 +289,7 @@ void loop()
       {
         counter2_3 = 0;
       }
-      theta2c_3 = (counter2_3 * 0.3);
+      theta2c_3 = -(counter2_3 * 0.3);
     }
 
     if (t < 0.5) {
@@ -302,19 +309,19 @@ void loop()
     else
     c1_3 = PID(theta1_3, theta1c_3, zeroError1_3 , Kp1+2.1 , (Kd1+2.2) , prev_error1_3);
     c2_3 = PID(theta2_3, theta2c_3, zeroError2_3 , Kp2+2 , Kd2 , prev_error2_3);
-    ll1=0.0, lm1=70.0, ul1=33.0, um1=95.0;
+    ll1=0.0, lm1=70.0, ul1=50.0, um1=120.0;
 
 //    correction1_3 = (um1-ul1)/(lm1-ll1)*abs(c1_3)+ul1;
     
     if(t<0.5)
     correction1_3 = (um1-ul1)/(lm1-ll1)*abs(c1_3)+ul1;
     else{
-    ll1=0.0, lm1=70.0, ul1=17.0, um1=20.0;
+    ll1=0.0, lm1=70.0, ul1=25.0, um1=38.0;
     correction1_3 = (um1-ul1)/(lm1-ll1)*abs(c1_3)+ul1;      //TODO   0-60
     }
     
     if(t<0.5){
-    ll2=0.0, lm2=70.0, ul2=100.0, um2=350.0;
+    ll2=0.0, lm2=70.0, ul2=100.0, um2=300.0;
     correction2_3 = (um2-ul2)/(lm2-ll2)*abs(c2_3) + ul2;      //TODO
     }
     else{
@@ -328,6 +335,7 @@ void loop()
 
     if(correction2_3 > 255)
     correction2_3=255;
+    
     if(t>0.85)
     correction1_3=11;
     
@@ -422,7 +430,7 @@ void loop()
       {
         counter2_3 = 0;
       }
-      theta2c_3 = (counter2_3 * 0.3);
+      theta2c_3 = -(counter2_3 * 0.3);
     }
 
     if (atan(ye_3 / xe_3) > 0)
@@ -440,7 +448,7 @@ void loop()
     c1_3 = PID(theta1_3, theta1c_3, zeroError1_3 , (Kp1+2.0) , (Kd1+1.2) , prev_error1_3);
     c2_3 = PID(theta2_3, theta2c_3, zeroError2_3 , Kp2 , Kd2 , prev_error2_3);
 
-    ll1=0.0, lm1=40.0, ul1=12.3, um1=48.0;
+    ll1=0.0, lm1=40.0, ul1=33, um1=55.0;
     ll2=0.0, lm2=90.0, ul2=0.0, um2=70.0;
 
     correction1_3 = (um1-ul1)/(lm1-ll1)*abs(c1_3)+ul1;
@@ -448,9 +456,9 @@ void loop()
     
     if(correction1_3 > um1)
     correction1_3=um1;
-
-    if(correction2_3 > um2)
-    correction2_3=um2;
+   
+    if(correction2_3 >255)
+    correction2_3=255;
 
     if(u>3.5){
       correction1_3 = 10;
@@ -555,7 +563,7 @@ void lwr_mtr_bwd_3() {
   digitalWrite(motor2_3, LOW);
 }
 
-void ai1_3() {
+void ai2_3() {
   if (digitalRead(b1_3) == !digitalRead(a1_3)) {
     counter1_3++;
   }
@@ -565,7 +573,7 @@ void ai1_3() {
 //  state1_3 = !state1_3;
 }
 
-void ai2_3() {
+void ai3_3() {
   if (digitalRead(b2_3) == !digitalRead(a2_3)) {
     counter2_3++;
   }

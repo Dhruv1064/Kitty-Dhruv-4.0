@@ -22,8 +22,8 @@ int l1 = 25, l2 = 25;
 //int A1_2 = 1;
 //int A2_2 = 0;
 
-//bool state1_2 = true;
-//bool state2_2 = true;
+bool state1_2 = true;
+bool state2_2 = true;
 
 double alpha_2;
 double theta1c_2 = 0.0 , theta2c_2 = 0.0, theta1_2, theta2_2,error1_2,error2_2, correction1_2, correction2_2, c1_2, c2_2, prev_error1_2 = 0.0 , prev_error2_2 = 0.0, zeroError1_2 = 58.8795, zeroError2_2=50.4;
@@ -37,21 +37,20 @@ double theta2AT1 = 42.68, theta2AT2 = 76.73, theta2AT3 = 50.75, theta2_AT1 = 0, 
 void setup()
 {
   Serial.begin(9600);
-
-  pinMode(a1_2, INPUT_PULLUP);
-  pinMode(a2_2, INPUT_PULLUP);
+  
+  pinMode(a1_2, INPUT_PULLUP);                                           
   pinMode(b1_2, INPUT_PULLUP);
-  pinMode(b2_2, INPUT_PULLUP);
-  pinMode(motor1_2, OUTPUT);
-  pinMode(motor2_2, OUTPUT);
-  pinMode(motor1pwm_2, OUTPUT);
-  pinMode(motor2pwm_2, OUTPUT);
-
   attachInterrupt(A1_2, ai1_2, CHANGE);
-  attachInterrupt(A2_2, ai2_2, CHANGE);
-
-//  state1_2 = digitalRead(a1_2);
-//  state2_2 = digitalRead(a2_2);
+  state1_2 = digitalRead(a1_2);
+  pinMode(a2_2, INPUT_PULLUP);
+  pinMode(b2_2, INPUT_PULLUP);
+  PCintPort::attachInterrupt(a2_2, ai2_2, CHANGE);
+  state2_2 = digitalRead(a2_2);
+  
+  pinMode(motor1_2, OUTPUT);
+  pinMode(motor1pwm_2, OUTPUT);
+  pinMode(motor2_2, OUTPUT);
+  pinMode(motor2pwm_2, OUTPUT);
 }
 
 void loop()
@@ -78,7 +77,7 @@ void loop()
       {
         counter2_2 = 0;
       }
-      theta2c_2 = (counter2_2 * 0.3);
+      theta2c_2 = -(counter2_2 * 0.3);
     }
 
     if (atan(ye_2 / xe_2) > 0)
@@ -96,17 +95,17 @@ void loop()
     c1_2 = PID(theta1_2, theta1c_2, zeroError1_2 , (Kp1+2.2) , (Kd1+0.6) , prev_error1_2);
     c2_2 = PID(theta2_2, theta2c_2, zeroError2_2 , Kp2 , Kd2 , prev_error2_2);
 
-    ll1=0.0, lm1=30.0, ul1=18.5, um1=50.0;
-    ll2=0.0, lm2=40.0, ul2=0.0, um2=260.0;
+    ll1=0.0, lm1=30.0, ul1=18, um1=48.0;
+    ll2=0.0, lm2=40.0, ul2=65, um2=150.0;
 
     correction1_2 = (um1-ul1)/(lm1-ll1)*abs(c1_2)+ul1;
     correction2_2 = (um2-ul2)/(lm2-ll2)*abs(c2_2)+ul2;
 
-//    correction1_2 = map(abs(c1_2), 0, 30, 0, 50);       //TODO
-//    correction2_2 = map(abs(c2_2), 0, 40, 125, 260);      //TODO
-
     if(correction1_2 > um1)
     correction1_2=um1;
+
+    if(correction2_2 > 255)
+    correction2_2=255;
     
     Serial.print("theta1_2=");
     Serial.println(theta1_2);
@@ -178,7 +177,7 @@ void loop()
       {
         counter2_2 = 0;
       }
-      theta2c_2 = (counter2_2 * 0.3);
+      theta2c_2 = -(counter2_2 * 0.3);
     }
 
     if (t < 0.5) {
@@ -198,8 +197,7 @@ void loop()
     else
     c1_2 = PID(theta1_2, theta1c_2, zeroError1_2 , Kp1+2.1 , (Kd1+2.2) , prev_error1_2);
     c2_2 = PID(theta2_2, theta2c_2, zeroError2_2 , Kp2+2 , Kd2 , prev_error2_2);
-    ll1=0.0, lm1=70.0, ul1=33.0, um1=95.0;
-
+    ll1=0.0, lm1=70.0, ul1=38.0, um1=110.0;
 //    correction1_2 = (um1-ul1)/(lm1-ll1)*abs(c1_2)+ul1;
     
     if(t<0.5)
@@ -210,7 +208,7 @@ void loop()
     }
     
     if(t<0.5){
-    ll2=0.0, lm2=70.0, ul2=100.0, um2=350.0;
+    ll2=0.0, lm2=70.0, ul2=100.0, um2=300.0;
     correction2_2 = (um2-ul2)/(lm2-ll2)*abs(c2_2) + ul2;      //TODO
     }
     else{
@@ -224,6 +222,7 @@ void loop()
 
     if(correction2_2 > 255)
     correction2_2=255;
+    
     if(t>0.85)
     correction1_2=11;
     
@@ -318,7 +317,7 @@ void loop()
       {
         counter2_2 = 0;
       }
-      theta2c_2 = (counter2_2 * 0.3);
+      theta2c_2 = -(counter2_2 * 0.3);
     }
 
     if (atan(ye_2 / xe_2) > 0)
@@ -345,8 +344,8 @@ void loop()
     if(correction1_2 > um1)
     correction1_2=um1;
 
-    if(correction2_2 > um2)
-    correction2_2=um2;
+    if(correction2_2 > 255)
+    correction2_2=255;
 
     if(u>3.5){
       correction1_2 = 10;
@@ -455,6 +454,9 @@ void loop()
 
     if(correction1_2 > um1)
     correction1_2=um1;
+
+    if(correction2_2 > 255)
+    correction2_2=255;
    
     Serial.print("theta1_2=");
     Serial.println(theta1_2);

@@ -8,14 +8,14 @@
 int A_1 = 5, A_2 = -1;
 
 #define a1 18
-#define b1 48
+#define b1 48 
 #define a2 A12
 #define b2 53
 
 //bool state1 = true, state2 = true;
 
-float pwmx1=100, pwmx2=60, pwmx4=120;
-float theta1c=0, theta2c=0, zeroError1 = 62.513, zeroError2=51.58, minAngle1 = 16.5, minAngle2 = 33.9;  //62.513  51.58
+float pwmx1=100, pwmx2=50, pwmx4=150;
+float theta1c=0, theta2c=0, zeroError1 = 62.513, zeroError2=51.58, minAngle1 = 21.3, minAngle2 = 30.0;  //62.513  51.58
 int x;
 
 volatile int temp1, counter1 = 0;
@@ -26,7 +26,7 @@ void setup() {
   //Pins for encoders
   pinMode(a1, INPUT_PULLUP);                                           
   pinMode(b1, INPUT_PULLUP);
-  attachInterrupt(digitalPinToInterrupt(a1), ai2_3, CHANGE);
+  attachInterrupt(A_1, ai2_3, CHANGE);
 //  state1 = digitalRead(a1);
   
   pinMode(a2, INPUT_PULLUP);
@@ -65,7 +65,7 @@ void loop() {
         digitalWrite(motor2, x - 4 );
         analogWrite(motor2pwm , pwmx4);
         }
-      if(x == 6 || (-theta2c+minAngle2)>zeroError1){           //51.58 51.66
+      if(x == 6 || (-theta2c+minAngle2)>zeroError2){           //51.58 51.66
         analogWrite(motor2pwm , 0);
         x=6;
         }
