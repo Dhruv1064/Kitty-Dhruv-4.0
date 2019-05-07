@@ -32,8 +32,8 @@ double theta1c_4 = 0.0 , theta2c_4 = 0.0, theta1_4, theta2_4,error1_4,error2_4, 
 volatile int temp1_4 , counter1_4 = 0;
 volatile int temp2_4 , counter2_4 = 0;
 
-double theta1AT1 = 53.73, theta1AT2 = 45.78, theta1AT3 = 69.71, theta1_AT1 = 0, theta1_AT2 = 0.1, theta1_AT3 = 0, theta1__AT1 = 0, theta1__AT2 = 0.1, theta1__AT3 = 0;
-double theta2AT1 = 42.68, theta2AT2 = 76.73, theta2AT3 = 50.75, theta2_AT1 = 0, theta2_AT2 = 0.1, theta2_AT3 = 0, theta2__AT1 = 0, theta2__AT2 = 0.1, theta2__AT3 = 0;
+double theta1AT1_4=54.68,theta1AT2_4=48.41,theta1AT3_4=72.815,theta1_AT1_4=0,theta1_AT2_4=0.1,theta1_AT3_4=0,theta1__AT1_4=0,theta1__AT2_4=0.1,theta1__AT3_4=0;
+double theta2AT1_4=45.57,theta2AT2_4=77.29,theta2AT3_4=49.55,theta2_AT1_4=0,theta2_AT2_4=0.1,theta2_AT3_4=0,theta2__AT1_4=0,theta2__AT2_4=0.1,theta2__AT3_4=0;
 
 void setup()
 {
@@ -59,7 +59,7 @@ void loop()
   for (double t = 0.1666, u = 0.887; t < 1, u < 5.333; t = t + 0.1666, u = u + 0.887)
   {
     Serial.println("line-1");
-    double xe_4 = -4 + u ;
+    double xe_4 = -6 + u ;
     double ye_4 = -45 ;
 
     if ( counter1_4 != temp1_4 ) {
@@ -78,11 +78,11 @@ void loop()
       {
         counter2_4 = 0;
       }
-      theta2c_4 = (counter2_4 * 0.3);
+      theta2c_4 = -(counter2_4 * 0.3);
     }
 
     if (atan(ye_4 / xe_4) > 0)
-      alpha_4 = atan(ye_4 / xe_4) - 3.14159;
+      alpha_4 = atan(ye_4 / xe_4) - PI;
 
     else
       alpha_4 = atan(ye_4 / xe_4);
@@ -96,7 +96,7 @@ void loop()
     c1_4 = PID(theta1_4, theta1c_4, zeroError1_4 , (Kp1+2.0) , (Kd1+1.2) , prev_error1_4);
     c2_4 = PID(theta2_4, theta2c_4, zeroError2_4 , Kp2 , Kd2 , prev_error2_4);
 
-    ll1=0.0, lm1=40.0, ul1=12.3, um1=48.0;
+    ll1=0.0, lm1=40.0, ul1=18.5, um1=45;
     ll2=0.0, lm2=90.0, ul2=0.0, um2=70.0;
 
     correction1_4 = (um1-ul1)/(lm1-ll1)*abs(c1_4)+ul1;
@@ -105,8 +105,8 @@ void loop()
     if(correction1_4 > um1)
     correction1_4=um1;
 
-    if(correction2_4 > um2)
-    correction2_4=um2;
+    if(correction2_4 > 255)
+    correction2_4=255;
 
     if(u>3.5){
       correction1_4 = 10;
@@ -167,7 +167,7 @@ void loop()
   for (double t = 0.1666, u = 0.887; t < 1, u < 5.333; t = t + 0.1666, u = u + 0.887)
   {
     Serial.println("line-2");
-    double xe_4 = 1.3333 + u ;
+    double xe_4 = -6+ 5.3333 + u ;
     double ye_4 = -45;
 
     if ( counter1_4 != temp1_4 ) {
@@ -186,7 +186,7 @@ void loop()
       {
         counter2_4 = 0;
       }
-      theta2c_4 = (counter2_4 * 0.3);
+      theta2c_4 = -(counter2_4 * 0.3);
     }
 
     if (atan(ye_4 / xe_4) > 0)
@@ -204,8 +204,8 @@ void loop()
     c1_4 = PID(theta1_4, theta1c_4, zeroError1_4 , (Kp1+2.1) , (Kd1+0.6) , prev_error1_4);
     c2_4 = PID(theta2_4, theta2c_4, zeroError2_4 , Kp2 , Kd2 , prev_error2_4);
 
-      ll1=0.0, lm1=30.0, ul1=16.5, um1=52.0;
-    ll2=0.0, lm2=40.0, ul2=0.0, um2=150.0;
+      ll1=0.0, lm1=30.0, ul1=20, um1=43;
+    ll2=0.0, lm2=40.0, ul2=40.0, um2=80.0;
 
     correction1_4 = (um1-ul1)/(lm1-ll1)*abs(c1_4)+ul1;
     correction2_4 = (um2-ul2)/(lm2-ll2)*abs(c2_4)+ul2;
@@ -215,6 +215,9 @@ void loop()
 
     if(correction1_4 > um1)
     correction1_4=um1;
+
+    if(correction2_4 > 255)
+    correction2_4 = 255;
    
     Serial.print("theta1_4=");
     Serial.println(theta1_4);
@@ -270,7 +273,7 @@ void loop()
   for (double t = 0.1666, u = 0.887; t < 1, u < 5.333; t = t + 0.1666, u = u + 0.887)
   {
     Serial.println("line-3");
-    double xe_4 = 1.3333 + u + 5.3333;
+    double xe_4 = 4.66 + u;
     double ye_4 = -45 ;
 
     if ( counter1_4 != temp1_4 ) {
@@ -289,7 +292,7 @@ void loop()
       {
         counter2_4 = 0;
       }
-      theta2c_4 = (counter2_4 * 0.3);
+      theta2c_4 = -(counter2_4 * 0.3);
     }
 
     if (atan(ye_4 / xe_4) > 0)
@@ -307,8 +310,8 @@ void loop()
     c1_4 = PID(theta1_4, theta1c_4, zeroError1_4 , (Kp1+2.2) , (Kd1+0.6) , prev_error1_4);
     c2_4 = PID(theta2_4, theta2c_4, zeroError2_4 , Kp2 , Kd2 , prev_error2_4);
 
-    ll1=0.0, lm1=30.0, ul1=25, um1=50.0;
-    ll2=0.0, lm2=40.0, ul2=0.0, um2=150.0;
+    ll1=0.0, lm1=30.0, ul1=26.8, um1=49.5;
+    ll2=0.0, lm2=40.0, ul2=20.0, um2=100.0;
 
     correction1_4 = (um1-ul1)/(lm1-ll1)*abs(c1_4)+ul1;
     correction2_4 = (um2-ul2)/(lm2-ll2)*abs(c2_4)+ul2;
@@ -318,6 +321,9 @@ void loop()
 
     if(correction1_4 > um1)
     correction1_4=um1;
+
+    if(correction2_4 > 255)
+      correction2_4 = 255;
     
     Serial.print("theta1_4=");
     Serial.println(theta1_4);
@@ -389,16 +395,16 @@ void loop()
       {
         counter2_4 = 0;
       }
-      theta2c_4 = (counter2_4 * 0.3);
+      theta2c_4 = -(counter2_4 * 0.3);
     }
 
     if (t < 0.5) {
-      theta1_4 = (-1) * theta(theta1AT1, theta1_AT1, theta1__AT1, theta1AT2, theta1_AT2, theta1__AT2, t);
-      theta2_4 = (-1) * theta(theta2AT1, theta2_AT1, theta2__AT1, theta2AT2, theta2_AT2, theta2__AT2, t);
+      theta1_4 = (-1) * theta(theta1AT1_4, theta1_AT1_4, theta1__AT1_4, theta1AT2_4, theta1_AT2_4, theta1__AT2_4, t);
+      theta2_4 = (-1) * theta(theta2AT1_4, theta2_AT1_4, theta2__AT1_4, theta2AT2_4, theta2_AT2_4, theta2__AT2_4, t);
     }
     else {
-      theta1_4 = (-1) * theta(theta1AT2, theta1_AT2, theta1__AT2, theta1AT3, theta1_AT3, theta1__AT3, t - 0.5);
-      theta2_4 = (-1) * theta(theta2AT2, theta2_AT2, theta2__AT2, theta2AT3, theta2_AT3, theta2__AT3, t - 0.5);
+      theta1_4 = (-1) * theta(theta1AT2_4, theta1_AT2_4, theta1__AT2_4, theta1AT3_4, theta1_AT3_4, theta1__AT3_4, t - 0.5);
+      theta2_4 = (-1) * theta(theta2AT2_4, theta2_AT2_4, theta2__AT2_4, theta2AT3_4, theta2_AT3_4, theta2__AT3_4, t - 0.5);
     }
 
     error1_4 = theta1_4 - theta1c_4 + zeroError1_4;
@@ -409,26 +415,25 @@ void loop()
     else
     c1_4 = PID(theta1_4, theta1c_4, zeroError1_4 , Kp1+2.1 , (Kd1+2.2) , prev_error1_4);
     c2_4 = PID(theta2_4, theta2c_4, zeroError2_4 , Kp2+2 , Kd2 , prev_error2_4);
-    ll1=0.0, lm1=70.0, ul1=40.0, um1=95.0;
+    ll1=0.0, lm1=70.0, ul1=40.0, um1=65.0;
 
 //    correction1_4 = (um1-ul1)/(lm1-ll1)*abs(c1_4)+ul1;
     
     if(t<0.5)
     correction1_4 = (um1-ul1)/(lm1-ll1)*abs(c1_4)+ul1;
     else{
-    ll1=0.0, lm1=70.0, ul1=20.0, um1=40.0;
+    ll1=0.0, lm1=70.0, ul1=35, um1=45.0;
     correction1_4 = (um1-ul1)/(lm1-ll1)*abs(c1_4)+ul1;      //TODO   0-60
     }
     
     if(t<0.5){
-    ll2=0.0, lm2=70.0, ul2=90.0, um2=350.0;
+    ll2=0.0, lm2=70.0, ul2=100.0, um2=225.0;
     correction2_4 = (um2-ul2)/(lm2-ll2)*abs(c2_4) + ul2;      //TODO
     }
     else{
-      ll2=0.0, lm2=70.0, ul2=100.0, um2=300.0;
+      ll2=0.0, lm2=70.0, ul2=100.0, um2=225.0;
     correction2_4 = (um2-ul2)/(lm2-ll2)*abs(c2_4) + ul2;
     }
-    
 
     if(correction1_4 > um1)
     correction1_4=um1;
@@ -436,7 +441,7 @@ void loop()
     if(correction2_4 > 255)
     correction2_4=255;
     if(t>0.85)
-    correction1_4=11;
+    correction1_4=10;
     
     Serial.print("theta1_4=");
     Serial.println(theta1_4);
@@ -476,34 +481,34 @@ void loop()
       analogWrite(motor2pwm_4, abs(correction2_4));
     }
 
-    do {
-        if ( counter1_4 != temp1_4 ) {
-        temp1_4 = counter1_4;
-
-        if (counter1_4 > 1200)
-        {
-          counter1_4 = 0;
-        }
-        theta1c_4 = (counter1_4 * 0.3);
-      }
-//      Serial.println("theta1c_4-----------------");
-//      Serial.println(theta1c_4);
-
-    }while(t<0.5 && (theta1_4 - theta1c_4 + zeroError1_4)>0.5);
-
-    do {
-        if ( counter1_4 != temp1_4 ) {
-        temp1_4 = counter1_4;
-
-        if (counter1_4 > 1200)
-        {
-          counter1_4 = 0;
-        }
-        theta1c_4 = (counter1_4 * 0.3);
-      }
-
-    }while(t>0.5 && (theta1_4 - theta1c_4 + zeroError1_4)<-0.2);
-    
+//    do {
+//        if ( counter1_4 != temp1_4 ) {
+//        temp1_4 = counter1_4;
+//
+//        if (counter1_4 > 1200)
+//        {
+//          counter1_4 = 0;
+//        }
+//        theta1c_4 = (counter1_4 * 0.3);
+//      }
+////      Serial.println("theta1c_4-----------------");
+////      Serial.println(theta1c_4);
+//
+//    }while(t<0.5 && (theta1_4 - theta1c_4 + zeroError1_4)>0.5);
+//
+//    do {
+//        if ( counter1_4 != temp1_4 ) {
+//        temp1_4 = counter1_4;
+//
+//        if (counter1_4 > 1200)
+//        {
+//          counter1_4 = 0;
+//        }
+//        theta1c_4 = (counter1_4 * 0.3);
+//      }
+//
+//    }while(t>0.5 && (theta1_4 - theta1c_4 + zeroError1_4)<-0.2);
+//    
 //    delay(150);
   }
   

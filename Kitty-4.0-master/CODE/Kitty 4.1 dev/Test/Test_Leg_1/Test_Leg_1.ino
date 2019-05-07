@@ -22,8 +22,8 @@ int l1 = 25, l2 = 25;
 //int A1_1 = 1;
 //int A2_1 = 0;
 
-bool state1_1 = true;
-bool state2_1 = true;
+//bool state1_1 = true;
+//bool state2_1 = true;
 
 double alpha_1;
 double theta1c_1 = 0.0 , theta2c_1 = 0.0, theta1_1, theta2_1,error1_1,error2_1, correction1_1, correction2_1, c1_1, c2_1, prev_error1_1 = 0.0 , prev_error2_1 = 0.0, zeroError1_1 = 53.728, zeroError2_1 = 42.68;
@@ -31,8 +31,7 @@ double theta1c_1 = 0.0 , theta2c_1 = 0.0, theta1_1, theta2_1,error1_1,error2_1, 
 volatile int temp1_1 , counter1_1 = 0;
 volatile int temp2_1 , counter2_1 = 0;
 
-double theta1AT1 = 53.73
-, theta1AT2 = 45.78, theta1AT3 = 69.71, theta1_AT1 = 0, theta1_AT2 = 0.1, theta1_AT3 = 0, theta1__AT1 = 0, theta1__AT2 = 0.1, theta1__AT3 = 0;
+double theta1AT1 = 53.73, theta1AT2 = 45.78, theta1AT3 = 69.71, theta1_AT1 = 0, theta1_AT2 = 0.1, theta1_AT3 = 0, theta1__AT1 = 0, theta1__AT2 = 0.1, theta1__AT3 = 0;
 double theta2AT1 = 42.68, theta2AT2 = 76.73, theta2AT3 = 50.75, theta2_AT1 = 0, theta2_AT2 = 0.1, theta2_AT3 = 0, theta2__AT1 = 0, theta2__AT2 = 0.1, theta2__AT3 = 0;
 
 void setup()
@@ -51,8 +50,8 @@ void setup()
   attachInterrupt(A1_1, ai1_1, CHANGE);
   attachInterrupt(A2_1, ai2_1, CHANGE);
 
-  state1_1 = digitalRead(a1_1);
-  state2_1 = digitalRead(a2_1);
+//  state1_1 = digitalRead(a1_1);
+//  state2_1 = digitalRead(a2_1);
 }
 
 void loop()
@@ -96,23 +95,23 @@ void loop()
     else
     c1_1 = PID(theta1_1, theta1c_1, zeroError1_1 , Kp1+2.1 , (Kd1+2.2) , prev_error1_1);
     c2_1 = PID(theta2_1, theta2c_1, zeroError2_1 , Kp2+1.2 , Kd2 , prev_error2_1);
-    ll1=0.0, lm1=70.0, ul1=55.0, um1=125.0;
+    ll1=0.0, lm1=70.0, ul1=45.0, um1=120.0;
 
 //    correction1_1 = (um1-ul1)/(lm1-ll1)*abs(c1_1)+ul1;
     
     if(t<0.5)
     correction1_1 = (um1-ul1)/(lm1-ll1)*abs(c1_1)+ul1;
     else{
-    ll1=0.0, lm1=70.0, ul1=20.0, um1=40.0;
+    ll1=0.0, lm1=70.0, ul1=25.0, um1=45.0;
     correction1_1 = (um1-ul1)/(lm1-ll1)*abs(c1_1)+ul1;      //TODO   0-60
     }
     
     if(t<0.5){
-    ll2=0.0, lm2=70.0, ul2=100.0, um2=300.0;
+    ll2=0.0, lm2=70.0, ul2=100.0, um2=225.0;
     correction2_1 = (um2-ul2)/(lm2-ll2)*abs(c2_1) + ul2;      //TODO
     }
     else{
-      ll2=0.0, lm2=70.0, ul2=100.0, um2=300.0;
+      ll2=0.0, lm2=70.0, ul2=100.0, um2=225.0;
     correction2_1 = (um2-ul2)/(lm2-ll2)*abs(c2_1) + ul2;
     }
     
@@ -120,8 +119,8 @@ void loop()
     if(correction1_1 > um1)
     correction1_1=um1;
 
-    if(correction2_1 > 255)
-    correction2_1=255;
+    if(correction2_1 > um2)
+    correction2_1=um2;
     
     if(t>0.85)
     correction1_1=11;
@@ -164,35 +163,35 @@ void loop()
       analogWrite(motor2pwm_1, abs(correction2_1));
     }
 
-    do {
-        if ( counter1_1 != temp1_1 ) {
-        temp1_1 = counter1_1;
-
-        if (counter1_1 > 1200)
-        {
-          counter1_1 = 0;
-        }
-        theta1c_1 = (counter1_1 * 0.3);
-      }
-//      Serial.println("theta1c_1-----------------");
-//      Serial.println(theta1c_1);
-
-    }while(t<0.5 && (theta1_1 - theta1c_1 + zeroError1_1)>0.5);
-
-    do {
-        if ( counter1_1 != temp1_1 ) {
-        temp1_1 = counter1_1;
-
-        if (counter1_1 > 1200)
-        {
-          counter1_1 = 0;
-        }
-        theta1c_1 = (counter1_1 * 0.3);
-      }
-
-    }while(t>0.5 && (theta1_1 - theta1c_1 + zeroError1_1)<-0.2);
-    
-//    delay(150);
+//    do {
+//        if ( counter1_1 != temp1_1 ) {
+//        temp1_1 = counter1_1;
+//
+//        if (counter1_1 > 1200)
+//        {
+//          counter1_1 = 0;
+//        }
+//        theta1c_1 = (counter1_1 * 0.3);
+//      }
+////      Serial.println("theta1c_1-----------------");
+////      Serial.println(theta1c_1);
+//
+//    }while(t<0.5 && (theta1_1 - theta1c_1 + zeroError1_1)>0.5);
+//
+//    do {
+//        if ( counter1_1 != temp1_1 ) {
+//        temp1_1 = counter1_1;
+//
+//        if (counter1_1 > 1200)
+//        {
+//          counter1_1 = 0;
+//        }
+//        theta1c_1 = (counter1_1 * 0.3);
+//      }
+//
+//    }while(t>0.5 && (theta1_1 - theta1c_1 + zeroError1_1)<-0.2);
+//    
+    delay(150);
   }
   
   for (double t = 0.1666, u = 0.887; t < 1, u < 5.333; t = t + 0.1666, u = u + 0.887)
@@ -235,7 +234,7 @@ void loop()
     c1_1 = PID(theta1_1, theta1c_1, zeroError1_1 , (Kp1+2.0) , (Kd1+1.2) , prev_error1_1);
     c2_1 = PID(theta2_1, theta2c_1, zeroError2_1 , Kp2 , Kd2 , prev_error2_1);
 
-    ll1=0.0, lm1=40.0, ul1=32, um1=53.0;    
+    ll1=0.0, lm1=40.0, ul1=25, um1=53.0;    
     ll2=0.0, lm2=90.0, ul2=0.0, um2=150.0;
 
     correction1_1 = (um1-ul1)/(lm1-ll1)*abs(c1_1)+ul1;
@@ -562,22 +561,22 @@ void lwr_mtr_bwd_1() {
 }
 
 void ai1_1() {
-  if (digitalRead(b1_1) == state1_1) {
+  if (digitalRead(b1_1) == !digitalRead(a1_1)) {
     counter1_1++;
   }
   else {
     counter1_1--;
   }
-  state1_1 = !state1_1;
+//  state1_1 = !state1_1;
 }
 
 void ai2_1() {
-  if (digitalRead(b2_1) == state2_1) {
+  if (digitalRead(b2_1) == !digitalRead(a2_1)) {
     counter2_1++;
   }
   else {
     counter2_1--;
   }
-  state2_1 = !state2_1;
+//  state2_1 = !state2_1;
 }
 

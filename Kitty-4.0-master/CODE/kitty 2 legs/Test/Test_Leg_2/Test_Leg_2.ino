@@ -26,13 +26,13 @@ bool state1_2 = true;
 bool state2_2 = true;
 
 double alpha_2;
-double theta1c_2 = 0.0 , theta2c_2 = 0.0, theta1_2, theta2_2,error1_2,error2_2, correction1_2, correction2_2, c1_2, c2_2, prev_error1_2 = 0.0 , prev_error2_2 = 0.0, zeroError1_2 = 58.8795, zeroError2_2=50.4;
+double theta1c_2 = 0.0 , theta2c_2 = 0.0, theta1_2, theta2_2,error1_2,error2_2, correction1_2, correction2_2, c1_2, c2_2, prev_error1_2 = 0.0 , prev_error2_2 = 0.0, zeroError1_2 = 70.8795, zeroError2_2=50.4;
 
 volatile int temp1_2 , counter1_2 = 0;
 volatile int temp2_2 , counter2_2 = 0;
 
-double theta1AT1 = 54.68, theta1AT2 = 48.41, theta1AT3 = 72.815, theta1_AT1 = 0, theta1_AT2 = 0.1, theta1_AT3 = 0, theta1__AT1 = 0, theta1__AT2 = 0.1, theta1__AT3 = 0;
-double theta2AT1 = 45.57, theta2AT2 = 77.29, theta2AT3 = 49.55, theta2_AT1 = 0, theta2_AT2 = 0.1, theta2_AT3 = 0, theta2__AT1 = 0, theta2__AT2 = 0.1, theta2__AT3 = 0;
+double theta1AT1 = 54.3, theta1AT2 = 45.3491, theta1AT3 = 70.4462, theta1_AT1 = 0, theta1_AT2 = 0.1, theta1_AT3 = 0, theta1__AT1 = 0, theta1__AT2 = 0.1, theta1__AT3 = 0;
+double theta2AT1 = 43.198, theta2AT2 = 75.6567, theta2AT3 = 50.5097, theta2_AT1 = 0, theta2_AT2 = 0.1, theta2_AT3 = 0, theta2__AT1 = 0, theta2__AT2 = 0.1, theta2__AT3 = 0;
 
 void setup()
 {
@@ -55,10 +55,10 @@ void setup()
 
 void loop()
 {  
-  for (double t = 0.1666, u = 0.887; t < 1, u < 5.333; t = t + 0.1666, u = u + 0.887)
+  for (double t = 0.1, u = 1.6; t <= 1.01, u <= 16.1; t = t + 0.1, u = u + 1.6)
   {
     Serial.println("line-3");
-    double xe_2 = 4.66+u;
+    double xe_2 = -6 + u;
     double ye_2 = -45 ;
 
     if ( counter1_2 != temp1_2 ) {
@@ -92,11 +92,11 @@ void loop()
     error1_2 = theta1_2 - theta1c_2 + zeroError1_2;
     error2_2 = theta2_2 - theta2c_2 + zeroError2_2;
     
-    c1_2 = PID(theta1_2, theta1c_2, zeroError1_2 , (Kp1+2.2) , (Kd1+0.6) , prev_error1_2);
-    c2_2 = PID(theta2_2, theta2c_2, zeroError2_2 , Kp2 , Kd2 , prev_error2_2);
+    c1_2 = PID(theta1_2, theta1c_2, zeroError1_2 , (Kp1+1.3) , (Kd1+2.8) , prev_error1_2);
+    c2_2 = PID(theta2_2, theta2c_2, zeroError2_2 , Kp2 , Kd2+1.2 , prev_error2_2);
 
-    ll1=0.0, lm1=30.0, ul1=25, um1=50.0;
-    ll2=0.0, lm2=40.0, ul2=0, um2=60.0;
+    ll1=0.0, lm1=40.0, ul1=25, um1=36.0;    
+    ll2=0.0, lm2=90.0, ul2=40.0, um2=150.0;
 
     correction1_2 = (um1-ul1)/(lm1-ll1)*abs(c1_2)+ul1;
     correction2_2 = (um2-ul2)/(lm2-ll2)*abs(c2_2)+ul2;
@@ -158,7 +158,7 @@ void loop()
 //    }while(theta1_2 - theta1c_2 + zeroError1_2>0.1);
   }
 
-  for (double t = 0.1666, u = 0.887; t < 1, u < 5.333; t = t + 0.1666, u = u + 0.887)
+  for (double t = 0.1, u = 1.6; t <= 1.01, u <= 16.1; t = t + 0.1, u = u + 1.6)
   { 
 
     if ( counter1_2 != temp1_2 ) {
@@ -193,17 +193,17 @@ void loop()
     error2_2 = theta2_2 - theta2c_2 + zeroError2_2; 
     
     if(t<0.5)
-    c1_2 = PID(theta1_2, theta1c_2, zeroError1_2 , Kp1+1.5 , Kd1+2.8 , prev_error1_2);
+    c1_2 = PID(theta1_2, theta1c_2, zeroError1_2 , Kp1+2.5 , Kd1+1.9 , prev_error1_2);
     else
-    c1_2 = PID(theta1_2, theta1c_2, zeroError1_2 , Kp1+2.1 , (Kd1+2.2) , prev_error1_2);
-    c2_2 = PID(theta2_2, theta2c_2, zeroError2_2 , Kp2+2 , Kd2 , prev_error2_2);
-    ll1=0.0, lm1=70.0, ul1=38.0, um1=55.0;
+    c1_2 = PID(theta1_2, theta1c_2, zeroError1_2 , Kp1+1.5 , (Kd1+2.5) , prev_error1_2);
+    c2_2 = PID(theta2_2, theta2c_2, zeroError2_2 , Kp1+0.6 , Kd2+1.2 , prev_error2_2);
+    ll1=0.0, lm1=70.0, ul1=40.0, um1=80.0;
 //    correction1_2 = (um1-ul1)/(lm1-ll1)*abs(c1_2)+ul1;
     
     if(t<0.5)
     correction1_2 = (um1-ul1)/(lm1-ll1)*abs(c1_2)+ul1;
     else{
-    ll1=0.0, lm1=70.0, ul1=32.0, um1=40.0;
+    ll1=0.0, lm1=70.0, ul1=25.0, um1=45.0;
     correction1_2 = (um1-ul1)/(lm1-ll1)*abs(c1_2)+ul1;      //TODO   0-60
     }
     
@@ -223,8 +223,8 @@ void loop()
     if(correction2_2 > 255)
     correction2_2=255;
     
-    if(t>0.85)
-    correction1_2=11;
+//    if(t>0.85)
+//    correction1_2=11;
     
     Serial.print("theta1_2=");
     Serial.println(theta1_2);
@@ -294,221 +294,6 @@ void loop()
 //    
 //    delay(150);
   }
-  
-  for (double t = 0.1666, u = 0.887; t < 1, u < 5.333; t = t + 0.1666, u = u + 0.887)
-  {
-    Serial.println("line-1");
-    double xe_2 = -6 + u ;
-    double ye_2 = -45 ;
-
-    if ( counter1_2 != temp1_2 ) {
-      temp1_2 = counter1_2;
-
-      if (counter1_2 > 1200)
-      {
-        counter1_2 = 0;
-      }
-      theta1c_2 = (counter1_2 * 0.3);
-    }
-    if ( counter2_2 != temp2_2 ) {
-      temp2_2 = counter2_2;
-
-      if (counter2_2 > 1200)
-      {
-        counter2_2 = 0;
-      }
-      theta2c_2 = -(counter2_2 * 0.3);
-    }
-
-    if (atan(ye_2 / xe_2) > 0)
-      alpha_2 = atan(ye_2 / xe_2) - 3.14159;
-
-    else
-      alpha_2 = atan(ye_2 / xe_2);
-
-    theta1_2 = 57.2958 * (cosine_rule(l1, l2, sqrt(xe_2 * xe_2 + ye_2 * ye_2)) + alpha_2);
-    theta2_2 = 57.2958 * (-3.14159 + cosine_rule(sqrt(xe_2 * xe_2 + ye_2 * ye_2), l1, l2));
-
-    error1_2 = theta1_2 - theta1c_2 + zeroError1_2;
-    error2_2 = theta2_2 - theta2c_2 + zeroError2_2;
-    
-    c1_2 = PID(theta1_2, theta1c_2, zeroError1_2 , (Kp1+2.0) , (Kd1+1.2) , prev_error1_2);
-    c2_2 = PID(theta2_2, theta2c_2, zeroError2_2 , Kp2 , Kd2 , prev_error2_2);
-
-    ll1=0.0, lm1=40.0, ul1=12.3, um1=35.0;
-    ll2=0.0, lm2=90.0, ul2=0.0, um2=60.0;
-
-    correction1_2 = (um1-ul1)/(lm1-ll1)*abs(c1_2)+ul1;
-    correction2_2 = (um2-ul2)/(lm2-ll2)*abs(c2_2)+ul2;
-    
-    if(correction1_2 > um1)
-    correction1_2=um1;
-
-    if(correction2_2 > 255)
-    correction2_2=255;
-
-    if(u>3.5){
-      correction1_2 = 10;
-    }
-
-    Serial.print("theta1_2=");
-    Serial.println(theta1_2);
-    Serial.print("theta1c_2=");
-    Serial.println(theta1c_2 - zeroError1_2);
-    Serial.print("theta2c_2=");
-    Serial.println(theta2c_2 - zeroError2_2);
-    Serial.print("theta2_2=");
-    Serial.println(theta2_2);
-    Serial.print("c1_2=");
-    Serial.println(c1_2);
-    Serial.print("c2_2=");
-    Serial.println(c2_2);
-    Serial.print("pwm1=");
-    Serial.println(correction1_2);
-    Serial.print("pwm2=");
-    Serial.println(correction2_2);
-    Serial.println("------------------------");
-
-    if (error1_2 < 0 ) {
-      upr_mtr_fwd_2();
-      analogWrite(motor1pwm_2, abs(correction1_2));
-    }
-
-    else if (error1_2 > 0) {
-      upr_mtr_bwd_2();
-      analogWrite(motor1pwm_2, abs(correction1_2));
-    }
-
-    if (error2_2 < 0) {
-      lwr_mtr_fwd_2();
-      analogWrite(motor2pwm_2, abs(correction2_2));
-    }
-
-    else if (error2_2 > 0) {
-      lwr_mtr_bwd_2();
-      analogWrite(motor2pwm_2, abs(correction2_2));
-    }
-
-//    do{
-//      if ( counter1_2 != temp1_2 ) {
-//        temp1_2 = counter1_2;
-//
-//        if (counter1_2 > 1200)
-//        {
-//          counter1_2 = 0;
-//        }
-//        theta1c_2 = (counter1_2 * 0.3);
-//      }
-//    }while((theta1_2 - theta1c_2 + zeroError1_2)>0.1);
-//
-  }
-  
-  for (double t = 0.1666, u = 0.887; t < 1, u < 5.333; t = t + 0.1666, u = u + 0.887)
-  {
-    Serial.println("line-2");
-    double xe_2 = -6 + 5.3333 + u ;
-    double ye_2 = -45;
-
-    if ( counter1_2 != temp1_2 ) {
-      temp1_2 = counter1_2;
-
-      if (counter1_2 > 1200)
-      {
-        counter1_2 = 0;
-      }
-      theta1c_2 = (counter1_2 * 0.3);
-    }
-    if ( counter2_2 != temp2_2 ) {
-      temp2_2 = counter2_2;
-
-      if (counter2_2 > 1200)
-      {
-        counter2_2 = 0;
-      }
-      theta2c_2 = (counter2_2 * 0.3);
-    }
-
-    if (atan(ye_2 / xe_2) > 0)
-      alpha_2 = atan(ye_2 / xe_2) - 3.14159;
-
-    else
-      alpha_2 = atan(ye_2 / xe_2);
-
-    theta1_2 = 57.2958 * (cosine_rule(l1, l2, sqrt(xe_2 * xe_2 + ye_2 * ye_2)) + alpha_2);
-    theta2_2 = 57.2958 * (-3.14159 + cosine_rule(sqrt(xe_2 * xe_2 + ye_2 * ye_2), l1, l2));
-
-     error1_2 = theta1_2 - theta1c_2 + zeroError1_2;
-    error2_2 = theta2_2 - theta2c_2 + zeroError2_2;
-    
-    c1_2 = PID(theta1_2, theta1c_2, zeroError1_2 , (Kp1+2.1) , (Kd1+0.6) , prev_error1_2);
-    c2_2 = PID(theta2_2, theta2c_2, zeroError2_2 , Kp2 , Kd2 , prev_error2_2);
-
-      ll1=0.0, lm1=30.0, ul1=16.5, um1=40.0;
-    ll2=0.0, lm2=40.0, ul2=0.0, um2=50.0;
-
-    correction1_2 = (um1-ul1)/(lm1-ll1)*abs(c1_2)+ul1;
-    correction2_2 = (um2-ul2)/(lm2-ll2)*abs(c2_2)+ul2;
-    
-//    correction1_2 = map(abs(c1_2), 0, 30, 0, 50);       //TODO
-//    correction2_2 = map(abs(c2_2), 0, 40, 0, 375);      //TODO
-
-    if(correction1_2 > um1)
-    correction1_2=um1;
-
-    if(correction2_2 > 255)
-    correction2_2=255;
-   
-    Serial.print("theta1_2=");
-    Serial.println(theta1_2);
-    Serial.print("theta1c_2=");
-    Serial.println(theta1c_2 - zeroError1_2);
-    Serial.print("theta2c_2=");
-    Serial.println(theta2c_2 - zeroError2_2);
-    Serial.print("theta2_2=");
-    Serial.println(theta2_2);
-    Serial.print("c1_2=");
-    Serial.println(c1_2);
-    Serial.print("c2_2=");
-    Serial.println(c2_2);
-    Serial.print("pwm1=");
-    Serial.println(correction1_2);
-    Serial.print("pwm2=");
-    Serial.println(correction2_2);
-    Serial.println("------------------------");
-
-    if (error1_2 < 0 ) {
-      upr_mtr_fwd_2();
-      analogWrite(motor1pwm_2, abs(correction1_2));
-    }
-
-    else if (error1_2 > 0) {
-      upr_mtr_bwd_2();
-      analogWrite(motor1pwm_2, abs(correction1_2));
-    }
-
-    if (error2_2 < 0) {
-      lwr_mtr_fwd_2();
-      analogWrite(motor2pwm_2, abs(correction2_2));
-    }
-
-    else if (error2_2 > 0) {
-      lwr_mtr_bwd_2();
-      analogWrite(motor2pwm_2, abs(correction2_2));
-    }
-
-//     do{
-//      if ( counter1_2 != temp1_2 ) {
-//        temp1_2 = counter1_2;
-//
-//        if (counter1_2 > 1200)
-//        {
-//          counter1_2 = 0;
-//        }
-//        theta1c_2 = (counter1_2 * 0.3);
-//      }
-//    }while(theta1_2 - theta1c_2 + zeroError1_2>0.1);
-  }
-
 }
 
 double PID(double theta, double thetac, double zeroError, double KP, double KD, double &prevError) {
