@@ -8,7 +8,7 @@ int A_1 = 3, A_2 = 4;
   
 #define a1 20
 #define b1 A15
-#define a2 19
+#define a2 19 
 #define b2 51
 //bool state1 = true, state2 = true;
 

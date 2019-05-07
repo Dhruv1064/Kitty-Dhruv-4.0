@@ -14,7 +14,7 @@ int A_1 = 2;
 bool state1 = true, state2 = true;
 
 float pwmx1=100, pwmx2=40, pwmx4=120; 
-float theta1c=0, theta2c=0, zeroError1 = 70.4462, zeroError2 = 50.5097, minAngle1 = 19.8,minAngle2 = 35.1;  //58.8795  50.4
+float theta1c=0, theta2c=0, zeroError1 = 72.4462, zeroError2 = 49.55, minAngle1 = 19.8,minAngle2 = 35.1;  //58.8795  50.4
 int x;
 
 volatile int temp1, counter1 = 0;
