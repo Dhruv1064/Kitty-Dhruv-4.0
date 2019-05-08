@@ -18,7 +18,7 @@ double ll2=0.0, lm2=0.0, ul2=0.0, um2=0.0;
 double Kp1 = 1.5, Kp2 = 1.5;
 double Kd1 = 2.0, Kd2 = 2.0;
 
-int l1 = 25, l2 = 25;
+double l1 = 26.0, l2 = 23.4;
 
 //int A1_3 = 1;
 //int A2_3 = 0;
@@ -27,12 +27,12 @@ int l1 = 25, l2 = 25;
 //bool state2_3 = true;
 
 double alpha_3;
-double theta1c_3 = 0.0 , theta2c_3 = 0.0, theta1_3, theta2_3,error1_3,error2_3, correction1_3, correction2_3, c1_3, c2_3, prev_error1_3 = 0.0 , prev_error2_3 = 0.0, zeroError1_3 = 67.513, zeroError2_3=51.58;
+double theta1c_3 = 0.0 , theta2c_3 = 0.0, theta1_3, theta2_3,error1_3,error2_3, correction1_3, correction2_3, c1_3, c2_3, prev_error1_3 = 0.0 , prev_error2_3 = 0.0, zeroError1_3 = 69.513, zeroError2_3=51.58;
 
 volatile int temp1_3 , counter1_3 = 0;
 volatile int temp2_3 , counter2_3 = 0;
 
-double theta1AT1 = 53.0, theta1AT2 = 45.9456, theta1AT3 = 67.3592, theta1_AT1 = 0, theta1_AT2 = 0.1, theta1_AT3 = 0, theta1__AT1 = 0, theta1__AT2 = 0.1, theta1__AT3 = 0;
+double theta1AT1 = 53.0, theta1AT2 = 45.9456, theta1AT3 = 69.3592, theta1_AT1 = 0, theta1_AT2 = 0.1, theta1_AT3 = 0, theta1__AT1 = 0, theta1__AT2 = 0.1, theta1__AT3 = 0;
 double theta2AT1 = 42.3, theta2AT2 = 75.0727, theta2AT3 = 51.7943, theta2_AT1 = 0, theta2_AT2 = 0.1, theta2_AT3 = 0, theta2__AT1 = 0, theta2__AT2 = 0.1, theta2__AT3 = 0;
 
 void setup()
@@ -94,10 +94,10 @@ void loop()
     error1_3 = theta1_3 - theta1c_3 + zeroError1_3;
     error2_3 = theta2_3 - theta2c_3 + zeroError2_3;
     
-    c1_3 = PID(theta1_3, theta1c_3, zeroError1_3 , (Kp1+1.8) , (Kd1+2.5) , prev_error1_3);
-    c2_3 = PID(theta2_3, theta2c_3, zeroError2_3 , Kp2+0.8 , Kd2+1.5 , prev_error2_3);
+    c1_3 = PID(theta1_3, theta1c_3, zeroError1_3 , (Kp1+1.8) , (Kd1+1.8) , prev_error1_3);
+    c2_3 = PID(theta2_3, theta2c_3, zeroError2_3 , Kp2 , Kd2+1.5 , prev_error2_3);
 
-    ll1=0.0, lm1=40.0, ul1=25, um1=50.0;    
+    ll1=0.0, lm1=40.0, ul1=30, um1=45.0;    
     ll2=0.0, lm2=90.0, ul2=40.0, um2=170.0;
 
     correction1_3 = (um1-ul1)/(lm1-ll1)*abs(c1_3)+ul1;
@@ -201,7 +201,7 @@ void loop()
     if(t<0.5)
     c1_3 = PID(theta1_3, theta1c_3, zeroError1_3 , Kp1+2.5 , Kd1+1.9 , prev_error1_3);
     else
-    c1_3 = PID(theta1_3, theta1c_3, zeroError1_3 , Kp1+1.5 , (Kd1+2.5) , prev_error1_3);
+    c1_3 = PID(theta1_3, theta1c_3, zeroError1_3 , Kp1+1.9 , (Kd1+1.7) , prev_error1_3);
     c2_3 = PID(theta2_3, theta2c_3, zeroError2_3 , Kp2+1.2 , Kd2+0.6 , prev_error2_3);
     ll1=0.0, lm1=70.0, ul1=40.0, um1=65.0;
 
@@ -210,7 +210,7 @@ void loop()
     if(t<0.5)
     correction1_3 = (um1-ul1)/(lm1-ll1)*abs(c1_3)+ul1;
     else{
-    ll1=0.0, lm1=70.0, ul1=25.0, um1=45.0;
+    ll1=0.0, lm1=70.0, ul1=30.0, um1=50.0;
     correction1_3 = (um1-ul1)/(lm1-ll1)*abs(c1_3)+ul1;      //TODO   0-60
     }
     

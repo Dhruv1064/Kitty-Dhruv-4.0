@@ -15,10 +15,10 @@ int A_1 = 5, A_2 = -1;
 //bool state1 = true, state2 = true;
 
 float pwmx1=100, pwmx2=50, pwmx4=150;
-float theta1c=0, theta2c=0, zeroError1 = 67.513, zeroError2=51.58, minAngle1 = 21.3, minAngle2 = 30.0;  //62.513  51.58
+float theta1c=0, theta2c=0, zeroError1 = 69.513, zeroError2=51.58, minAngle1 = 21.3, minAngle2 = 30.0;  //62.513  51.58
 int x;
 
-volatile int temp1, counter1 = 0;
+volatile int temp1, counter1 = 0; 
 volatile int temp2 , counter2 = 0;
 
 void setup() {

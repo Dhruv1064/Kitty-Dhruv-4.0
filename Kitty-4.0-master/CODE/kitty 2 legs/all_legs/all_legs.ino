@@ -45,13 +45,13 @@ int A1_1 = 3, A2_1 = 4, A1_2 = 2, A1_3 = 5,A1_4= 1,A2_4=3;  //Change as per need
 double ll=0.0, lm=0.0, ul=0.0, um=0.0;
 
 double alpha_1;
-double theta1c_1 = 0.0 , theta2c_1 = 0.0, theta1_1, theta2_1,error1_1,error2_1, correction1_1, correction2_1, c1_1, c2_1, prev_error1_1 = 0.0 , prev_error2_1 = 0.0, zeroError1_1 = 56.728, zeroError2_1 = 39.68;
+double theta1c_1 = 0.0 , theta2c_1 = 0.0, theta1_1, theta2_1,error1_1,error2_1, correction1_1, correction2_1, c1_1, c2_1, prev_error1_1 = 0.0 , prev_error2_1 = 0.0, zeroError1_1 = 56.6, zeroError2_1 = 39.0;
 
 double alpha_2;
-double theta1c_2 = 0.0 , theta2c_2 = 0.0, theta1_2, theta2_2,error1_2,error2_2, correction1_2, correction2_2, c1_2, c2_2, prev_error1_2 = 0.0 , prev_error2_2 = 0.0, zeroError1_2 = 70.87, zeroError2_2 = 50.4;
+double theta1c_2 = 0.0 , theta2c_2 = 0.0, theta1_2, theta2_2,error1_2,error2_2, correction1_2, correction2_2, c1_2, c2_2, prev_error1_2 = 0.0 , prev_error2_2 = 0.0, zeroError1_2 = 70.8795, zeroError2_2=50.4;
 
 double alpha_3;
-double theta1c_3 = 0.0 , theta2c_3 = 0.0, theta1_3, theta2_3,error1_3,error2_3, correction1_3, correction2_3, c1_3, c2_3, prev_error1_3 = 0.0 , prev_error2_3 = 0.0, zeroError1_3 = 67.513, zeroError2_3 = 51.58;
+double theta1c_3 = 0.0 , theta2c_3 = 0.0, theta1_3, theta2_3,error1_3,error2_3, correction1_3, correction2_3, c1_3, c2_3, prev_error1_3 = 0.0 , prev_error2_3 = 0.0, zeroError1_3 = 69.513, zeroError2_3=51.58;
 
 double alpha_4;
 double theta1c_4 = 0.0 , theta2c_4 = 0.0, theta1_4, theta2_4,error1_4,error2_4, correction1_4, correction2_4, c1_4, c2_4, prev_error1_4 = 0.0, prev_error2_4 = 0.0, zeroError1_4 = 53.815, zeroError2_4 = 39.55;
@@ -69,15 +69,15 @@ volatile int temp1_4 , counter1_4 = 0;
 volatile int temp2_4 , counter2_4 = 0;
 
 double Kp1 = 1.5, Kp2 = 1.5, Kd1 = 2.0, Kd2 = 2.0 ;
-int l1 = 25, l2 = 25;
+double l1 = 26.0, l2 = 23.4;
 
-double theta1AT1_1 = 56.0, theta1AT2_1 = 45.9456, theta1AT3_1 = 70.3592, theta1_AT1_1 = 0, theta1_AT2_1 = 0.1, theta1_AT3_1 = 0, theta1__AT1_1 = 0, theta1__AT2_1 = 0.1, theta1__AT3_1 = 0;
+double theta1AT1_1 = 55.0, theta1AT2_1 = 45.9456, theta1AT3_1 = 70.3592, theta1_AT1_1 = 0, theta1_AT2_1 = 0.1, theta1_AT3_1 = 0, theta1__AT1_1 = 0, theta1__AT2_1 = 0.1, theta1__AT3_1 = 0;
 double theta2AT1_1 = 39.3, theta2AT2_1 = 75.0727, theta2AT3_1 = 47.7943, theta2_AT1_1 = 0, theta2_AT2_1 = 0.1, theta2_AT3_1 = 0, theta2__AT1_1 = 0, theta2__AT2_1 = 0.1, theta2__AT3_1 = 0;
 
 double theta1AT1_2 = 54.3, theta1AT2_2 = 45.34, theta1AT3_2 = 70.44, theta1_AT1_2 = 0, theta1_AT2_2 = 0.1, theta1_AT3_2 = 0, theta1__AT1_2 = 0, theta1__AT2_2 = 0.1, theta1__AT3_2 = 0;
 double theta2AT1_2 = 43.57, theta2AT2_2 = 75.29, theta2AT3_2 = 50.55, theta2_AT1_2 = 0, theta2_AT2_2 = 0.1, theta2_AT3_2 = 0, theta2__AT1_2 = 0, theta2__AT2_2 = 0.1, theta2__AT3_2 = 0;
 
-double theta1AT1_3 = 53.0,theta1AT2_3=45.94,theta1AT3_3=67.35, theta1_AT1_3=0,theta1_AT2_3=0.1,theta1_AT3_3=0,theta1__AT1_3=0,theta1__AT2_3=0.1,theta1__AT3_3=0;
+double theta1AT1_3 = 53.0,theta1AT2_3=45.94,theta1AT3_3=69.35, theta1_AT1_3=0,theta1_AT2_3=0.1,theta1_AT3_3=0,theta1__AT1_3=0,theta1__AT2_3=0.1,theta1__AT3_3=0;
 double theta2AT1_3 = 42.3,theta2AT2_3=75.07,theta2AT3_3=51.79, theta2_AT1_3=0,theta2_AT2_3=0.1,theta2_AT3_3=0,theta2__AT1_3=0,theta2__AT2_3=0.1,theta2__AT3_3=0;
 
 double theta1AT1_4 = 53.5356, theta1AT2_4 = 45.3491, theta1AT3_4 = 64.4462, theta1_AT1_4 = 0, theta1_AT2_4 = 0.1, theta1_AT3_4 = 0, theta1__AT1_4 = 0, theta1__AT2_4 = 0.1, theta1__AT3_4 = 0;
@@ -141,12 +141,12 @@ void setup()
 }
 
 void loop(){
-  for (double t = 0.1, u = 1.6; t <= 1.01, u <= 16.1; t = t + 0.1, u = u + 1.6)
+  for (double t = 0.1, u = 1.6; t <= 1, u <= 16.1; t = t + 0.1, u = u + 1.6)
   {
-    double xe_2 = 4.66 + u ;
+    double xe_2 = -6 + u ;
     double ye_2 = -45 ;
 
-    double xe_3 = 1.3333 + u ;
+    double xe_3 = -4 + u ;
     double ye_3 = -45 ;
 
      if ( counter1_1 != temp1_1 ) {
@@ -248,16 +248,16 @@ void loop(){
     }
 
     
-    error1_1 = theta1_1 - theta1c_1 + zeroError1_1;
+     error1_1 = theta1_1 - theta1c_1 + zeroError1_1;
     error2_1 = theta2_1 - theta2c_1 + zeroError2_1; 
     
     if(t<0.5)
-    c1_1 = PID(theta1_1, theta1c_1, zeroError1_1 , Kp1+2.5 , Kd1+1.9 , prev_error1_1);
+    c1_1 = PID(theta1_1, theta1c_1, zeroError1_1 , Kp1+2.3 , Kd1+1.6 , prev_error1_1);
     else
-    c1_1 = PID(theta1_1, theta1c_1, zeroError1_1 , Kp1+1.9 , (Kd1+2.5) , prev_error1_1);
+    c1_1 = PID(theta1_1, theta1c_1, zeroError1_1 , Kp1+1.9 , (Kd1+2.1) , prev_error1_1);
     c2_1 = PID(theta2_1, theta2c_1, zeroError2_1 , Kp2+0.6 , Kd2 , prev_error2_1);
-    double ll1=0.0, lm1=70.0, ul1=50.0, um1=80.0;
-    double ll2=0.0, lm2=70.0, ul2=80.0, um2=170.0;
+    ll1=0.0, lm1=70.0, ul1=60.0, um1=80.0;
+
 //    correction1_1 = (um1-ul1)/(lm1-ll1)*abs(c1_1)+ul1;
     
     if(t<0.5)
@@ -268,11 +268,11 @@ void loop(){
     }
     
     if(t<0.5){
-    ll2=0.0, lm2=70.0, ul2=80.0, um2=170.0;
+    ll2=0.0, lm2=70.0, ul2=120.0, um2=210.0;
     correction2_1 = (um2-ul2)/(lm2-ll2)*abs(c2_1) + ul2;      //TODO
     }
     else{
-      ll2=0.0, lm2=70.0, ul2=100.0, um2=185.0;
+      ll2=0.0, lm2=70.0, ul2=120.0, um2=210.0;
     correction2_1 = (um2-ul2)/(lm2-ll2)*abs(c2_1) + ul2;
     }
     
@@ -284,7 +284,7 @@ void loop(){
     correction2_1=um2;
     
     if(t>0.85)
-    correction1_1=15;
+    correction1_1=5;
 
     //------------------------------------------------22222222222222-------------------------------------------------------------------------
     theta1_2 = 57.2958 * (cosine_rule(l1, l2, sqrt(xe_2 * xe_2 + ye_2 * ye_2)) + alpha_2);
@@ -293,11 +293,11 @@ void loop(){
     error1_2 = theta1_2 - theta1c_2 + zeroError1_2;
     error2_2 = theta2_2 - theta2c_2 + zeroError2_2;
     
-    c1_2 = PID(theta1_2, theta1c_2, zeroError1_2 , (Kp1+1.3) , (Kd1+2.8) , prev_error1_2);
-    c2_2 = PID(theta2_2, theta2c_2, zeroError2_2 , Kp2 , Kd2+1.2 , prev_error2_2);
+    c1_2 = PID(theta1_2, theta1c_2, zeroError1_2 , (Kp1+1.2) , (Kd1+2.2) , prev_error1_2);
+    c2_2 = PID(theta2_2, theta2c_2, zeroError2_2 , Kp2 , Kd2+1.8 , prev_error2_2);
 
-    ll1=0.0, lm1=40.0, ul1=25, um1=36.0;    
-    ll2=0.0, lm2=90.0, ul2=40.0, um2=150.0;
+    ll1=0.0, lm1=40.0, ul1=25, um1=35.0;    
+    ll2=0.0, lm2=90.0, ul2=40.0, um2=140.0;
 
     correction1_2 = (um1-ul1)/(lm1-ll1)*abs(c1_2)+ul1;
     correction2_2 = (um2-ul2)/(lm2-ll2)*abs(c2_2)+ul2;
@@ -308,6 +308,8 @@ void loop(){
     if(correction2_2 > 255)
     correction2_2=255;
 
+    if(t>=0.9) correction1_2 = 40;
+
     //----------------------------------------------3333333333333333333333--------------------------------------------------------------------
     theta1_3 = 57.2958 * (cosine_rule(l1, l2, sqrt(xe_3 * xe_3 + ye_3 * ye_3)) + alpha_3);
     theta2_3 = 57.2958 * (-3.14159 + cosine_rule(sqrt(xe_3 * xe_3 + ye_3 * ye_3), l1, l2));
@@ -315,10 +317,10 @@ void loop(){
     error1_3 = theta1_3 - theta1c_3 + zeroError1_3;
     error2_3 = theta2_3 - theta2c_3 + zeroError2_3;
     
-    c1_3 = PID(theta1_3, theta1c_3, zeroError1_3 , (Kp1+1.8) , (Kd1+2.5) , prev_error1_3);
-    c2_3 = PID(theta2_3, theta2c_3, zeroError2_3 , Kp2+0.8 , Kd2+1.5 , prev_error2_3);
+    c1_3 = PID(theta1_3, theta1c_3, zeroError1_3 , (Kp1+1.8) , (Kd1+1.8) , prev_error1_3);
+    c2_3 = PID(theta2_3, theta2c_3, zeroError2_3 , Kp2 , Kd2+1.5 , prev_error2_3);
 
-    ll1=0.0, lm1=40.0, ul1=25, um1=50.0;    
+    ll1=0.0, lm1=40.0, ul1=30, um1=45.0;    
     ll2=0.0, lm2=90.0, ul2=40.0, um2=170.0;
 
     correction1_3 = (um1-ul1)/(lm1-ll1)*abs(c1_3)+ul1;
@@ -335,18 +337,18 @@ void loop(){
     error2_4 = theta2_4 - theta2c_4 + zeroError2_4; 
     
     if(t<0.5)
-    c1_4 = PID(theta1_4, theta1c_4, zeroError1_4 , Kp1+1.5 , Kd1+1.7 , prev_error1_4);
+    c1_4 = PID(theta1_4, theta1c_4, zeroError1_4 , Kp1+1.7 , Kd1+1.8 , prev_error1_4);
     else
-    c1_4 = PID(theta1_4, theta1c_4, zeroError1_4 , Kp1+1.8 , (Kd1+1.9) , prev_error1_4);
+    c1_4 = PID(theta1_4, theta1c_4, zeroError1_4 , Kp1+1.8 , (Kd1+1.4) , prev_error1_4);
     c2_4 = PID(theta2_4, theta2c_4, zeroError2_4 , Kp2+2 , Kd2 , prev_error2_4);
-    ll1=0.0, lm1=70.0, ul1=40.0, um1=65.0;
+    ll1=0.0, lm1=70.0, ul1=50.0, um1=62.0;
 
 //    correction1_4 = (um1-ul1)/(lm1-ll1)*abs(c1_4)+ul1;
     
     if(t<0.5)
     correction1_4 = (um1-ul1)/(lm1-ll1)*abs(c1_4)+ul1;
     else{
-    ll1=0.0, lm1=70.0, ul1=35, um1=45.0;
+    ll1=0.0, lm1=70.0, ul1=37, um1=45.0;
     correction1_4 = (um1-ul1)/(lm1-ll1)*abs(c1_4)+ul1;      //TODO   0-60
     }
     
@@ -366,6 +368,7 @@ void loop(){
     correction2_4=255;
     if(t>0.75)
     correction1_4=10;
+-------------------------------------------------------------------------------------------------------
 
     if (error1_1 < 0 ) {
       upr_mtr_fwd_1();
@@ -454,7 +457,7 @@ void loop(){
     double xe_1 = -4 + u ;
     double ye_1 = -45 ;
 
-    double xe_4 = -6 + u + 5.3333;
+    double xe_4 = -6 + u;
     double ye_4 = -45;
 
     if ( counter1_1 != temp1_1 ) {
@@ -553,11 +556,11 @@ void loop(){
     error1_1 = theta1_1 - theta1c_1 + zeroError1_1;
     error2_1 = theta2_1 - theta2c_1 + zeroError2_1;
     
-    c1_1 = PID(theta1_1, theta1c_1, zeroError1_1 , (Kp1+1.5) , (Kd1+2.2) , prev_error1_1);
+      c1_1 = PID(theta1_1, theta1c_1, zeroError1_1 , (Kp1+1.6) , (Kd1+1.8) , prev_error1_1);
     c2_1 = PID(theta2_1, theta2c_1, zeroError2_1 , Kp2 , Kd2 , prev_error2_1);
 
-    double ll1=0.0, lm1=40.0, ul1=25, um1=50.0;    
-    double ll2=0.0, lm2=90.0, ul2=0.0, um2=130.0;
+    ll1=0.0, lm1=40.0, ul1=28, um1=50.0;    
+    ll2=0.0, lm2=90.0, ul2=25.0, um2=220.0;
 
     correction1_1 = (um1-ul1)/(lm1-ll1)*abs(c1_1)+ul1;
     correction2_1 = (um2-ul2)/(lm2-ll2)*abs(c2_1)+ul2;
@@ -567,6 +570,8 @@ void loop(){
 
     if(correction2_1 > 255)
     correction2_1=255;
+
+    if(t>=0.6) correction1_1 = 52;
 
     //-------------------------------------------------------------22222222222222222222---------------------------------------------------
     if (t < 0.5) {
@@ -582,38 +587,37 @@ void loop(){
     error2_2 = theta2_2 - theta2c_2 + zeroError2_2; 
     
     if(t<0.5)
-    c1_2 = PID(theta1_2, theta1c_2, zeroError1_2 , Kp1+2.5 , Kd1+1.9 , prev_error1_2);
+    c1_2 = PID(theta1_2, theta1c_2, zeroError1_2 , Kp1+1.5 , Kd1+1.9 , prev_error1_2);
     else
-    c1_2 = PID(theta1_2, theta1c_2, zeroError1_2 , Kp1+1.5 , (Kd1+2.5) , prev_error1_2);
-    c2_2 = PID(theta2_2, theta2c_2, zeroError2_2 , Kp1+0.6 , Kd2+1.2 , prev_error2_2);
-    ll1=0.0, lm1=70.0, ul1=40.0, um1=80.0;
+    c1_2 = PID(theta1_2, theta1c_2, zeroError1_2 , Kp1+1.5 , (Kd1+2.2) , prev_error1_2);
+    c2_2 = PID(theta2_2, theta2c_2, zeroError2_2 , Kp1+0.6 , Kd2+1.6 , prev_error2_2);
+    ll1=0.0, lm1=70.0, ul1=25.0, um1=40.0;
 //    correction1_2 = (um1-ul1)/(lm1-ll1)*abs(c1_2)+ul1;
     
     if(t<0.5)
     correction1_2 = (um1-ul1)/(lm1-ll1)*abs(c1_2)+ul1;
     else{
-    ll1=0.0, lm1=70.0, ul1=25.0, um1=45.0;
+    ll1=0.0, lm1=70.0, ul1=25.0, um1=40.0;
     correction1_2 = (um1-ul1)/(lm1-ll1)*abs(c1_2)+ul1;      //TODO   0-60
     }
     
     if(t<0.5){
-    ll2=0.0, lm2=70.0, ul2=100.0, um2=225.0;
+    ll2=0.0, lm2=70.0, ul2=100.0, um2=200.0;
     correction2_2 = (um2-ul2)/(lm2-ll2)*abs(c2_2) + ul2;      //TODO
     }
     else{
-      ll2=0.0, lm2=70.0, ul2=100.0, um2=225.0;
+      ll2=0.0, lm2=70.0, ul2=100.0, um2=200.0;
     correction2_2 = (um2-ul2)/(lm2-ll2)*abs(c2_2) + ul2;
     }
     
-
+ 
     if(correction1_2 > um1)
     correction1_2=um1;
 
     if(correction2_2 > 255)
     correction2_2=255;
-    
-//    if(t>0.85)
-//    correction1_2=11;
+    if(t==0.4 || t==0.5 || t==0.6) correction1_2 = 45;
+    if(t>0.85) correction1_2=15;
 
     //----------------------------------------------3333333333333333333333--------------------------------------------------------------------
     if (t < 0.5) {
@@ -631,7 +635,7 @@ void loop(){
     if(t<0.5)
     c1_3 = PID(theta1_3, theta1c_3, zeroError1_3 , Kp1+2.5 , Kd1+1.9 , prev_error1_3);
     else
-    c1_3 = PID(theta1_3, theta1c_3, zeroError1_3 , Kp1+1.5 , (Kd1+2.5) , prev_error1_3);
+    c1_3 = PID(theta1_3, theta1c_3, zeroError1_3 , Kp1+1.9 , (Kd1+1.7) , prev_error1_3);
     c2_3 = PID(theta2_3, theta2c_3, zeroError2_3 , Kp2+1.2 , Kd2+0.6 , prev_error2_3);
     ll1=0.0, lm1=70.0, ul1=40.0, um1=65.0;
 
@@ -640,7 +644,7 @@ void loop(){
     if(t<0.5)
     correction1_3 = (um1-ul1)/(lm1-ll1)*abs(c1_3)+ul1;
     else{
-    ll1=0.0, lm1=70.0, ul1=25.0, um1=45.0;
+    ll1=0.0, lm1=70.0, ul1=30.0, um1=50.0;
     correction1_3 = (um1-ul1)/(lm1-ll1)*abs(c1_3)+ul1;      //TODO   0-60
     }
     
@@ -671,10 +675,10 @@ void loop(){
     error1_4 = theta1_4 - theta1c_4 + zeroError1_4;
     error2_4 = theta2_4 - theta2c_4 + zeroError2_4;
     
-    c1_4 = PID(theta1_4, theta1c_4, zeroError1_4 , (Kp1+1.2) , (Kd1+1.2) , prev_error1_4);
+    c1_4 = PID(theta1_4, theta1c_4, zeroError1_4 , (Kp1+1.8) , (Kd1+1.8) , prev_error1_4);
     c2_4 = PID(theta2_4, theta2c_4, zeroError2_4 , Kp2 , Kd2 , prev_error2_4);
 
-    ll1=0.0, lm1=30.0, ul1=26.8, um1=45.5;
+    ll1=0.0, lm1=30.0, ul1=30, um1=44;
     ll2=0.0, lm2=40.0, ul2=20.0, um2=100.0;
 
     correction1_4 = (um1-ul1)/(lm1-ll1)*abs(c1_4)+ul1;
@@ -683,12 +687,14 @@ void loop(){
 //    correction1_4 = map(abs(c1_4), 0, 30, 0, 50);       //TODO
 //    correction2_4 = map(abs(c2_4), 0, 40, 125, 260);      //TODO
 
+    if(t>=0.8) correction1_4 = 40;
+    
     if(correction1_4 > um1)
     correction1_4=um1;
 
     if(correction2_4 > 255)
       correction2_4 = 255;
-
+--------------------------------------------------------------------------------------------------------------------------
     if (error1_1 < 0 ) {
       upr_mtr_fwd_1();
       analogWrite(motor1pwm_1, abs(correction1_1));

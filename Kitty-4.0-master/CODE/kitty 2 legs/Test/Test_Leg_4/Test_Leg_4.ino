@@ -18,7 +18,7 @@ double ll2=0.0, lm2=0.0, ul2=0.0, um2=0.0;
 double Kp1 = 1.5, Kp2 = 1.5;
 double Kd1 = 2.0, Kd2 = 2.0;
 
-int l1 = 25, l2 = 25;
+double l1 = 26.0, l2 = 23.4;
 
 //int A1_4 = 1;
 //int A2_4 = 0;
@@ -91,18 +91,18 @@ void loop()
     error2_4 = theta2_4 - theta2c_4 + zeroError2_4; 
     
     if(t<0.5)
-    c1_4 = PID(theta1_4, theta1c_4, zeroError1_4 , Kp1+1.5 , Kd1+1.7 , prev_error1_4);
+    c1_4 = PID(theta1_4, theta1c_4, zeroError1_4 , Kp1+1.7 , Kd1+1.8 , prev_error1_4);
     else
-    c1_4 = PID(theta1_4, theta1c_4, zeroError1_4 , Kp1+1.8 , (Kd1+1.9) , prev_error1_4);
+    c1_4 = PID(theta1_4, theta1c_4, zeroError1_4 , Kp1+1.8 , (Kd1+1.4) , prev_error1_4);
     c2_4 = PID(theta2_4, theta2c_4, zeroError2_4 , Kp2+2 , Kd2 , prev_error2_4);
-    ll1=0.0, lm1=70.0, ul1=40.0, um1=65.0;
+    ll1=0.0, lm1=70.0, ul1=50.0, um1=62.0;
 
 //    correction1_4 = (um1-ul1)/(lm1-ll1)*abs(c1_4)+ul1;
     
     if(t<0.5)
     correction1_4 = (um1-ul1)/(lm1-ll1)*abs(c1_4)+ul1;
     else{
-    ll1=0.0, lm1=70.0, ul1=35, um1=45.0;
+    ll1=0.0, lm1=70.0, ul1=37, um1=45.0;
     correction1_4 = (um1-ul1)/(lm1-ll1)*abs(c1_4)+ul1;      //TODO   0-60
     }
     
@@ -122,7 +122,7 @@ void loop()
     correction2_4=255;
     if(t>0.75)
     correction1_4=10;
-    
+    Serial.println(t);
     Serial.print("theta1_4=");
     Serial.println(theta1_4);
     Serial.print("theta1c_4=");
@@ -229,10 +229,10 @@ void loop()
     error1_4 = theta1_4 - theta1c_4 + zeroError1_4;
     error2_4 = theta2_4 - theta2c_4 + zeroError2_4;
     
-    c1_4 = PID(theta1_4, theta1c_4, zeroError1_4 , (Kp1+1.2) , (Kd1+1.2) , prev_error1_4);
+    c1_4 = PID(theta1_4, theta1c_4, zeroError1_4 , (Kp1+1.8) , (Kd1+1.8) , prev_error1_4);
     c2_4 = PID(theta2_4, theta2c_4, zeroError2_4 , Kp2 , Kd2 , prev_error2_4);
 
-    ll1=0.0, lm1=30.0, ul1=26.8, um1=45.5;
+    ll1=0.0, lm1=30.0, ul1=30, um1=44;
     ll2=0.0, lm2=40.0, ul2=20.0, um2=100.0;
 
     correction1_4 = (um1-ul1)/(lm1-ll1)*abs(c1_4)+ul1;
@@ -241,6 +241,8 @@ void loop()
 //    correction1_4 = map(abs(c1_4), 0, 30, 0, 50);       //TODO
 //    correction2_4 = map(abs(c2_4), 0, 40, 125, 260);      //TODO
 
+    if(t>=0.8) correction1_4 = 40;
+    
     if(correction1_4 > um1)
     correction1_4=um1;
 

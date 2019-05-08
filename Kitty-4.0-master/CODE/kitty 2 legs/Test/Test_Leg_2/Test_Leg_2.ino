@@ -31,7 +31,7 @@ double theta1c_2 = 0.0 , theta2c_2 = 0.0, theta1_2, theta2_2,error1_2,error2_2, 
 volatile int temp1_2 , counter1_2 = 0;
 volatile int temp2_2 , counter2_2 = 0;
 
-double theta1AT1 = 54.68, theta1AT2 = 45.41, theta1AT3 = 72.815, theta1_AT1 = 0, theta1_AT2 = 0.1, theta1_AT3 = 0, theta1__AT1 = 0, theta1__AT2 = 0.1, theta1__AT3 = 0;
+double theta1AT1 = 54.68, theta1AT2 = 45.41, theta1AT3 = 70.815, theta1_AT1 = 0, theta1_AT2 = 0.1, theta1_AT3 = 0, theta1__AT1 = 0, theta1__AT2 = 0.1, theta1__AT3 = 0;
 double theta2AT1 = 45.57, theta2AT2 = 77.29, theta2AT3 = 49.55 , theta2_AT1 = 0, theta2_AT2 = 0.1, theta2_AT3 = 0, theta2__AT1 = 0, theta2__AT2 = 0.1, theta2__AT3 = 0;
 
 void setup()
@@ -93,10 +93,10 @@ void loop()
     error2_2 = theta2_2 - theta2c_2 + zeroError2_2;
     
     c1_2 = PID(theta1_2, theta1c_2, zeroError1_2 , (Kp1+1.2) , (Kd1+2.2) , prev_error1_2);
-    c2_2 = PID(theta2_2, theta2c_2, zeroError2_2 , Kp2 , Kd2+1.2 , prev_error2_2);
+    c2_2 = PID(theta2_2, theta2c_2, zeroError2_2 , Kp2 , Kd2+1.8 , prev_error2_2);
 
-    ll1=0.0, lm1=40.0, ul1=25, um1=40.0;    
-    ll2=0.0, lm2=90.0, ul2=40.0, um2=150.0;
+    ll1=0.0, lm1=40.0, ul1=25, um1=35.0;    
+    ll2=0.0, lm2=90.0, ul2=40.0, um2=140.0;
 
     correction1_2 = (um1-ul1)/(lm1-ll1)*abs(c1_2)+ul1;
     correction2_2 = (um2-ul2)/(lm2-ll2)*abs(c2_2)+ul2;
@@ -107,7 +107,7 @@ void loop()
     if(correction2_2 > 255)
     correction2_2=255;
 
-    if(t>=0.9) correction1_2 = 45;
+    if(t>=0.9) correction1_2 = 40;
     
     Serial.print("theta1_2=");
     Serial.println(theta1_2);
@@ -199,7 +199,7 @@ void loop()
     else
     c1_2 = PID(theta1_2, theta1c_2, zeroError1_2 , Kp1+1.5 , (Kd1+2.2) , prev_error1_2);
     c2_2 = PID(theta2_2, theta2c_2, zeroError2_2 , Kp1+0.6 , Kd2+1.6 , prev_error2_2);
-    ll1=0.0, lm1=70.0, ul1=25.0, um1=45.0;
+    ll1=0.0, lm1=70.0, ul1=25.0, um1=40.0;
 //    correction1_2 = (um1-ul1)/(lm1-ll1)*abs(c1_2)+ul1;
     
     if(t<0.5)
@@ -210,11 +210,11 @@ void loop()
     }
     
     if(t<0.5){
-    ll2=0.0, lm2=70.0, ul2=100.0, um2=225.0;
+    ll2=0.0, lm2=70.0, ul2=100.0, um2=200.0;
     correction2_2 = (um2-ul2)/(lm2-ll2)*abs(c2_2) + ul2;      //TODO
     }
     else{
-      ll2=0.0, lm2=70.0, ul2=100.0, um2=225.0;
+      ll2=0.0, lm2=70.0, ul2=100.0, um2=200.0;
     correction2_2 = (um2-ul2)/(lm2-ll2)*abs(c2_2) + ul2;
     }
     
@@ -224,8 +224,8 @@ void loop()
 
     if(correction2_2 > 255)
     correction2_2=255;
-    if(t==0.4 || t==0.5) correction1_2 = 45;
-    if(t>0.95) correction1_2=11;
+    if(t==0.4 || t==0.5 || t==0.6) correction1_2 = 45;
+    if(t>0.85) correction1_2=15;
     Serial.println(t);
     Serial.print("theta1_2=");
     Serial.println(theta1_2);
