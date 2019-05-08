@@ -109,6 +109,7 @@ void loop()
 
     if(t>=0.9) correction1_2 = 40;
     
+    Serial.println(t);
     Serial.print("theta1_2=");
     Serial.println(theta1_2);
     Serial.print("theta1c_2=");
@@ -226,6 +227,7 @@ void loop()
     correction2_2=255;
     if(t==0.4 || t==0.5 || t==0.6) correction1_2 = 45;
     if(t>0.85) correction1_2=15;
+    
     Serial.println(t);
     Serial.print("theta1_2=");
     Serial.println(theta1_2);

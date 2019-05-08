@@ -93,16 +93,16 @@ void loop()
     if(t<0.5)
     c1_4 = PID(theta1_4, theta1c_4, zeroError1_4 , Kp1+1.7 , Kd1+1.8 , prev_error1_4);
     else
-    c1_4 = PID(theta1_4, theta1c_4, zeroError1_4 , Kp1+1.8 , (Kd1+1.4) , prev_error1_4);
+    c1_4 = PID(theta1_4, theta1c_4, zeroError1_4 , Kp1+1.8 , (Kd1+1.1) , prev_error1_4);
     c2_4 = PID(theta2_4, theta2c_4, zeroError2_4 , Kp2+2 , Kd2 , prev_error2_4);
-    ll1=0.0, lm1=70.0, ul1=50.0, um1=62.0;
+    ll1=0.0, lm1=70.0, ul1=50.0, um1=65.0;
 
 //    correction1_4 = (um1-ul1)/(lm1-ll1)*abs(c1_4)+ul1;
     
     if(t<0.5)
     correction1_4 = (um1-ul1)/(lm1-ll1)*abs(c1_4)+ul1;
     else{
-    ll1=0.0, lm1=70.0, ul1=37, um1=45.0;
+    ll1=0.0, lm1=70.0, ul1=40, um1=50.0;
     correction1_4 = (um1-ul1)/(lm1-ll1)*abs(c1_4)+ul1;      //TODO   0-60
     }
     
@@ -120,7 +120,7 @@ void loop()
 
     if(correction2_4 > 255)
     correction2_4=255;
-    if(t>0.75)
+    if(t>0.85)
     correction1_4=10;
     Serial.println(t);
     Serial.print("theta1_4=");
@@ -248,7 +248,8 @@ void loop()
 
     if(correction2_4 > 255)
       correction2_4 = 255;
-    
+
+    Serial.println(t);
     Serial.print("theta1_4=");
     Serial.println(theta1_4);
     Serial.print("theta1c_4=");

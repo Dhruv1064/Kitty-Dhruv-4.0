@@ -166,7 +166,7 @@ void loop()
 
   }
   
-  for (double t = 0.1, u = 1.6; t <= 1, u <= 16; t = t + 0.1, u = u + 1.6)
+  for (double t = 0.1, u = 1.6; t <= 1, u <= 16.1; t = t + 0.1, u = u + 1.6)
   {
     Serial.println("line-1");
     double xe_1 = -4 + u ;
@@ -220,6 +220,7 @@ void loop()
 
     if(t>=0.6) correction1_1 = 52;
 
+    Serial.println(t);
     Serial.print("theta1_1=");
     Serial.println(theta1_1);
     Serial.print("theta1c_1=");
