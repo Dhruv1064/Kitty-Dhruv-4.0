@@ -1,26 +1,26 @@
-  #include <PinChangeInt.h>
+#include <PinChangeInt.h>
 
-#define motor1  40
+ #define motor1  40
 #define motor1pwm  8
 #define motor2  42
 #define motor2pwm  7
-int A_1 = 3, A_2 = 2;
+int A_1 = 2, A_2=3;
 
-#define a1 20
-#define b1 A0
-#define a2 21
-#define b2 A1 
+ #define a1 21
+#define b1 A1
+#define a2 20
+#define b2 A0 
 
-bool state1 = true, state2 = true;
+ bool state1 = true, state2 = true;
 
-float pwmx1=100, pwmx2=40, pwmx4=120; 
-float theta1c=0, theta2c=0, zeroError1 = 72.4462, zeroError2 = 49.55, minAngle1 = 19.8,minAngle2 = 35.1;  //zeroError1 = 72.4462, zeroError2 = 49.55
+ float pwmx1=100, pwmx2=40, pwmx4=120; 
+float theta1c=0, theta2c=0, zeroError1 = 58.8795, zeroError2=50.4, minAngle1 = 19.8,minAngle2 = 35.1;  //58.8795  50.4
 int x;
 
-volatile int temp1, counter1 = 0;
+ volatile int temp1, counter1 = 0;
 volatile int temp2 , counter2 = 0;
 
-void setup() {
+ void setup() {
   Serial.begin(9600);
   //Pins for encoders
   pinMode(a1, INPUT_PULLUP);                                           
@@ -31,15 +31,15 @@ void setup() {
   pinMode(b2, INPUT_PULLUP);
   attachInterrupt(A_2, ai2, CHANGE);
   state2 = digitalRead(a2);
-  
-  pinMode(motor1, OUTPUT);
+
+   pinMode(motor1, OUTPUT);
   pinMode(motor1pwm, OUTPUT);
   pinMode(motor2, OUTPUT);
   pinMode(motor2pwm, OUTPUT);
 
-}
+ }
 
-void loop() {
+ void loop() {
   if (Serial.available())
   {
     x = Serial.parseInt();
@@ -66,9 +66,9 @@ void loop() {
         x=6;
         }
     }
-  
 
-  //Convert Encoder Output into angle
+
+   //Convert Encoder Output into angle
       if ( counter1 != temp1 ) {
         temp1 = counter1;
         if (counter1 > 1200) {
@@ -89,7 +89,7 @@ void loop() {
       }
 }
 
-void ai1(){
+ void ai1(){
   if(digitalRead(b1) == !digitalRead(a1)){
     counter1++;
   }
@@ -99,7 +99,7 @@ void ai1(){
 //  state1 = !state1;
 }
 
-void ai2(){
+ void ai2(){
   if(digitalRead(b2) == !digitalRead(a2)){
     counter2++;
   }

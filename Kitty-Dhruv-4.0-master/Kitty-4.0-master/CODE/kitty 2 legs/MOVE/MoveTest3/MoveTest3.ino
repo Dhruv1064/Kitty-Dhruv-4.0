@@ -26,12 +26,12 @@ void setup() {
   //Pins for encoders
   pinMode(a1, INPUT_PULLUP);                                           
   pinMode(b1, INPUT_PULLUP);
-  PCintPort::attachInterrupt(A_1, ai2_3, CHANGE);
+  PCintPort::attachInterrupt(a1, ai2_3, CHANGE);
 //  state1 = digitalRead(a1);
   
   pinMode(a2, INPUT_PULLUP);
   pinMode(b2, INPUT_PULLUP);
-  PCintPort::attachInterrupt(A_2, ai3_3, CHANGE);
+  PCintPort::attachInterrupt(a2, ai3_3, CHANGE);
 //  state2 = digitalRead(a2);
   
   //Pins for Motors
