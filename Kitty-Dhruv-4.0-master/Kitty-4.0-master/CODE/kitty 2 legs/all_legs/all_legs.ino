@@ -5,10 +5,10 @@
 #define a2_1 18
 #define b2_1 51
 
-#define a1_2 20
-#define b1_2 A0
-#define a2_2 21
-#define b2_2 A1
+#define a1_2 21
+#define b1_2 A1
+#define a2_2 20
+#define b2_2 A0
 
 #define a1_3 A14
 #define b1_3 A15
@@ -20,7 +20,7 @@
 #define a2_4 3
 #define b2_4 14
 
-int A1_1 = 4, A2_1 = 5, A1_2 = 3, A2_2 = 2, A1_4 = 0, A2_4= 1;  //Change as per need
+int A1_1 = 4, A2_1 = 5, A1_2 = 2, A2_2 = 3,  A1_4 = 0, A2_4 = 1;  //Change as per need
 
 #define motor1_1  43
 #define motor1pwm_1  12

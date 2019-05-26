@@ -1,19 +1,19 @@
 #include <PinChangeInt.h>
 
 #define motor1  43
-#define motor1pwm  2
-#define motor2  40
+#define motor1pwm  12
+#define motor2  41
 #define motor2pwm  11
-int A_1 = 3, A_2 = 4;
+int A_1 = 4, A_2 = 5;
   
-#define a1 20
-#define b1 A15
-#define a2 19 
+#define a1 19 
+#define b1 A3
+#define a2 18
 #define b2 51
 //bool state1 = true, state2 = true;
 
-float pwmx1=90, pwmx2=45, pwmx4=150;
-float theta1c=0, theta2c=0, zeroError1 = 69.513, zeroError2=51.58, minAngle1 = 21.6, minAngle2 = 28.5;  //zeroError1 = 56.6296, zeroError2 = 39.0143
+float pwmx1=100, pwmx2=55, pwmx4=150;
+float theta1c=0, theta2c=0, zeroError1 = 53.728, zeroError2=42.68, minAngle1 = 21.6, minAngle2 = 28.5;  //53.728  42.68
 int x; 
     
 volatile int temp1, counter1 = 0; 
