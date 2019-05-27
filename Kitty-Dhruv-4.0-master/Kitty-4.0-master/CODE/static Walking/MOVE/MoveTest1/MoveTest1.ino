@@ -13,12 +13,14 @@ int A_1 = 4, A_2 = 5;
 //bool state1 = true, state2 = true;
 
 float pwmx1=90, pwmx2=45, pwmx4=150;
-float theta1c=0, theta2c=0, zeroError1 = 56.6296, zeroError2 = 39.0143, minAngle1 = 21.6, minAngle2 = 28.5;  //53.728  42.68
+float theta1c=0, theta2c=0, zeroError1 = 0, zeroError2 = 0, minAngle1 = 21.6+5, minAngle2 = 28.5+5;  //53.728  42.68
 int x; 
 
 volatile int temp1, counter1 = 0; 
 volatile int temp2, counter2 = 0;
-  
+
+double a = 26.0, b = 23.4, c = 0;
+double d, y;
 void setup() {
   Serial.begin(9600);
   
@@ -27,7 +29,7 @@ void setup() {
   attachInterrupt(A_1, ai1, CHANGE);
 //  state1 = digitalRead(a1);
   
-  pinMode(a2, INPUT_PULLUP);  
+  pinMode(a2, INPUT_PULLUP);
   pinMode(b2, INPUT_PULLUP);
   attachInterrupt(A_2, ai2, CHANGE);
 //  state2 = digitalRead(a2);
@@ -36,6 +38,18 @@ void setup() {
   pinMode(motor1pwm, OUTPUT);
   pinMode(motor2, OUTPUT);
   pinMode(motor2pwm, OUTPUT);
+
+  
+  d = 0;
+  y = -45;
+  c = sqrt(d*d + y*y);
+  double theta = atan(abs(y/x))*90/acos(0);
+  zeroError1 = theta - cosine1();
+  if(d>0){
+    zeroError1 = 180 - theta - cosine1();
+  }
+  zeroError2 = 180 - cosine2();
+  
   while(!Serial.available())
   {
 //    x = Serial.parseInt();
@@ -113,4 +127,12 @@ void ai2(){
     counter2--;
   }
 //  state2 = !state2;
+}
+
+double cosine1(){
+  return (acos((a*a + c*c - b*b)/(2*a*c)))*90/acos(0);
+}
+
+double cosine2(){
+  return (acos((a*a + b*b - c*c)/(2*a*b)))*90/acos(0);
 }

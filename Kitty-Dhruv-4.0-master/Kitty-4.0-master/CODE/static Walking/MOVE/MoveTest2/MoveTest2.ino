@@ -20,6 +20,9 @@ int x;
 volatile int temp1, counter1 = 0;
 volatile int temp2 , counter2 = 0;
 
+double a = 26.0, b = 23.4, c = 0;
+double d, y;
+
 void setup() {
   Serial.begin(9600);
   //Pins for encoders
@@ -36,6 +39,16 @@ void setup() {
   pinMode(motor1pwm, OUTPUT);
   pinMode(motor2, OUTPUT);
   pinMode(motor2pwm, OUTPUT);
+
+  d = 2;
+  y = -45;
+  c = sqrt(d*d + y*y);
+  double theta = atan(abs(y/x))*90/acos(0);
+  zeroError1 = theta - cosine1();
+  if(d>0){
+    zeroError1 = 180 - theta - cosine1();
+  }
+  zeroError2 = 180 - cosine2();
 
   while(!Serial.available())
   {
@@ -112,4 +125,12 @@ void ai2(){
     counter2--;
   }
 //  state2 = !state2;
+}
+
+double cosine1(){
+  return (acos((a*a + c*c - b*b)/(2*a*c)))*90/acos(0);
+}
+
+double cosine2(){
+  return (acos((a*a + b*b - c*c)/(2*a*b)))*90/acos(0);
 }

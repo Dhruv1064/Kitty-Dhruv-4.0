@@ -5,10 +5,10 @@
 #define a2_1 18
 #define b2_1 51
 
-#define a1_2 21
-#define b1_2 A1
-#define a2_2 20
-#define b2_2 A0
+#define a1_2 20
+#define b1_2 A0
+#define a2_2 21
+#define b2_2 A1
 
 #define a1_3 A14
 #define b1_3 A15
@@ -20,7 +20,7 @@
 #define a2_4 3
 #define b2_4 14
 
-int A1_1 = 4, A2_1 = 5, A1_2 = 2, A2_2 = 3,  A1_4 = 0, A2_4 = 1;  //Change as per need
+int A1_1 = 4, A2_1 = 5, A1_2 = 3, A2_2 = 2, A1_4 = 0, A2_4= 1;  //Change as per need
 
 #define motor1_1  43
 #define motor1pwm_1  12
@@ -255,27 +255,27 @@ void loop(){
     error2_1 = theta2_1 - theta2c_1 + zeroError2_1; 
     
     if(t<0.5)
-    c1_1 = PID(theta1_1, theta1c_1, zeroError1_1 , Kp1+1.9 , Kd1+1.6 , prev_error1_1);    
+    c1_1 = PID(theta1_1, theta1c_1, zeroError1_1 , Kp1+1.2 , Kd1+1.6 , prev_error1_1);    
     else
-    c1_1 = PID(theta1_1, theta1c_1, zeroError1_1 , Kp1+1.9 , (Kd1+2.1) , prev_error1_1);
+    c1_1 = PID(theta1_1, theta1c_1, zeroError1_1 , Kp1+1.4 , (Kd1+2.1) , prev_error1_1);
     c2_1 = PID(theta2_1, theta2c_1, zeroError2_1 , Kp2+0.6 , Kd2 , prev_error2_1);
-    ll1=0.0, lm1=70.0, ul1=60.0, um1=70.0;
+    ll1=0.0, lm1=70.0, ul1=42.0, um1=58.0;
 
-//    correction1_1 = (um1-ul1)/(lm1-ll1)*abs(c1_1)+ul1;
+    correction1_1 = (um1-ul1)/(lm1-ll1)*abs(c1_1)+ul1;
     
     if(t<0.5)
     correction1_1 = (um1-ul1)/(lm1-ll1)*abs(c1_1)+ul1;
     else{
-    ll1=0.0, lm1=70.0, ul1=33.0, um1=45.0;
+    ll1=0.0, lm1=70.0, ul1=35.0, um1=48.0;
     correction1_1 = (um1-ul1)/(lm1-ll1)*abs(c1_1)+ul1;      //TODO   0-60
     }
     
     if(t<0.5){
-    ll2=0.0, lm2=70.0, ul2=120.0, um2=210.0;
+    ll2=0.0, lm2=70.0, ul2=120.0, um2=190.0;
     correction2_1 = (um2-ul2)/(lm2-ll2)*abs(c2_1) + ul2;      //TODO
     }
     else{
-      ll2=0.0, lm2=70.0, ul2=95.0, um2=145.0;
+      ll2=0.0, lm2=70.0, ul2=95.0, um2=180.0;
     correction2_1 = (um2-ul2)/(lm2-ll2)*abs(c2_1) + ul2;
     }
     
@@ -299,19 +299,19 @@ void loop(){
     c1_2 = PID(theta1_2, theta1c_2, zeroError1_2 , (Kp1+1.2) , (Kd1+2.2) , prev_error1_2);
     c2_2 = PID(theta2_2, theta2c_2, zeroError2_2 , Kp2 , Kd2+2.4 , prev_error2_2);
 
-    ll1=0.0, lm1=40.0, ul1=25, um1=35.0;    
+    ll1=0.0, lm1=40.0, ul1=45, um1=60.0;    
     ll2=0.0, lm2=90.0, ul2=20.0, um2=120.0;
 
-    correction1_2 = (um1-ul1)/(lm1-ll1)*abs(c1_2)+ul1;
-    correction2_2 = (um2-ul2)/(lm2-ll2)*abs(c2_2)+ul2;
+    correction1_2 = ((um1-ul1)/(lm1-ll1)*abs(c1_2)+ul1);
+    correction2_2 = ((um2-ul2)/(lm2-ll2)*abs(c2_2)+ul2);
 
-    if(correction1_2 > um1)
-    correction1_2=um1;
+//    if(correction1_2 > um1)
+//    correction1_2=um1;
 
     if(correction2_2 > 255)
     correction2_2=255;
 
-    if(t>=0.9) correction1_2 = 40;
+//    if(t>=0.9) correction1_2 = 55;
 
     //----------------------------------------------3333333333333333333333--------------------------------------------------------------------
     theta1_3 = 57.2958 * (cosine_rule(l1, l2, sqrt(xe_3 * xe_3 + ye_3 * ye_3)) + alpha_3);
@@ -323,19 +323,19 @@ void loop(){
     c1_3 = PID(theta1_3, theta1c_3, zeroError1_3 , (Kp1+1.3) , (Kd1+2.4) , prev_error1_3);
     c2_3 = PID(theta2_3, theta2c_3, zeroError2_3 , Kp2 , Kd2+1.5 , prev_error2_3);
 
-    ll1=0.0, lm1=40.0, ul1=26, um1=43.0;    
-    ll2=0.0, lm2=90.0, ul2=20.0, um2=120.0;
+    ll1=0.0, lm1=40.0, ul1=26, um1=38.0;    
+    ll2=0.0, lm2=90.0, ul2=40.0, um2=120.0;
 
-    correction1_3 = (um1-ul1)/(lm1-ll1)*abs(c1_3)+ul1;
-    correction2_3 = (um2-ul2)/(lm2-ll2)*abs(c2_3)+ul2;
+    correction1_3 = ((um1-ul1)/(lm1-ll1)*abs(c1_3)+ul1);
+    correction2_3 = ((um2-ul2)/(lm2-ll2)*abs(c2_3)+ul2);
     
-    if(correction1_3 > um1)
-    correction1_3=um1;
+//    if(correction1_3 > um1)
+//    correction1_3=um1;
    
     if(correction2_3 >255)
     correction2_3=255;
 
-    if(t>0.75) correction1_3 = 50;
+//    if(t>0.75) correction1_3 = 32;
 
      //----------------------------------------------------44444444444444444444-----------------------------------------------------------------------
     if (t < 0.5) {
@@ -357,23 +357,23 @@ void loop(){
     else
     c1_4 = PID(theta1_4, theta1c_4, zeroError1_4 , Kp1+1.8 , (Kd1+1.1) , prev_error1_4);
     c2_4 = PID(theta2_4, theta2c_4, zeroError2_4 , Kp2+2 , Kd2 , prev_error2_4);
-    ll1=0.0, lm1=70.0, ul1=48.0, um1=60.0;
+    ll1=0.0, lm1=70.0, ul1=38.0, um1=50.0;
 
 //    correction1_4 = (um1-ul1)/(lm1-ll1)*abs(c1_4)+ul1;
     
     if(t<0.5)
     correction1_4 = (um1-ul1)/(lm1-ll1)*abs(c1_4)+ul1;
     else{
-    ll1=0.0, lm1=70.0, ul1=45, um1=55.0;
+    ll1=0.0, lm1=70.0, ul1=34, um1=45.0;
     correction1_4 = (um1-ul1)/(lm1-ll1)*abs(c1_4)+ul1;      //TODO   0-60
     }
     
     if(t<0.5){
-    ll2=0.0, lm2=70.0, ul2=100.0, um2=175.0;
+    ll2=0.0, lm2=70.0, ul2=110.0, um2=180.0;
     correction2_4 = (um2-ul2)/(lm2-ll2)*abs(c2_4) + ul2;      //TODO
     }
     else{
-      ll2=0.0, lm2=70.0, ul2=130.0, um2=195.0;
+      ll2=0.0, lm2=70.0, ul2=100.0, um2=170.0;
     correction2_4 = (um2-ul2)/(lm2-ll2)*abs(c2_4) + ul2;
     }
 
@@ -383,26 +383,26 @@ void loop(){
     if(correction2_4 > 255)
     correction2_4=255;
     if(t>0.85)
-    correction1_4=10;
+    correction1_4=16;
 //-------------------------------------------------------------------------------------------------------
 
     Serial.println(t);
-    Serial.print("theta1_1=");
-    Serial.println(theta1_1);
-    Serial.print("theta1c_1=");
-    Serial.println(theta1c_1 - zeroError1_1);
-    Serial.print("theta2c_1=");
-    Serial.println(theta2c_1 - zeroError2_1);
-    Serial.print("theta2_1=");
-    Serial.println(theta2_1);
-    Serial.print("c1_1=");
-    Serial.println(c1_1);
-    Serial.print("c2_1=");
-    Serial.println(c2_1);
+    Serial.print("theta1_2=");
+    Serial.println(theta1_2);
+    Serial.print("theta1c_2=");
+    Serial.println(theta1c_2 - zeroError1_2);
+    Serial.print("theta2c_2=");
+    Serial.println(theta2c_2 - zeroError2_2);
+    Serial.print("theta2_2=");
+    Serial.println(theta2_2);
+    Serial.print("c1_2=");
+    Serial.println(c1_2);
+    Serial.print("c2_2=");
+    Serial.println(c2_2);
     Serial.print("pwm1=");
-    Serial.println(correction1_1);
+    Serial.println(correction1_2);
     Serial.print("pwm2=");
-    Serial.println(correction2_1);
+    Serial.println(correction2_2);
     Serial.println("------------------------");
     
 //-------------------------------------------------------------------------------------------------------
@@ -490,7 +490,7 @@ void loop(){
   }
 
   for (double t = 0.1, u = 1.6; t <= 1.1, u <= 16.1; t = t + 0.1, u = u + 1.6)
-  {
+  { 
     double xe_1 = -4 + u ;
     double ye_1 = -45 ;
 
@@ -593,22 +593,22 @@ void loop(){
     error1_1 = theta1_1 - theta1c_1 + zeroError1_1;
     error2_1 = theta2_1 - theta2c_1 + zeroError2_1;
     
-      c1_1 = PID(theta1_1, theta1c_1, zeroError1_1 , (Kp1+1.6) , (Kd1+1.8) , prev_error1_1);
+      c1_1 = PID(theta1_1, theta1c_1, zeroError1_1 , (Kp1+1.5) , (Kd1+2.2) , prev_error1_1);
     c2_1 = PID(theta2_1, theta2c_1, zeroError2_1 , Kp2 , Kd2 , prev_error2_1);
 
-    ll1=0.0, lm1=40.0, ul1=32, um1=45.0;    
+    ll1=0.0, lm1=40.0, ul1=25, um1=35.0;    
     ll2=0.0, lm2=90.0, ul2=25.0, um2=160.0;
 
-    correction1_1 = (um1-ul1)/(lm1-ll1)*abs(c1_1)+ul1;
-    correction2_1 = (um2-ul2)/(lm2-ll2)*abs(c2_1)+ul2;
+    correction1_1 = ((um1-ul1)/(lm1-ll1)*abs(c1_1)+ul1);
+    correction2_1 = ((um2-ul2)/(lm2-ll2)*abs(c2_1)+ul2);
     
-    if(correction1_1 > um1)
-    correction1_1=um1;
+//    if(correction1_1 > um1)
+//    correction1_1=um1;
 
     if(correction2_1 > 255)
     correction2_1=255;
 
-    if(t>=0.7) correction1_1 = 48;
+//    if(t>=0.7) correction1_1 = 34;
 
     //-------------------------------------------------------------22222222222222222222---------------------------------------------------
     if (t < 0.5) {
@@ -624,26 +624,26 @@ void loop(){
     error2_2 = theta2_2 - theta2c_2 + zeroError2_2; 
     
     if(t<0.5)
-    c1_2 = PID(theta1_2, theta1c_2, zeroError1_2 , Kp1+1.5 , Kd1+1.9 , prev_error1_2);
+    c1_2 = PID(theta1_2, theta1c_2, zeroError1_2 , Kp1+1.5 , Kd1+0.5 , prev_error1_2);
     else
-    c1_2 = PID(theta1_2, theta1c_2, zeroError1_2 , Kp1+1.5 , (Kd1+2.2) , prev_error1_2);
+    c1_2 = PID(theta1_2, theta1c_2, zeroError1_2 , Kp1+1.5 , (Kd1+0.8) , prev_error1_2);
     c2_2 = PID(theta2_2, theta2c_2, zeroError2_2 , Kp2+1.6 , Kd2+0.9 , prev_error2_2);
-    ll1=0.0, lm1=70.0, ul1=25.0, um1=44.0;
+    ll1=0.0, lm1=70.0, ul1=75.0, um1=90.0;
 //    correction1_2 = (um1-ul1)/(lm1-ll1)*abs(c1_2)+ul1;
     
     if(t<0.5)
     correction1_2 = (um1-ul1)/(lm1-ll1)*abs(c1_2)+ul1;
     else{
-    ll1=0.0, lm1=70.0, ul1=38.0, um1=47.0;
+    ll1=0.0, lm1=70.0, ul1=60.0, um1=75.0;
     correction1_2 = (um1-ul1)/(lm1-ll1)*abs(c1_2)+ul1;      //TODO   0-60
     }
     
     if(t<0.5){
-    ll2=0.0, lm2=70.0, ul2=100.0, um2=200.0;
+    ll2=0.0, lm2=70.0, ul2=100.0, um2=190.0;
     correction2_2 = (um2-ul2)/(lm2-ll2)*abs(c2_2) + ul2;      //TODO
     }
     else{
-      ll2=0.0, lm2=70.0, ul2=100.0, um2=200.0;
+      ll2=0.0, lm2=70.0, ul2=100.0, um2=170.0;
     correction2_2 = (um2-ul2)/(lm2-ll2)*abs(c2_2) + ul2;
     }
     
@@ -674,14 +674,14 @@ void loop(){
     else
     c1_3 = PID(theta1_3, theta1c_3, zeroError1_3 , Kp1+1.9 , (Kd1+1.7) , prev_error1_3);
     c2_3 = PID(theta2_3, theta2c_3, zeroError2_3 , Kp2+1.2 , Kd2+0.6 , prev_error2_3);
-    ll1=0.0, lm1=70.0, ul1=50.0, um1=60.0;
+    ll1=0.0, lm1=70.0, ul1=38.0, um1=50.0;
 
-//    correction1_3 = (um1-ul1)/(lm1-ll1)*abs(c1_3)+ul1;
+    correction1_3 = (um1-ul1)/(lm1-ll1)*abs(c1_3)+ul1;
     
     if(t<0.5)
     correction1_3 = (um1-ul1)/(lm1-ll1)*abs(c1_3)+ul1;
     else{
-    ll1=0.0, lm1=70.0, ul1=40.0, um1=50.0;
+    ll1=0.0, lm1=70.0, ul1=25.0, um1=37.0;
     correction1_3 = (um1-ul1)/(lm1-ll1)*abs(c1_3)+ul1;      //TODO   0-60
     }
 
@@ -691,7 +691,7 @@ void loop(){
     correction2_3 = (um2-ul2)/(lm2-ll2)*abs(c2_3) + ul2;      //TODO
     }
     else{
-      ll2=0.0, lm2=70.0, ul2=90.0, um2=130.0;
+      ll2=0.0, lm2=70.0, ul2=90.0, um2=110.0;
     correction2_3 = (um2-ul2)/(lm2-ll2)*abs(c2_3) + ul2;
     }
     
@@ -703,7 +703,7 @@ void loop(){
     correction2_3=255;
     
     if(t>0.85)
-    correction1_3=11;
+    correction1_3=15;
 
     //----------------------------------------------------44444444444444444444-----------------------------------------------------------------------
 
@@ -716,40 +716,40 @@ void loop(){
     c1_4 = PID(theta1_4, theta1c_4, zeroError1_4 , (Kp1+1.8) , (Kd1+1.8) , prev_error1_4);
     c2_4 = PID(theta2_4, theta2c_4, zeroError2_4 , Kp2 , Kd2 , prev_error2_4);
 
-    ll1=0.0, lm1=30.0, ul1=25, um1=40;
+    ll1=0.0, lm1=30.0, ul1=25, um1=35;
     ll2=0.0, lm2=40.0, ul2=20.0, um2=140.0;
 
-    correction1_4 = (um1-ul1)/(lm1-ll1)*abs(c1_4)+ul1;
-    correction2_4 = (um2-ul2)/(lm2-ll2)*abs(c2_4)+ul2;
+    correction1_4 = ((um1-ul1)/(lm1-ll1)*abs(c1_4)+ul1);
+    correction2_4 = ((um2-ul2)/(lm2-ll2)*abs(c2_4)+ul2);
 
 //    correction1_4 = map(abs(c1_4), 0, 30, 0, 50);       //TODO
 //    correction2_4 = map(abs(c2_4), 0, 40, 125, 260);      //TODO
 
-    if(t>=0.75) correction1_4 = 45;
+//    if(t>=0.75) correction1_4 = 45;
     
-    if(correction1_4 > um1)
-    correction1_4=um1;
+//    if(correction1_4 > um1)
+//    correction1_4=um1;
 
     if(correction2_4 > 255)
       correction2_4 = 255;
 //--------------------------------------------------------------------------------------------------------------------------
     Serial.println(t);
-    Serial.print("theta1_1=");
-    Serial.println(theta1_1);
-    Serial.print("theta1c_1=");
-    Serial.println(theta1c_1 - zeroError1_1);
-    Serial.print("theta2c_1=");
-    Serial.println(theta2c_1 - zeroError2_1);
-    Serial.print("theta2_1=");
-    Serial.println(theta2_1);
-    Serial.print("c1_1=");
-    Serial.println(c1_1);
-    Serial.print("c2_1=");
-    Serial.println(c2_1);
+    Serial.print("theta1_2=");
+    Serial.println(theta1_2);
+    Serial.print("theta1c_2=");
+    Serial.println(theta1c_2 - zeroError1_2);
+    Serial.print("theta2c_2=");
+    Serial.println(theta2c_2 - zeroError2_2);
+    Serial.print("theta2_2=");
+    Serial.println(theta2_2);
+    Serial.print("c1_2=");
+    Serial.println(c1_2);
+    Serial.print("c2_2=");
+    Serial.println(c2_2);
     Serial.print("pwm1=");
-    Serial.println(correction1_1);
+    Serial.println(correction1_2);
     Serial.print("pwm2=");
-    Serial.println(correction2_1);
+    Serial.println(correction2_2);
     Serial.println("------------------------");
     
 //---------------------------------------------------------------------------------------------------
