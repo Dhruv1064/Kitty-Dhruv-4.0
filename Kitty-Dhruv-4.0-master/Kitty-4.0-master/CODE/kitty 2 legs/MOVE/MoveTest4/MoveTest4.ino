@@ -14,7 +14,7 @@ int A_1 = 0, A_2 = 1;
 
 bool state1 = true, state2 = true;
 float pwmx1=90, pwmx2=40, pwmx4=200;
-float theta1c=0, theta2c=0, zeroError1 = 53.5356, zeroError2 = 39.198, minAngle1 = 19.5,minAngle2 = 31.2;  //72.815  49.55
+float theta1c=0, theta2c=0, zeroError1 = 72.4462, zeroError2 = 49.55, minAngle1 = 19.5,minAngle2 = 31.2+5;  //72.815  49.55
 int x;
 
 volatile int temp1, counter1 = 0;
@@ -22,7 +22,7 @@ volatile int temp2 , counter2 = 0;
 
 void setup() {
   Serial.begin(9600);
-  //Pins for encoders
+  //Pins for encodersu
   pinMode(a1, INPUT_PULLUP);                                          
   pinMode(b1, INPUT_PULLUP);
   attachInterrupt(A_1, ai4_4, CHANGE);

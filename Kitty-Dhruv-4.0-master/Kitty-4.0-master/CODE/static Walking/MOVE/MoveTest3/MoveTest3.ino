@@ -15,7 +15,7 @@ int A_1 = 5, A_2 = -1;
 //bool state1 = true, state2 = true;
 
 float pwmx1=120, pwmx2=50, pwmx4=150;
-float theta1c=0, theta2c=0, zeroError1 = 69.513, zeroError2=51.58, minAngle1 = 21.3, minAngle2 = 30.0;  //62.513  51.58
+float theta1c=0, theta2c=0, zeroError1 = 69.513, zeroError2=51.58, minAngle1 = 21.3, minAngle2 = 30.0+5;  //62.513  51.58
 int x;
 
 volatile int temp1, counter1 = 0; 
@@ -43,10 +43,10 @@ void setup() {
   pinMode(motor2, OUTPUT);
   pinMode(motor2pwm, OUTPUT);
 
-  d = 0;
+  d = -2;
   y = -45;
   c = sqrt(d*d + y*y);
-  double theta = atan(abs(y/x))*90/acos(0);
+  double theta = atan(abs(y/d))*90/acos(0);
   zeroError1 = theta - cosine1();
   if(d>0){
     zeroError1 = 180 - theta - cosine1();
