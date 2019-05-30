@@ -11,6 +11,9 @@ int A_1 = 3, A_2 = 2;
 #define a2 21
 #define b2 A1 
 
+double a = 26.0, b = 23.4, c = 0;
+double d, y;
+
 bool state1 = true, state2 = true;
 
 float pwmx1=100, pwmx2=40, pwmx4=120; 
@@ -37,6 +40,16 @@ void setup() {
   pinMode(motor2, OUTPUT);
   pinMode(motor2pwm, OUTPUT);
 
+  d = -8;
+  y = -42;
+  c = sqrt(d*d + y*y);
+  double theta = atan(abs(y/d))*90/acos(0);
+  zeroError1 = theta - cosine1();
+  if(d>0){
+    zeroError1 = 180 - theta - cosine1();
+  }
+  zeroError2 = 180 - cosine2();
+  
   while(!Serial.available())
   {
      
@@ -112,4 +125,12 @@ void ai2(){
     counter2--;
   }
 //  state2 = !state2;
+}
+
+double cosine1(){
+  return (acos((a*a + c*c - b*b)/(2*a*c)))*90/acos(0);
+}
+
+double cosine2(){
+  return (acos((a*a + b*b - c*c)/(2*a*b)))*90/acos(0);
 }

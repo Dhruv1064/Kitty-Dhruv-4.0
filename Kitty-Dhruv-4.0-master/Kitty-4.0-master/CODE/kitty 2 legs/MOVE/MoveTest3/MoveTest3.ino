@@ -11,6 +11,9 @@ int A_1 = 5, A_2 = -1;
 #define b1 A15
 #define a2 A12
 #define b2 A13
+
+double a = 26.0, b = 23.4, c = 0;
+double d, y;
   
 //bool state1 = true, state2 = true;
 
@@ -39,6 +42,15 @@ void setup() {
   pinMode(motor1pwm, OUTPUT);
   pinMode(motor2, OUTPUT);
   pinMode(motor2pwm, OUTPUT);
+  d =-6;
+  y = -42;
+  c = sqrt(d*d + y*y);
+  double theta = atan(abs(y/d))*90/acos(0);
+  zeroError1 = theta - cosine1();
+  if(d>0){
+    zeroError1 = 180 - theta - cosine1();
+  }
+  zeroError2 = 180 - cosine2();
   while(!Serial.available())
   {
     
@@ -121,4 +133,11 @@ void ai3_3() {
 //  state2 = !state2;
 //  Serial.print("counter2: ");
 //  Serial.println(counter2);
+}
+double cosine1(){
+  return (acos((a*a + c*c - b*b)/(2*a*c)))*90/acos(0);
+}
+
+double cosine2(){
+  return (acos((a*a + b*b - c*c)/(2*a*b)))*90/acos(0);
 }
