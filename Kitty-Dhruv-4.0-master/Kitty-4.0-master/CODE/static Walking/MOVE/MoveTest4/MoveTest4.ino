@@ -22,7 +22,7 @@ volatile int temp2 , counter2 = 0;
 
 double a = 26.0, b = 23.4, c = 0;
 double d, y;
-
+  
 void setup() {
   Serial.begin(9600);
   //Pins for encoders

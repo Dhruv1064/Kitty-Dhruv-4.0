@@ -88,13 +88,13 @@ volatile int temp2_4 , counter2_4 = 0;
 double Kp1 = 1.5, Kp2 = 1.5, Kd1 = 2.0, Kd2 = 2.0 ;
 double l1 = 26.0, l2 = 23.4;
 
-double theta1AT1_1 = 52.20, theta1AT2_1 = 45.94, theta1AT3_1 = 65.52, theta1_AT1_1 = 0, theta1_AT2_1 = 0.1, theta1_AT3_1 = 0, theta1__AT1_1 = 0, theta1__AT2_1 = 0.1, theta1__AT3_1 = 0;
+double theta1AT1_1 = 52.20, theta1AT2_1 = 45.94, theta1AT3_1 = 67.52, theta1_AT1_1 = 0, theta1_AT2_1 = 0.1, theta1_AT3_1 = 0, theta1__AT1_1 = 0, theta1__AT2_1 = 0.1, theta1__AT3_1 = 0;
 double theta2AT1_1 = 55.19, theta2AT2_1 = 68.07, theta2AT3_1 = 59.15, theta2_AT1_1 = 0, theta2_AT2_1 = 0.1, theta2_AT3_1 = 0, theta2__AT1_1 = 0, theta2__AT2_1 = 0.1, theta2__AT3_1 = 0;
 
 double theta1AT1_2 = 54.45, theta1AT2_2 = 45.34, theta1AT3_2 = 68.91, theta1_AT1_2 = 0, theta1_AT2_2 = 0.1, theta1_AT3_2 = 0, theta1__AT1_2 = 0, theta1__AT2_2 = 0.1, theta1__AT3_2 = 0;
 double theta2AT1_2 = 56.58, theta2AT2_2 = 68.29, theta2AT3_2 = 57.85, theta2_AT1_2 = 0, theta2_AT2_2 = 0.1, theta2_AT3_2 = 0, theta2__AT1_2 = 0, theta2__AT2_2 = 0.1, theta2__AT3_2 = 0;
 
-double theta1AT1_3 = 52.21, theta1AT2_3 = 45.94, theta1AT3_3 = 65.52, theta1_AT1_3 = 0, theta1_AT2_3 = 0.1, theta1_AT3_3 = 0, theta1__AT1_3 = 0, theta1__AT2_3 = 0.1, theta1__AT3_3 = 0;
+double theta1AT1_3 = 52.21, theta1AT2_3 = 45.94, theta1AT3_3 = 67.52, theta1_AT1_3 = 0, theta1_AT2_3 = 0.1, theta1_AT3_3 = 0, theta1__AT1_3 = 0, theta1__AT2_3 = 0.1, theta1__AT3_3 = 0;
 double theta2AT1_3 = 55.19, theta2AT2_3 = 68.07, theta2AT3_3 = 59.15, theta2_AT1_3 = 0, theta2_AT2_3 = 0.1, theta2_AT3_3 = 0, theta2__AT1_3 = 0, theta2__AT2_3 = 0.1, theta2__AT3_3 = 0;
 
 double theta1AT1_4 = 54.45, theta1AT2_4 = 45.34, theta1AT3_4 = 68.91, theta1_AT1_4 = 0, theta1_AT2_4 = 0.1, theta1_AT3_4 = 0, theta1__AT1_4 = 0, theta1__AT2_4 = 0.1, theta1__AT3_4 = 0;
@@ -168,7 +168,7 @@ void setup()
   
 //2
   
-  d = 4;
+  d = 4.2;
   y = -43;
   c = sqrt(d*d + y*y);
   theta = atan(abs(y/d))*90/acos(0);
@@ -180,7 +180,7 @@ void setup()
 
 //3
   
-  d = 2;
+  d = 2.2;
   y = -43;
   c = sqrt(d*d + y*y);
   theta = atan(abs(y/d))*90/acos(0);
@@ -205,13 +205,13 @@ void setup()
 }
 
 void loop(){
-  for (double t = 0.125, u = 1.25; t <= 1.01, u <= 10.01; t = t + 0.125, u = u + 1.25)
+  for (double t = 0.1, u = 1; t <= 1.01, u <= 10.01; t = t + 0.1, u = u + 1)
   {
     double xe_2 = 4 - u ;
-    double ye_2 = -45 ;
+    double ye_2 = -43 ;
 
     double xe_3 = 2 - u ;
-    double ye_3 = -45 ;
+    double ye_3 = -43 ;
 
      if ( counter1_1 != temp1_1 ) {
       temp1_1 = counter1_1;
@@ -326,23 +326,23 @@ void loop(){
     else
     c1_1 = PID(theta1_1, theta1c_1, zeroError1_1 , Kp1+1.4 , (Kd1+2.1) , prev_error1_1);
     c2_1 = PID(theta2_1, theta2c_1, zeroError2_1 , Kp2+0.6 , Kd2 , prev_error2_1);
-    ll1=0.0, lm1=70.0, ul1=25.0, um1=35.0;
+    ll1=0.0, lm1=70.0, ul1=55.0, um1 = 68.0;
 
     correction1_1 = (um1-ul1)/(lm1-ll1)*abs(c1_1)+ul1;
     
     if(t<0.5)
     correction1_1 = (um1-ul1)/(lm1-ll1)*abs(c1_1)+ul1;
     else{
-    ll1=0.0, lm1=70.0, ul1=25.0, um1=35.0;
+    ll1=0.0, lm1=70.0, ul1=28.0, um1=40.0;
     correction1_1 = (um1-ul1)/(lm1-ll1)*abs(c1_1)+ul1;      //TODO   0-60
     }
     
     if(t<0.5){
-    ll2=0.0, lm2=70.0, ul2=120.0, um2=190.0;
+    ll2=0.0, lm2=70.0, ul2=120.0, um2=170.0;
     correction2_1 = (um2-ul2)/(lm2-ll2)*abs(c2_1) + ul2;      //TODO
     }
     else{
-      ll2=0.0, lm2=70.0, ul2=95.0, um2=180.0;
+      ll2=0.0, lm2=70.0, ul2=110.0, um2=180.0;
     correction2_1 = (um2-ul2)/(lm2-ll2)*abs(c2_1) + ul2;
     }
     
@@ -353,8 +353,8 @@ void loop(){
     if(correction2_1 > um2)
     correction2_1=um2;
     
-    if(t>0.85)
-    correction1_1=5;
+    if(t>0.75)
+    correction1_1=10;
 
     //------------------------------------------------22222222222222-------------------------------------------------------------------------
 //    theta1_2 = 57.2958 * (cosine_rule(l1, l2, sqrt(xe_2 * xe_2 + ye_2 * ye_2)) + alpha_2);
@@ -362,24 +362,23 @@ void loop(){
 
     error1_2 = zeroError1_2 - theta1_2 - theta1c_2;
     error2_2 = zeroError2_2 - theta2_2 - theta2c_2;
-    Serial.println(error2_2);
     
     c1_2 = PID(theta1_2, theta1c_2, zeroError1_2 , (Kp1+1.2) , (Kd1+2.2) , prev_error1_2);
-    c2_2 = PID(theta2_2, theta2c_2, zeroError2_2 , Kp2 , Kd2+2.4 , prev_error2_2);
+    c2_2 = PID(theta2_2, theta2c_2, zeroError2_2 , Kp2 , Kd2+1.8 , prev_error2_2);
 
-    ll1=0.0, lm1=40.0, ul1=25, um1=45.0;    
-    ll2=0.0, lm2=90.0, ul2=80.0, um2=150.0;
+    ll1=0.0, lm1=40.0, ul1=32, um1=44.0;    
+    ll2=0.0, lm2=90.0, ul2=30.0, um2=50.0;
 
     correction1_2 = ((um1-ul1)/(lm1-ll1)*abs(c1_2)+ul1);
     correction2_2 = ((um2-ul2)/(lm2-ll2)*abs(c2_2)+ul2);
 
-//    if(correction1_2 > um1)
-//    correction1_2=um1;
+    if(correction1_2 > um1)
+    correction1_2=um1;
 
-    if(correction2_2 > 255)
-    correction2_2=255;
-
-//    if(t>=0.9) correction1_2 = 55;
+    if(correction2_2 > um2)
+    correction2_2=um2;
+    
+    if(t>=0.86) correction1_2 = 55;
 
     //----------------------------------------------3333333333333333333333--------------------------------------------------------------------
 //    theta1_3 = 57.2958 * (cosine_rule(l1, l2, sqrt(xe_3 * xe_3 + ye_3 * ye_3)) + alpha_3);
@@ -389,21 +388,21 @@ void loop(){
     error2_3 = zeroError2_3 - theta2_3 - theta2c_3;
     
     c1_3 = PID(theta1_3, theta1c_3, zeroError1_3 , (Kp1+1.3) , (Kd1+2.4) , prev_error1_3);
-    c2_3 = PID(theta2_3, theta2c_3, zeroError2_3 , Kp2 , Kd2+1.5 , prev_error2_3);
+    c2_3 = PID(theta2_3, theta2c_3, zeroError2_3 , Kp2 , Kd2+2.4 , prev_error2_3);
 
-    ll1=0.0, lm1=40.0, ul1=25, um1=45.0;    
-    ll2=0.0, lm2=90.0, ul2=70.0, um2=150.0;
+    ll1=0.0, lm1=40.0, ul1=32, um1=41.0;    
+    ll2=0.0, lm2=90.0, ul2=25.0, um2=41.0;
 
     correction1_3 = ((um1-ul1)/(lm1-ll1)*abs(c1_3)+ul1);
     correction2_3 = ((um2-ul2)/(lm2-ll2)*abs(c2_3)+ul2);
     
-//    if(correction1_3 > um1)
-//    correction1_3=um1;
+    if(correction1_3 > um1)
+    correction1_3=um1;
    
     if(correction2_3 >255)
     correction2_3=255;
 
-//    if(t>0.75) correction1_3 = 32;
+    if(t>0.85) correction1_3 = 28;
 
      //----------------------------------------------------44444444444444444444-----------------------------------------------------------------------
     if (t < 0.5) {
@@ -425,23 +424,23 @@ void loop(){
     else
     c1_4 = PID(theta1_4, theta1c_4, zeroError1_4 , Kp1+1.8 , (Kd1+1.1) , prev_error1_4);
     c2_4 = PID(theta2_4, theta2c_4, zeroError2_4 , Kp2+2 , Kd2 , prev_error2_4);
-    ll1=0.0, lm1=70.0, ul1=25.0, um1=35.0;
+    ll1=0.0, lm1=70.0, ul1=50.0, um1=62.0;
 
 //    correction1_4 = (um1-ul1)/(lm1-ll1)*abs(c1_4)+ul1;
     
     if(t<0.5)
     correction1_4 = (um1-ul1)/(lm1-ll1)*abs(c1_4)+ul1;
     else{
-    ll1=0.0, lm1=70.0, ul1=25, um1=35.0;
+    ll1=0.0, lm1=70.0, ul1=32, um1=40.0;
     correction1_4 = (um1-ul1)/(lm1-ll1)*abs(c1_4)+ul1;      //TODO   0-60
     }
     
     if(t<0.5){
-    ll2=0.0, lm2=70.0, ul2=110.0, um2=180.0;
+    ll2=0.0, lm2=70.0, ul2=140.0, um2=220.0;
     correction2_4 = (um2-ul2)/(lm2-ll2)*abs(c2_4) + ul2;      //TODO
     }
     else{
-      ll2=0.0, lm2=70.0, ul2=100.0, um2=170.0;
+      ll2=0.0, lm2=70.0, ul2=120.0, um2=190.0;
     correction2_4 = (um2-ul2)/(lm2-ll2)*abs(c2_4) + ul2;
     }
 
@@ -451,26 +450,26 @@ void loop(){
     if(correction2_4 > 255)
     correction2_4=255;
     if(t>0.85)
-    correction1_4=16;
+    correction1_4=8;
 //-------------------------------------------------------------------------------------------------------
 
     Serial.println(t);
-    Serial.print("theta1_1=");
-    Serial.println(theta1_1);
-    Serial.print("theta1c_1=");
-    Serial.println(theta1c_1 - zeroError1_1);
-    Serial.print("theta2c_1=");
-    Serial.println(theta2c_1 - zeroError2_1);
-    Serial.print("theta2_1=");
-    Serial.println(theta2_1);
-    Serial.print("c1_1=");
-    Serial.println(c1_1);
-    Serial.print("c2_1=");
-    Serial.println(c2_1);
+    Serial.print("theta1_4=");
+    Serial.println(theta1_4);
+    Serial.print("theta1c_4=");
+    Serial.println(theta1c_4 - zeroError1_4);
+    Serial.print("theta2c_4=");
+    Serial.println(theta2c_4 - zeroError2_4);
+    Serial.print("theta2_4=");
+    Serial.println(theta2_4);
+    Serial.print("c1_4=");
+    Serial.println(c1_4);
+    Serial.print("c2_4=");
+    Serial.println(c2_4);
     Serial.print("pwm1=");
-    Serial.println(correction1_1);
+    Serial.println(correction1_4);
     Serial.print("pwm2=");
-    Serial.println(correction2_1);
+    Serial.println(correction2_4);
     Serial.println("------------------------");
     
 //-------------------------------------------------------------------------------------------------------
@@ -573,235 +572,235 @@ void loop(){
     d1_4 = 0;
     d2_4 = 0;
     
-    while(d1_1==0 || d2_1==0 || d1_2==0 || d2_2==0 || d1_3==0 || d2_3==0 || d1_4==0 || d2_4==0){
-
-      if ( counter1_1 != temp1_1 ) {
-      temp1_1 = counter1_1;
-
-      if (counter1_1 > 1200)
-      {
-        counter1_1 = 0;
-      }
-      theta1c_1 = (counter1_1 * 0.3);
-    }
-
-      if ( counter2_1 != temp2_1 ) {
-      temp2_1 = counter2_1;
-
-      if (counter2_1 > 1200)
-      {
-        counter2_1 = 0;
-      }
-      theta2c_1 = (counter2_1 * 0.3);
-    }
-
-      if ( counter1_2 != temp1_2 ) {
-      temp1_2 = counter1_2;
-
-      if (counter1_2 > 1200) {
-        counter1_2 = 0;
-      }
-
-      theta1c_2 = (counter1_2 * 0.3);
-    }
-
-      if ( counter2_2 != temp2_2 ) {
-      temp2_2 = counter2_2;
-
-      if (counter2_2 > 1200) {
-        counter2_2 = 0;
-      }
-      theta2c_2 = -(counter2_2 * 0.3);
-    }
-
-      if ( counter1_3 != temp1_3 ) {
-      temp1_3 = counter1_3;
-
-      if (counter1_3 > 1200)
-        counter1_3 = 0;
-
-      theta1c_3 = (counter1_3 * 0.3);
-    }
-
-      if ( counter2_3 != temp2_3 ) {
-      temp2_3 = counter2_3;
-
-      if (counter2_3 > 1200)
-        counter2_3 = 0;
-
-      theta2c_3 = -(counter2_3 * 0.3);
-    }
-
-      if ( counter1_4 != temp1_4 ) {
-      temp1_4 = counter1_4;
-
-      if (counter1_4 > 1200)
-        counter1_4 = 0;
-
-      theta1c_4 = (counter1_4 * 0.3);
-    }
-
-      if ( counter2_4 != temp2_4 ) {
-      temp2_4 = counter2_4;
-
-      if (counter2_4 > 1200)
-        counter2_4 = 0;
-
-      theta2c_4 = -(counter2_4 * 0.3);
-    }
-
-      ierror1_1 = theta1_1 - theta1c_1 + zeroError1_1;
-      ierror2_1 = theta2_1 - theta2c_1 + zeroError2_1;
-
-      ierror1_2 = zeroError1_2 - theta1_2 - theta1c_2;
-      ierror2_2 = zeroError2_2 - theta2_2 - theta2c_2;
-      
-      ierror1_3 = zeroError1_3 - theta1_3 - theta1c_3;
-      ierror2_3 = zeroError2_3 - theta2_3 - theta2c_3;
-      
-      ierror1_4 = theta1_4 - theta1c_4 + zeroError1_4;
-      ierror2_4 = theta2_4 - theta2c_4 + zeroError2_4;
-
-      if (error1_1 < 0 ) {
-        if(ierror1_1>-1){
-          d1_1 = 1;
-      }
-    }
-
-    else if (error1_1 > 0) {
-      if(ierror1_1<1){
-        d1_1 = 1;
-      }
-    }
-
-    if (error2_1 < 0) {
-      if(ierror2_1>-1){
-        d2_1 = 1;
-      }
-    }
-
-    else if (error2_1 > 0) {
-      if(ierror2_1<1){
-        d2_1 = 1;
-      }
-    }
-
-    if (error1_2 < 0 ) {
-      if(ierror1_2>-1){
-        d1_2 = 1;
-      }
-    }
-
-    else if (error1_2 > 0) {
-      if(ierror1_2<1){
-        d1_2 = 1;
-      }
-    }
-
-    if (error2_2 < 0) {
-      if(ierror2_2>-1){
-        d2_2 = 1;
-      }
-    }
-
-    else if (error2_2 > 0) {
-      if(ierror2_2<1){
-        d2_2 = 1;
-      }
-    }
-
-    if (error1_3 < 0 ) {
-      if(ierror1_3>-1){
-        d1_3 = 1;
-      }
-    }
-
-    else if (error1_3 > 0) {
-      if(ierror1_3<1){
-        d1_3 = 1;
-      }
-    }
-
-    if (error2_3 < 0) {
-      if(ierror2_3>-1){
-        d2_3 = 1;
-      }
-    }
-
-    else if (error2_3 > 0) {
-      if(ierror2_3<1){
-        d2_3 = 1;
-      }
-    }
-
-    if (error1_4 < 0 ) {
-      if(ierror1_4>-1){
-        d1_4 = 1;
-      }
-    }
-
-    else if (error1_4 > 0) {
-      if(ierror1_4<1){
-        d1_4 = 1;
-      }
-    }
-
-    if (error2_4 < 0) {
-      if(ierror2_4>-1){
-        d2_4 = 1;
-      }
-    }
-
-    else if (error2_4 > 0) {
-      if(ierror2_4<1){
-        d2_4 = 1;
-      }
-    }
-
-
-      pwm1_1 += 3;
-      pwm2_1 += 3;
-      pwm1_2 += 3;
-      pwm2_2 += 3;
-      pwm1_3 += 3;
-      pwm2_3 += 3;
-      pwm1_4 += 3;
-      pwm2_4 += 3;
-
-      if(d1_1==1) pwm1_1 = 0;
-      if(d2_1==1) pwm2_1 = 0;
-      
-      if(d1_2==1) pwm1_2 = 0;
-      if(d2_2==1) pwm2_2 = 0;
-
-      if(d1_3==1) pwm1_3 = 0;
-      if(d2_3==1) pwm2_3 = 0;
-
-      if(d1_4==1) pwm1_4 = 0;
-      if(d2_4==1) pwm2_4 = 0;
-
-      
-
-      analogWrite(motor1pwm_1, pwm1_1);
-      analogWrite(motor2pwm_1, pwm2_1);
-      analogWrite(motor1pwm_2, pwm1_2);
-      analogWrite(motor2pwm_2, pwm2_2);
-      analogWrite(motor1pwm_3, pwm1_3);
-      analogWrite(motor2pwm_3, pwm2_3);
-      analogWrite(motor1pwm_4, pwm1_4);
-      analogWrite(motor2pwm_4, pwm2_4);
-
-    }
-  
+//    while(d1_1==0 || d2_1==0 || d1_2==0 || d2_2==0 || d1_3==0 || d2_3==0 || d1_4==0 || d2_4==0){
+//
+//      if ( counter1_1 != temp1_1 ) {
+//      temp1_1 = counter1_1;
+//
+//      if (counter1_1 > 1200)
+//      {
+//        counter1_1 = 0;
+//      }
+//      theta1c_1 = (counter1_1 * 0.3);
+//    }
+//
+//      if ( counter2_1 != temp2_1 ) {
+//      temp2_1 = counter2_1;
+//
+//      if (counter2_1 > 1200)
+//      {
+//        counter2_1 = 0;
+//      }
+//      theta2c_1 = (counter2_1 * 0.3);
+//    }
+//
+//      if ( counter1_2 != temp1_2 ) {
+//      temp1_2 = counter1_2;
+//
+//      if (counter1_2 > 1200) {
+//        counter1_2 = 0;
+//      }
+//
+//      theta1c_2 = (counter1_2 * 0.3);
+//    }
+//
+//      if ( counter2_2 != temp2_2 ) {
+//      temp2_2 = counter2_2;
+//
+//      if (counter2_2 > 1200) {
+//        counter2_2 = 0;
+//      }
+//      theta2c_2 = -(counter2_2 * 0.3);
+//    }
+//
+//      if ( counter1_3 != temp1_3 ) {
+//      temp1_3 = counter1_3;
+//
+//      if (counter1_3 > 1200)
+//        counter1_3 = 0;
+//
+//      theta1c_3 = (counter1_3 * 0.3);
+//    }
+//
+//      if ( counter2_3 != temp2_3 ) {
+//      temp2_3 = counter2_3;
+//
+//      if (counter2_3 > 1200)
+//        counter2_3 = 0;
+//
+//      theta2c_3 = -(counter2_3 * 0.3);
+//    }
+//
+//      if ( counter1_4 != temp1_4 ) {
+//      temp1_4 = counter1_4;
+//
+//      if (counter1_4 > 1200)
+//        counter1_4 = 0;
+//
+//      theta1c_4 = (counter1_4 * 0.3);
+//    }
+//
+//      if ( counter2_4 != temp2_4 ) {
+//      temp2_4 = counter2_4;
+//
+//      if (counter2_4 > 1200)
+//        counter2_4 = 0;
+//
+//      theta2c_4 = -(counter2_4 * 0.3);
+//    }
+//
+//      ierror1_1 = theta1_1 - theta1c_1 + zeroError1_1;
+//      ierror2_1 = theta2_1 - theta2c_1 + zeroError2_1;
+//
+//      ierror1_2 = zeroError1_2 - theta1_2 - theta1c_2;
+//      ierror2_2 = zeroError2_2 - theta2_2 - theta2c_2;
+//      
+//      ierror1_3 = zeroError1_3 - theta1_3 - theta1c_3;
+//      ierror2_3 = zeroError2_3 - theta2_3 - theta2c_3;
+//      
+//      ierror1_4 = theta1_4 - theta1c_4 + zeroError1_4;
+//      ierror2_4 = theta2_4 - theta2c_4 + zeroError2_4;
+//
+//      if (error1_1 < 0 ) {
+//        if(ierror1_1>-1){
+//          d1_1 = 1;
+//      }
+//    }
+//
+//    else if (error1_1 > 0) {
+//      if(ierror1_1<1){
+//        d1_1 = 1;
+//      }
+//    }
+//
+//    if (error2_1 < 0) {
+//      if(ierror2_1>-1){
+//        d2_1 = 1;
+//      }
+//    }
+//
+//    else if (error2_1 > 0) {
+//      if(ierror2_1<1){
+//        d2_1 = 1;
+//      }
+//    }
+//
+//    if (error1_2 < 0 ) {
+//      if(ierror1_2>-1){
+//        d1_2 = 1;
+//      }
+//    }
+//
+//    else if (error1_2 > 0) {
+//      if(ierror1_2<1){
+//        d1_2 = 1;
+//      }
+//    }
+//
+//    if (error2_2 < 0) {
+//      if(ierror2_2>-1){
+//        d2_2 = 1;
+//      }
+//    }
+//
+//    else if (error2_2 > 0) {
+//      if(ierror2_2<1){
+//        d2_2 = 1;
+//      }
+//    }
+//
+//    if (error1_3 < 0 ) {
+//      if(ierror1_3>-1){
+//        d1_3 = 1;
+//      }
+//    }
+//
+//    else if (error1_3 > 0) {
+//      if(ierror1_3<1){
+//        d1_3 = 1;
+//      }
+//    }
+//
+//    if (error2_3 < 0) {
+//      if(ierror2_3>-1){
+//        d2_3 = 1;
+//      }
+//    }
+//
+//    else if (error2_3 > 0) {
+//      if(ierror2_3<1){
+//        d2_3 = 1;
+//      }
+//    }
+//
+//    if (error1_4 < 0 ) {
+//      if(ierror1_4>-1){
+//        d1_4 = 1;
+//      }
+//    }
+//
+//    else if (error1_4 > 0) {
+//      if(ierror1_4<1){
+//        d1_4 = 1;
+//      }
+//    }
+//
+//    if (error2_4 < 0) {
+//      if(ierror2_4>-1){
+//        d2_4 = 1;
+//      }
+//    }
+//
+//    else if (error2_4 > 0) {
+//      if(ierror2_4<1){
+//        d2_4 = 1;
+//      }
+//    }
+//
+//
+//      pwm1_1 += 3;
+//      pwm2_1 += 3;
+//      pwm1_2 += 3;
+//      pwm2_2 += 3;
+//      pwm1_3 += 3;
+//      pwm2_3 += 3;
+//      pwm1_4 += 3;
+//      pwm2_4 += 3;
+//
+//      if(d1_1==1) pwm1_1 = 0;
+//      if(d2_1==1) pwm2_1 = 0;
+//      
+//      if(d1_2==1) pwm1_2 = 0;
+//      if(d2_2==1) pwm2_2 = 0;
+//
+//      if(d1_3==1) pwm1_3 = 0;
+//      if(d2_3==1) pwm2_3 = 0;
+//
+//      if(d1_4==1) pwm1_4 = 0;
+//      if(d2_4==1) pwm2_4 = 0;
+//
+//      
+//
+//      analogWrite(motor1pwm_1, pwm1_1);
+//      analogWrite(motor2pwm_1, pwm2_1);
+//      analogWrite(motor1pwm_2, pwm1_2);
+//      analogWrite(motor2pwm_2, pwm2_2);
+//      analogWrite(motor1pwm_3, pwm1_3);
+//      analogWrite(motor2pwm_3, pwm2_3);
+//      analogWrite(motor1pwm_4, pwm1_4);
+//      analogWrite(motor2pwm_4, pwm2_4);
+//
+//    }
+//  
   }
   
-  for (double t = 0.125, u = 1.25; t <= 1.01, u <= 10.01; t = t + 0.125, u = u + 1.25)
+  for (double t = 0.1, u = 1; t <= 1.01, u <= 10.01; t = t + 0.1, u = u + 1)
   { 
     double xe_1 = 2 - u ;
-    double ye_1 = -45 ;
+    double ye_1 = -43 ;
 
     double xe_4 = 4 - u;
-    double ye_4 = -45;
+    double ye_4 = -43;
 
     if ( counter1_1 != temp1_1 ) {
       temp1_1 = counter1_1;
@@ -904,22 +903,22 @@ void loop(){
     error1_1 = zeroError1_1 - theta1_1 - theta1c_1;
     error2_1 = zeroError2_1 - theta2_1 - theta2c_1;
     
-      c1_1 = PID(theta1_1, theta1c_1, zeroError1_1 , (Kp1+1.5) , (Kd1+2.2) , prev_error1_1);
-    c2_1 = PID(theta2_1, theta2c_1, zeroError2_1 , Kp2 , Kd2 , prev_error2_1);
+    c1_1 = PID(theta1_1, theta1c_1, zeroError1_1 , (Kp1+1.5) , (Kd1+2.2) , prev_error1_1);
+    c2_1 = PID(theta2_1, theta2c_1, zeroError2_1 , Kp2 , Kd2+1.5 , prev_error2_1);
 
-    ll1=0.0, lm1=40.0, ul1=25, um1=35.0;    
-    ll2=0.0, lm2=90.0, ul2=50.0, um2=150.0;
+    ll1=0.0, lm1=40.0, ul1=35, um1=47.0;    
+    ll2=0.0, lm2=90.0, ul2=30.0, um2=60.0;
 
     correction1_1 = ((um1-ul1)/(lm1-ll1)*abs(c1_1)+ul1);
     correction2_1 = ((um2-ul2)/(lm2-ll2)*abs(c2_1)+ul2);
     
-//    if(correction1_1 > um1)
-//    correction1_1=um1;
+    if(correction1_1 > um1)
+    correction1_1=um1;
 
     if(correction2_1 > 255)
     correction2_1=255;
 
-//    if(t>=0.7) correction1_1 = 34;
+    if(t>=0.75) correction1_1 = 34;
 
     //-------------------------------------------------------------22222222222222222222---------------------------------------------------
     if (t < 0.5) {
@@ -939,22 +938,22 @@ void loop(){
     else
     c1_2 = PID(theta1_2, theta1c_2, zeroError1_2 , Kp1+1.5 , (Kd1+0.8) , prev_error1_2);
     c2_2 = PID(theta2_2, theta2c_2, zeroError2_2 , Kp2+1.6 , Kd2+0.9 , prev_error2_2);
-    ll1=0.0, lm1=70.0, ul1=25.0, um1=35.0;
+    ll1=0.0, lm1=70.0, ul1=53.0, um1=70.0;
 //    correction1_2 = (um1-ul1)/(lm1-ll1)*abs(c1_2)+ul1;
     
     if(t<0.5)
     correction1_2 = (um1-ul1)/(lm1-ll1)*abs(c1_2)+ul1;
     else{
-    ll1=0.0, lm1=70.0, ul1=25.0, um1=35.0;
+    ll1=0.0, lm1=70.0, ul1=33.0, um1=47.0;
     correction1_2 = (um1-ul1)/(lm1-ll1)*abs(c1_2)+ul1;      //TODO   0-60
     }
     
     if(t<0.5){
-    ll2=0.0, lm2=70.0, ul2=100.0, um2=190.0;
+    ll2=0.0, lm2=70.0, ul2=120.0, um2=170.0;
     correction2_2 = (um2-ul2)/(lm2-ll2)*abs(c2_2) + ul2;      //TODO
     }
     else{
-      ll2=0.0, lm2=70.0, ul2=100.0, um2=170.0;
+      ll2=0.0, lm2=70.0, ul2=40.0, um2=80.0;
     correction2_2 = (um2-ul2)/(lm2-ll2)*abs(c2_2) + ul2;
     }
     
@@ -964,7 +963,7 @@ void loop(){
 
     if(correction2_2 > 255)
     correction2_2=255;
-    if(t==0.4 || t==0.5 || t==0.6) correction1_2 = 45;
+//    if(t==0.4 || t==0.5 || t==0.6) correction1_2 = 45;
     if(t>0.85) correction1_2=15;
 
     //----------------------------------------------3333333333333333333333--------------------------------------------------------------------
@@ -985,14 +984,14 @@ void loop(){
     else
     c1_3 = PID(theta1_3, theta1c_3, zeroError1_3 , Kp1+1.9 , (Kd1+1.7) , prev_error1_3);
     c2_3 = PID(theta2_3, theta2c_3, zeroError2_3 , Kp2+1.2 , Kd2+0.6 , prev_error2_3);
-    ll1=0.0, lm1=70.0, ul1=25.0, um1=35.0;
+    ll1=0.0, lm1=70.0, ul1=47.0, um1=62.0;
 
     correction1_3 = (um1-ul1)/(lm1-ll1)*abs(c1_3)+ul1;
     
     if(t<0.5)
     correction1_3 = (um1-ul1)/(lm1-ll1)*abs(c1_3)+ul1;
     else{
-    ll1=0.0, lm1=70.0, ul1=25.0, um1=35.0;
+    ll1=0.0, lm1=70.0, ul1=33.0, um1=43.0;
     correction1_3 = (um1-ul1)/(lm1-ll1)*abs(c1_3)+ul1;      //TODO   0-60
     }
 
@@ -1002,7 +1001,7 @@ void loop(){
     correction2_3 = (um2-ul2)/(lm2-ll2)*abs(c2_3) + ul2;      //TODO
     }
     else{
-      ll2=0.0, lm2=70.0, ul2=90.0, um2=110.0;
+      ll2=0.0, lm2=70.0, ul2=100.0, um2=140.0;
     correction2_3 = (um2-ul2)/(lm2-ll2)*abs(c2_3) + ul2;
     }
     
@@ -1013,7 +1012,7 @@ void loop(){
     if(correction2_3 > 255)
     correction2_3=255;
     
-    if(t>0.85)
+    if(t>0.75)
     correction1_3=15;
 
     //----------------------------------------------------44444444444444444444-----------------------------------------------------------------------
@@ -1024,43 +1023,43 @@ void loop(){
     error1_4 = zeroError1_4 - theta1_4 - theta1c_4;
     error2_4 = zeroError2_4 - theta2_4 - theta2c_4;
     
-    c1_4 = PID(theta1_4, theta1c_4, zeroError1_4 , (Kp1+1.8) , (Kd1+1.8) , prev_error1_4);
+    c1_4 = PID(theta1_4, theta1c_4, zeroError1_4 , (Kp1+1.65) , (Kd1+1.8) , prev_error1_4);
     c2_4 = PID(theta2_4, theta2c_4, zeroError2_4 , Kp2 , Kd2 , prev_error2_4);
 
-    ll1=0.0, lm1=30.0, ul1=25, um1=35;
-    ll2=0.0, lm2=40.0, ul2=50.0, um2=200.0;
+    ll1=0.0, lm1=30.0, ul1=22, um1=32;
+    ll2=0.0, lm2=40.0, ul2=30.0, um2=40.0;
 
     correction1_4 = ((um1-ul1)/(lm1-ll1)*abs(c1_4)+ul1);
     correction2_4 = ((um2-ul2)/(lm2-ll2)*abs(c2_4)+ul2);
 
 //    correction1_4 = map(abs(c1_4), 0, 30, 0, 50);       //TODO
 //    correction2_4 = map(abs(c2_4), 0, 40, 125, 260);      //TODO
-
-//    if(t>=0.75) correction1_4 = 45;
     
-//    if(correction1_4 > um1)
-//    correction1_4=um1;
-
+    if(correction1_4 > um1)
+    correction1_4=um1;
+    
+    if(t>=0.75) correction1_4 = 30;
+    
     if(correction2_4 > 255)
       correction2_4 = 255;
 //--------------------------------------------------------------------------------------------------------------------------
     Serial.println(t);
-    Serial.print("theta1_1=");
-    Serial.println(theta1_1);
-    Serial.print("theta1c_1=");
-    Serial.println(theta1c_1 - zeroError1_1);
-    Serial.print("theta2c_1=");
-    Serial.println(theta2c_1 - zeroError2_1);
-    Serial.print("theta2_1=");
-    Serial.println(theta2_1);
-    Serial.print("c1_1=");
-    Serial.println(c1_1);
-    Serial.print("c2_1=");
-    Serial.println(c2_1);
-    Serial.print("pwm1=");
-    Serial.println(correction1_1);
+    Serial.print("theta1_3=");
+    Serial.println(theta1_3);
+    Serial.print("theta1c_3=");
+    Serial.println(theta1c_3 - zeroError1_3);
+    Serial.print("theta2c_3=");
+    Serial.println(theta2c_3 - zeroError2_3);
+    Serial.print("theta2_3=");
+    Serial.println(theta2_3);
+    Serial.print("c1_3=");
+    Serial.println(c1_3);
+    Serial.print("c2_3=");
+    Serial.println(c2_3);
+    Serial.print("pwm3=");
+    Serial.println(correction1_3);
     Serial.print("pwm2=");
-    Serial.println(correction2_1);
+    Serial.println(correction2_3);
     Serial.println("------------------------");
     
 //---------------------------------------------------------------------------------------------------
@@ -1162,226 +1161,226 @@ void loop(){
     d1_4 = 0;
     d2_4 = 0;
     
-    while(d1_1==0 || d2_1==0 || d1_2==0 || d2_2==0 || d1_3==0 || d2_3==0 || d1_4==0 || d2_4==0){
-
-      if ( counter1_1 != temp1_1 ) {
-      temp1_1 = counter1_1;
-
-      if (counter1_1 > 1200)
-      {
-        counter1_1 = 0;
-      }
-      theta1c_1 = (counter1_1 * 0.3);
-    }
-
-      if ( counter2_1 != temp2_1 ) {
-      temp2_1 = counter2_1;
-
-      if (counter2_1 > 1200)
-      {
-        counter2_1 = 0;
-      }
-      theta2c_1 = (counter2_1 * 0.3);
-    }
-
-      if ( counter1_2 != temp1_2 ) {
-      temp1_2 = counter1_2;
-
-      if (counter1_2 > 1200) {
-        counter1_2 = 0;
-      }
-
-      theta1c_2 = (counter1_2 * 0.3);
-    }
-
-      if ( counter2_2 != temp2_2 ) {
-      temp2_2 = counter2_2;
-
-      if (counter2_2 > 1200) {
-        counter2_2 = 0;
-      }
-      theta2c_2 = -(counter2_2 * 0.3);
-    }
-
-      if ( counter1_3 != temp1_3 ) {
-      temp1_3 = counter1_3;
-
-      if (counter1_3 > 1200)
-        counter1_3 = 0;
-
-      theta1c_3 = (counter1_3 * 0.3);
-    }
-
-      if ( counter2_3 != temp2_3 ) {
-      temp2_3 = counter2_3;
-
-      if (counter2_3 > 1200)
-        counter2_3 = 0;
-
-      theta2c_3 = -(counter2_3 * 0.3);
-    }
-
-      if ( counter1_4 != temp1_4 ) {
-      temp1_4 = counter1_4;
-
-      if (counter1_4 > 1200)
-        counter1_4 = 0;
-
-      theta1c_4 = (counter1_4 * 0.3);
-    }
-
-      if ( counter2_4 != temp2_4 ) {
-      temp2_4 = counter2_4;
-
-      if (counter2_4 > 1200)
-        counter2_4 = 0;
-
-      theta2c_4 = -(counter2_4 * 0.3);
-    }
-
-      ierror1_1 = zeroError1_1 - theta1_1 - theta1c_1;
-      ierror2_1 = zeroError2_1 - theta2_1 - theta2c_1;
-
-      ierror1_2 = theta1_2 - theta1c_2 + zeroError1_2;
-      ierror2_2 = theta2_2 - theta2c_2 + zeroError2_2;
-
-      ierror1_3 = theta1_3 - theta1c_3 + zeroError1_3;
-      ierror2_3 = theta2_3 - theta2c_3 + zeroError2_3;
-
-      ierror1_4 = zeroError1_4 - theta1_4 - theta1c_4;
-      ierror2_4 = zeroError2_4 - theta2_4 - theta2c_4;
-
-      if (error1_1 < 0 ) {
-        if(ierror1_1>-1){
-          d1_1 = 1;
-      }
-    }
-
-    else if (error1_1 > 0) {
-      if(ierror1_1<1){
-        d1_1 = 1;
-      }
-    }
-
-    if (error2_1 < 0) {
-      if(ierror2_1>-1){
-        d2_1 = 1;
-      }
-    }
-
-    else if (error2_1 > 0) {
-      if(ierror2_1<1){
-        d2_1 = 1;
-      }
-    }
-
-    if (error1_2 < 0 ) {
-      if(ierror1_2>-1){
-        d1_2 = 1;
-      }
-    }
-
-    else if (error1_2 > 0) {
-      if(ierror1_2<1){
-        d1_2 = 1;
-      }
-    }
-
-    if (error2_2 < 0) {
-      if(ierror2_2>-1){
-        d2_2 = 1;
-      }
-    }
-
-    else if (error2_2 > 0) {
-      if(ierror2_2<1){
-        d2_2 = 1;
-      }
-    }
-
-    if (error1_3 < 0 ) {
-      if(ierror1_3>-1){
-        d1_3 = 1;
-      }
-    }
-
-    else if (error1_3 > 0) {
-      if(ierror1_3<1){
-        d1_3 = 1;
-      }
-    }
-
-    if (error2_3 < 0) {
-      if(ierror2_3>-1){
-        d2_3 = 1;
-      }
-    }
-
-    else if (error2_3 > 0) {
-      if(ierror2_3<1){
-        d2_3 = 1;
-      }
-    }
-
-    if (error1_4 < 0 ) {
-      if(ierror1_4>-1){
-        d1_4 = 1;
-      }
-    }
-
-    else if (error1_4 > 0) {
-      if(ierror1_4<1){
-        d1_4 = 1;
-      }
-    }
-
-    if (error2_4 < 0) {
-      if(ierror2_4>-1){
-        d2_4 = 1;
-      }
-    }
-
-    else if (error2_4 > 0) {
-      if(ierror2_4<1){
-        d2_4 = 1;
-      }
-    }
-
-
-      pwm1_1 += 3;
-      pwm2_1 += 3;
-      pwm1_2 += 3;
-      pwm2_2 += 3;
-      pwm1_3 += 3;
-      pwm2_3 += 3;
-      pwm1_4 += 3;
-      pwm2_4 += 3;
-
-      if(d1_1==1) pwm1_1 = 0;
-      if(d2_1==1) pwm2_1 = 0;
-      
-      if(d1_2==1) pwm1_2 = 0;
-      if(d2_2==1) pwm2_2 = 0;
-
-      if(d1_3==1) pwm1_3 = 0;
-      if(d2_3==1) pwm2_3 = 0;
-
-      if(d1_4==1) pwm1_4 = 0;
-      if(d2_4==1) pwm2_4 = 0;
-
-      
-
-      analogWrite(motor1pwm_1, pwm1_1);
-      analogWrite(motor2pwm_1, pwm2_1);
-      analogWrite(motor1pwm_2, pwm1_2);
-      analogWrite(motor2pwm_2, pwm2_2);
-      analogWrite(motor1pwm_3, pwm1_3);
-      analogWrite(motor2pwm_3, pwm2_3);
-      analogWrite(motor1pwm_4, pwm1_4);
-      analogWrite(motor2pwm_4, pwm2_4);
-
-    }
-  
+//    while(d1_1==0 || d2_1==0 || d1_2==0 || d2_2==0 || d1_3==0 || d2_3==0 || d1_4==0 || d2_4==0){
+//
+//      if ( counter1_1 != temp1_1 ) {
+//      temp1_1 = counter1_1;
+//
+//      if (counter1_1 > 1200)
+//      {
+//        counter1_1 = 0;
+//      }
+//      theta1c_1 = (counter1_1 * 0.3);
+//    }
+//
+//      if ( counter2_1 != temp2_1 ) {
+//      temp2_1 = counter2_1;
+//
+//      if (counter2_1 > 1200)
+//      {
+//        counter2_1 = 0;
+//      }
+//      theta2c_1 = (counter2_1 * 0.3);
+//    }
+//
+//      if ( counter1_2 != temp1_2 ) {
+//      temp1_2 = counter1_2;
+//
+//      if (counter1_2 > 1200) {
+//        counter1_2 = 0;
+//      }
+//
+//      theta1c_2 = (counter1_2 * 0.3);
+//    }
+//
+//      if ( counter2_2 != temp2_2 ) {
+//      temp2_2 = counter2_2;
+//
+//      if (counter2_2 > 1200) {
+//        counter2_2 = 0;
+//      }
+//      theta2c_2 = -(counter2_2 * 0.3);
+//    }
+//
+//      if ( counter1_3 != temp1_3 ) {
+//      temp1_3 = counter1_3;
+//
+//      if (counter1_3 > 1200)
+//        counter1_3 = 0;
+//
+//      theta1c_3 = (counter1_3 * 0.3);
+//    }
+//
+//      if ( counter2_3 != temp2_3 ) {
+//      temp2_3 = counter2_3;
+//
+//      if (counter2_3 > 1200)
+//        counter2_3 = 0;
+//
+//      theta2c_3 = -(counter2_3 * 0.3);
+//    }
+//
+//      if ( counter1_4 != temp1_4 ) {
+//      temp1_4 = counter1_4;
+//
+//      if (counter1_4 > 1200)
+//        counter1_4 = 0;
+//
+//      theta1c_4 = (counter1_4 * 0.3);
+//    }
+//
+//      if ( counter2_4 != temp2_4 ) {
+//      temp2_4 = counter2_4;
+//
+//      if (counter2_4 > 1200)
+//        counter2_4 = 0;
+//
+//      theta2c_4 = -(counter2_4 * 0.3);
+//    }
+//
+//      ierror1_1 = zeroError1_1 - theta1_1 - theta1c_1;
+//      ierror2_1 = zeroError2_1 - theta2_1 - theta2c_1;
+//
+//      ierror1_2 = theta1_2 - theta1c_2 + zeroError1_2;
+//      ierror2_2 = theta2_2 - theta2c_2 + zeroError2_2;
+//
+//      ierror1_3 = theta1_3 - theta1c_3 + zeroError1_3;
+//      ierror2_3 = theta2_3 - theta2c_3 + zeroError2_3;
+//
+//      ierror1_4 = zeroError1_4 - theta1_4 - theta1c_4;
+//      ierror2_4 = zeroError2_4 - theta2_4 - theta2c_4;
+//
+//      if (error1_1 < 0 ) {
+//        if(ierror1_1>-1){
+//          d1_1 = 1;
+//      }
+//    }
+//
+//    else if (error1_1 > 0) {
+//      if(ierror1_1<1){
+//        d1_1 = 1;
+//      }
+//    }
+//
+//    if (error2_1 < 0) {
+//      if(ierror2_1>-1){
+//        d2_1 = 1;
+//      }
+//    }
+//
+//    else if (error2_1 > 0) {
+//      if(ierror2_1<1){
+//        d2_1 = 1;
+//      }
+//    }
+//
+//    if (error1_2 < 0 ) {
+//      if(ierror1_2>-1){
+//        d1_2 = 1;
+//      }
+//    }
+//
+//    else if (error1_2 > 0) {
+//      if(ierror1_2<1){
+//        d1_2 = 1;
+//      }
+//    }
+//
+//    if (error2_2 < 0) {
+//      if(ierror2_2>-1){
+//        d2_2 = 1;
+//      }
+//    }
+//
+//    else if (error2_2 > 0) {
+//      if(ierror2_2<1){
+//        d2_2 = 1;
+//      }
+//    }
+//
+//    if (error1_3 < 0 ) {
+//      if(ierror1_3>-1){
+//        d1_3 = 1;
+//      }
+//    }
+//
+//    else if (error1_3 > 0) {
+//      if(ierror1_3<1){
+//        d1_3 = 1;
+//      }
+//    }
+//
+//    if (error2_3 < 0) {
+//      if(ierror2_3>-1){
+//        d2_3 = 1;
+//      }
+//    }
+//
+//    else if (error2_3 > 0) {
+//      if(ierror2_3<1){
+//        d2_3 = 1;
+//      }
+//    }
+//
+//    if (error1_4 < 0 ) {
+//      if(ierror1_4>-1){
+//        d1_4 = 1;
+//      }
+//    }
+//
+//    else if (error1_4 > 0) {
+//      if(ierror1_4<1){
+//        d1_4 = 1;
+//      }
+//    }
+//
+//    if (error2_4 < 0) {
+//      if(ierror2_4>-1){
+//        d2_4 = 1;
+//      }
+//    }
+//
+//    else if (error2_4 > 0) {
+//      if(ierror2_4<1){
+//        d2_4 = 1;
+//      }
+//    }
+//
+//
+//      pwm1_1 += 3;
+//      pwm2_1 += 3;
+//      pwm1_2 += 3;
+//      pwm2_2 += 3;
+//      pwm1_3 += 3;
+//      pwm2_3 += 3;
+//      pwm1_4 += 3;
+//      pwm2_4 += 3;
+//
+//      if(d1_1==1) pwm1_1 = 0;
+//      if(d2_1==1) pwm2_1 = 0;
+//      
+//      if(d1_2==1) pwm1_2 = 0;
+//      if(d2_2==1) pwm2_2 = 0;
+//
+//      if(d1_3==1) pwm1_3 = 0;
+//      if(d2_3==1) pwm2_3 = 0;
+//
+//      if(d1_4==1) pwm1_4 = 0;
+//      if(d2_4==1) pwm2_4 = 0;
+//
+//      
+//
+//      analogWrite(motor1pwm_1, pwm1_1);
+//      analogWrite(motor2pwm_1, pwm2_1);
+//      analogWrite(motor1pwm_2, pwm1_2);
+//      analogWrite(motor2pwm_2, pwm2_2);
+//      analogWrite(motor1pwm_3, pwm1_3);
+//      analogWrite(motor2pwm_3, pwm2_3);
+//      analogWrite(motor1pwm_4, pwm1_4);
+//      analogWrite(motor2pwm_4, pwm2_4);
+//
+//    }
+//  
   }
 
 }
