@@ -21,6 +21,11 @@
 #define b2_4 14
 
 int A1_1 = 4, A2_1 = 5, A1_2 = 3, A2_2 = 2, A1_4 = 0, A2_4= 1;  //Change as per need
+
+double a = 26.0, b = 23.4, c = 0;
+double d, y;
+double angle;
+
 int d1_1, d2_1, d1_2, d2_2, d1_3, d2_3, d1_4, d2_4;
 int ierror1_1, ierror2_1, ierror1_2, ierror2_2, ierror1_3, ierror2_3, ierror1_4, ierror2_4; 
 
@@ -83,17 +88,17 @@ volatile int temp2_4 , counter2_4 = 0;
 double Kp1 = 1.5, Kp2 = 1.5, Kd1 = 2.0, Kd2 = 2.0 ;
 double l1 = 26.0, l2 = 23.4;
 
-double theta1AT1_1 = 55.0, theta1AT2_1 = 45.9456, theta1AT3_1 = 70.3592, theta1_AT1_1 = 0, theta1_AT2_1 = 0.1, theta1_AT3_1 = 0, theta1__AT1_1 = 0, theta1__AT2_1 = 0.1, theta1__AT3_1 = 0;
-double theta2AT1_1 = 39.3, theta2AT2_1 = 75.0727, theta2AT3_1 = 47.7943, theta2_AT1_1 = 0, theta2_AT2_1 = 0.1, theta2_AT3_1 = 0, theta2__AT1_1 = 0, theta2__AT2_1 = 0.1, theta2__AT3_1 = 0;
+double theta1AT1_1 = 52.20, theta1AT2_1 = 45.94, theta1AT3_1 = 65.52, theta1_AT1_1 = 0, theta1_AT2_1 = 0.1, theta1_AT3_1 = 0, theta1__AT1_1 = 0, theta1__AT2_1 = 0.1, theta1__AT3_1 = 0;
+double theta2AT1_1 = 55.19, theta2AT2_1 = 68.07, theta2AT3_1 = 59.15, theta2_AT1_1 = 0, theta2_AT2_1 = 0.1, theta2_AT3_1 = 0, theta2__AT1_1 = 0, theta2__AT2_1 = 0.1, theta2__AT3_1 = 0;
 
-double theta1AT1_2 = 54.3, theta1AT2_2 = 45.34, theta1AT3_2 = 70.44, theta1_AT1_2 = 0, theta1_AT2_2 = 0.1, theta1_AT3_2 = 0, theta1__AT1_2 = 0, theta1__AT2_2 = 0.1, theta1__AT3_2 = 0;
-double theta2AT1_2 = 43.57, theta2AT2_2 = 75.29, theta2AT3_2 = 50.55, theta2_AT1_2 = 0, theta2_AT2_2 = 0.1, theta2_AT3_2 = 0, theta2__AT1_2 = 0, theta2__AT2_2 = 0.1, theta2__AT3_2 = 0;
+double theta1AT1_2 = 54.45, theta1AT2_2 = 45.34, theta1AT3_2 = 68.91, theta1_AT1_2 = 0, theta1_AT2_2 = 0.1, theta1_AT3_2 = 0, theta1__AT1_2 = 0, theta1__AT2_2 = 0.1, theta1__AT3_2 = 0;
+double theta2AT1_2 = 56.58, theta2AT2_2 = 68.29, theta2AT3_2 = 57.85, theta2_AT1_2 = 0, theta2_AT2_2 = 0.1, theta2_AT3_2 = 0, theta2__AT1_2 = 0, theta2__AT2_2 = 0.1, theta2__AT3_2 = 0;
 
-double theta1AT1_3 = 53.0,theta1AT2_3=45.94,theta1AT3_3=69.35, theta1_AT1_3=0,theta1_AT2_3=0.1,theta1_AT3_3=0,theta1__AT1_3=0,theta1__AT2_3=0.1,theta1__AT3_3=0;
-double theta2AT1_3 = 42.3,theta2AT2_3=75.07,theta2AT3_3=51.79, theta2_AT1_3=0,theta2_AT2_3=0.1,theta2_AT3_3=0,theta2__AT1_3=0,theta2__AT2_3=0.1,theta2__AT3_3=0;
+double theta1AT1_3 = 52.21, theta1AT2_3 = 45.94, theta1AT3_3 = 65.52, theta1_AT1_3 = 0, theta1_AT2_3 = 0.1, theta1_AT3_3 = 0, theta1__AT1_3 = 0, theta1__AT2_3 = 0.1, theta1__AT3_3 = 0;
+double theta2AT1_3 = 55.19, theta2AT2_3 = 68.07, theta2AT3_3 = 59.15, theta2_AT1_3 = 0, theta2_AT2_3 = 0.1, theta2_AT3_3 = 0, theta2__AT1_3 = 0, theta2__AT2_3 = 0.1, theta2__AT3_3 = 0;
 
-double theta1AT1_4 = 53.5356, theta1AT2_4 = 45.3491, theta1AT3_4 = 64.4462, theta1_AT1_4 = 0, theta1_AT2_4 = 0.1, theta1_AT3_4 = 0, theta1__AT1_4 = 0, theta1__AT2_4 = 0.1, theta1__AT3_4 = 0;
-double theta2AT1_4 = 39.198, theta2AT2_4 = 75.6567, theta2AT3_4 = 51.5097, theta2_AT1_4 = 0, theta2_AT2_4 = 0.1, theta2_AT3_4 = 0, theta2__AT1_4 = 0, theta2__AT2_4 = 0.1, theta2__AT3_4 = 0;
+double theta1AT1_4 = 54.45, theta1AT2_4 = 45.34, theta1AT3_4 = 68.91, theta1_AT1_4 = 0, theta1_AT2_4 = 0.1, theta1_AT3_4 = 0, theta1__AT1_4 = 0, theta1__AT2_4 = 0.1, theta1__AT3_4 = 0;
+double theta2AT1_4 = 56.58, theta2AT2_4 = 68.65, theta2AT3_4 = 57.85, theta2_AT1_4 = 0, theta2_AT2_4 = 0.1, theta2_AT3_4 = 0, theta2__AT1_4 = 0, theta2__AT2_4 = 0.1, theta2__AT3_4 = 0;
 
 void setup()
 {
@@ -150,15 +155,62 @@ void setup()
   pinMode(motor1pwm_4, OUTPUT);
   pinMode(motor2_4, OUTPUT);
   pinMode(motor2pwm_4, OUTPUT);
+//1
+  d = -8;
+  y = -45;
+  c = sqrt(d*d + y*y);
+  double theta = atan(abs(y/d))*90/acos(0);
+  zeroError1_1 = theta - cosine1();
+  if(d>0){
+    zeroError1_1 = 180 - theta - cosine1();
+  }
+  zeroError2_1 = 180 - cosine2();
+  
+//2
+  
+  d = 4;
+  y = -43;
+  c = sqrt(d*d + y*y);
+  theta = atan(abs(y/d))*90/acos(0);
+  zeroError1_2 = theta - cosine1();
+  if(d>0){
+    zeroError1_2 = 180 - theta - cosine1();
+  }
+  zeroError2_2 = 180 - cosine2();
+
+//3
+  
+  d = 2;
+  y = -43;
+  c = sqrt(d*d + y*y);
+  theta = atan(abs(y/d))*90/acos(0);
+  zeroError1_3 = theta - cosine1();
+  if(d>0){
+    zeroError1_3 = 180 - theta - cosine1();
+  }
+  zeroError2_3 = 180 - cosine2();
+  
+//4
+
+  d = -6;
+  y = -43;
+  c = sqrt(d*d + y*y);
+  theta = atan(abs(y/d))*90/acos(0);
+  zeroError1_4 = theta - cosine1();
+  if(d>0){
+    zeroError1_4 = 180 - theta - cosine1();
+  }
+  zeroError2_4 = 180 - cosine2();
+  
 }
 
 void loop(){
-  for (double t = 0.1, u = 1.6; t <= 1.1, u <= 16.1; t = t + 0.1, u = u + 1.6)
+  for (double t = 0.125, u = 1.25; t <= 1.01, u <= 10.01; t = t + 0.125, u = u + 1.25)
   {
-    double xe_2 = -6 + u ;
+    double xe_2 = 4 - u ;
     double ye_2 = -45 ;
 
-    double xe_3 = -4 + u ;
+    double xe_3 = 2 - u ;
     double ye_3 = -45 ;
 
      if ( counter1_1 != temp1_1 ) {
@@ -236,19 +288,23 @@ void loop(){
       theta2c_4 = -(counter2_4 * 0.3);
     }
 
-
-    if (atan(ye_2 / xe_2) > 0)
-      alpha_2 = atan(ye_2 / xe_2) - 3.14159;
-
-    else
-      alpha_2 = atan(ye_2 / xe_2);
-
-    if (atan(ye_3 / xe_3) > 0)
-      alpha_3 = atan(ye_3 / xe_3) - PI;
-
-    else
-      alpha_3 = atan(ye_3 / xe_3);
-
+//2
+    c = sqrt(xe_2*xe_2 + ye_2*ye_2);
+    angle = atan(abs(ye_2/xe_2))*90/acos(0);
+    theta1_2 = angle - cosine1();
+    if(xe_2>0){
+      theta1_2 = 180 - angle - cosine1();
+    }
+    theta2_2 = 180 - cosine2();
+    
+//3
+    c = sqrt(xe_3*xe_3 + ye_3*ye_3);
+    angle = atan(abs(ye_3/xe_3))*90/acos(0);
+    theta1_3 = angle - cosine1();
+    if(xe_3>0){
+      theta1_3 = 180 - angle - cosine1();
+    }
+    theta2_3 = 180 - cosine2();
     //----------------------------------------------1111111111111111111------------------------------------------------------------------
     
     
@@ -262,7 +318,7 @@ void loop(){
     }
 
     
-     error1_1 = theta1_1 - theta1c_1 + zeroError1_1;
+    error1_1 = theta1_1 - theta1c_1 + zeroError1_1;
     error2_1 = theta2_1 - theta2c_1 + zeroError2_1; 
     
     if(t<0.5)
@@ -301,17 +357,18 @@ void loop(){
     correction1_1=5;
 
     //------------------------------------------------22222222222222-------------------------------------------------------------------------
-    theta1_2 = 57.2958 * (cosine_rule(l1, l2, sqrt(xe_2 * xe_2 + ye_2 * ye_2)) + alpha_2);
-    theta2_2 = 57.2958 * (-3.14159 + cosine_rule(sqrt(xe_2 * xe_2 + ye_2 * ye_2), l1, l2));
+//    theta1_2 = 57.2958 * (cosine_rule(l1, l2, sqrt(xe_2 * xe_2 + ye_2 * ye_2)) + alpha_2);
+//    theta2_2 = 57.2958 * (-3.14159 + cosine_rule(sqrt(xe_2 * xe_2 + ye_2 * ye_2), l1, l2));
 
-    error1_2 = theta1_2 - theta1c_2 + zeroError1_2;
-    error2_2 = theta2_2 - theta2c_2 + zeroError2_2;
+    error1_2 = zeroError1_2 - theta1_2 - theta1c_2;
+    error2_2 = zeroError2_2 - theta2_2 - theta2c_2;
+    Serial.println(error2_2);
     
     c1_2 = PID(theta1_2, theta1c_2, zeroError1_2 , (Kp1+1.2) , (Kd1+2.2) , prev_error1_2);
     c2_2 = PID(theta2_2, theta2c_2, zeroError2_2 , Kp2 , Kd2+2.4 , prev_error2_2);
 
-    ll1=0.0, lm1=40.0, ul1=25, um1=35.0;    
-    ll2=0.0, lm2=90.0, ul2=50.0, um2=150.0;
+    ll1=0.0, lm1=40.0, ul1=25, um1=45.0;    
+    ll2=0.0, lm2=90.0, ul2=80.0, um2=150.0;
 
     correction1_2 = ((um1-ul1)/(lm1-ll1)*abs(c1_2)+ul1);
     correction2_2 = ((um2-ul2)/(lm2-ll2)*abs(c2_2)+ul2);
@@ -325,16 +382,16 @@ void loop(){
 //    if(t>=0.9) correction1_2 = 55;
 
     //----------------------------------------------3333333333333333333333--------------------------------------------------------------------
-    theta1_3 = 57.2958 * (cosine_rule(l1, l2, sqrt(xe_3 * xe_3 + ye_3 * ye_3)) + alpha_3);
-    theta2_3 = 57.2958 * (-3.14159 + cosine_rule(sqrt(xe_3 * xe_3 + ye_3 * ye_3), l1, l2));
+//    theta1_3 = 57.2958 * (cosine_rule(l1, l2, sqrt(xe_3 * xe_3 + ye_3 * ye_3)) + alpha_3);
+//    theta2_3 = 57.2958 * (-3.14159 + cosine_rule(sqrt(xe_3 * xe_3 + ye_3 * ye_3), l1, l2));
 
-    error1_3 = theta1_3 - theta1c_3 + zeroError1_3;
-    error2_3 = theta2_3 - theta2c_3 + zeroError2_3;
+    error1_3 = zeroError1_3 - theta1_3 - theta1c_3;
+    error2_3 = zeroError2_3 - theta2_3 - theta2c_3;
     
     c1_3 = PID(theta1_3, theta1c_3, zeroError1_3 , (Kp1+1.3) , (Kd1+2.4) , prev_error1_3);
     c2_3 = PID(theta2_3, theta2c_3, zeroError2_3 , Kp2 , Kd2+1.5 , prev_error2_3);
 
-    ll1=0.0, lm1=40.0, ul1=25, um1=35.0;    
+    ll1=0.0, lm1=40.0, ul1=25, um1=45.0;    
     ll2=0.0, lm2=90.0, ul2=70.0, um2=150.0;
 
     correction1_3 = ((um1-ul1)/(lm1-ll1)*abs(c1_3)+ul1);
@@ -596,12 +653,12 @@ void loop(){
       ierror1_1 = theta1_1 - theta1c_1 + zeroError1_1;
       ierror2_1 = theta2_1 - theta2c_1 + zeroError2_1;
 
-      ierror1_2 = theta1_2 - theta1c_2 + zeroError1_2;
-      ierror2_2 = theta2_2 - theta2c_2 + zeroError2_2;
-
-      ierror1_3 = theta1_3 - theta1c_3 + zeroError1_3;
-      ierror2_3 = theta2_3 - theta2c_3 + zeroError2_3;
-
+      ierror1_2 = zeroError1_2 - theta1_2 - theta1c_2;
+      ierror2_2 = zeroError2_2 - theta2_2 - theta2c_2;
+      
+      ierror1_3 = zeroError1_3 - theta1_3 - theta1c_3;
+      ierror2_3 = zeroError2_3 - theta2_3 - theta2c_3;
+      
       ierror1_4 = theta1_4 - theta1c_4 + zeroError1_4;
       ierror2_4 = theta2_4 - theta2c_4 + zeroError2_4;
 
@@ -738,12 +795,12 @@ void loop(){
   
   }
   
-  for (double t = 0.1, u = 1.6; t <= 1.1, u <= 16.1; t = t + 0.1, u = u + 1.6)
+  for (double t = 0.125, u = 1.25; t <= 1.01, u <= 10.01; t = t + 0.125, u = u + 1.25)
   { 
-    double xe_1 = -4 + u ;
+    double xe_1 = 2 - u ;
     double ye_1 = -45 ;
 
-    double xe_4 = -6 + u;
+    double xe_4 = 4 - u;
     double ye_4 = -45;
 
     if ( counter1_1 != temp1_1 ) {
@@ -822,25 +879,30 @@ void loop(){
       theta2c_4 = -(counter2_4 * 0.3);
     }
 
+//1
+    c = sqrt(xe_1*xe_1 + ye_1*ye_1);
+    angle = atan(abs(ye_1/xe_1))*90/acos(0);
+    theta1_1 = angle - cosine1();
+    if(xe_1>0){
+      theta1_1 = 180 - angle - cosine1();
+    }
+    theta2_1 = 180 - cosine2();
 
-    if (atan(ye_1 / xe_1) > 0)
-      alpha_1 = atan(ye_1 / xe_1) - 3.14159;
-
-    else
-      alpha_1 = atan(ye_1 / xe_1);
-
-    if (atan(ye_4 / xe_4) > 0)
-      alpha_4 = atan(ye_4 / xe_4) - PI;
-
-    else
-      alpha_4 = atan(ye_4 / xe_4);
+ //4
+    c = sqrt(xe_4*xe_4 + ye_4*ye_4);
+    angle = atan(abs(ye_4/xe_4))*90/acos(0);
+    theta1_4 = angle - cosine1();
+    if(xe_4>0){
+      theta1_4 = 180 - angle - cosine1();
+    }
+    theta2_4 = 180 - cosine2();
 
     //------------------------------------------------------11111111111111111111----------------------------------------------------------------
-    theta1_1 = 57.2958 * (cosine_rule(l1, l2, sqrt(xe_1 * xe_1 + ye_1 * ye_1)) + alpha_1);
-    theta2_1 = 57.2958 * (-3.14159 + cosine_rule(sqrt(xe_1 * xe_1 + ye_1 * ye_1), l1, l2));
+//    theta1_1 = 57.2958 * (cosine_rule(l1, l2, sqrt(xe_1 * xe_1 + ye_1 * ye_1)) + alpha_1);
+//    theta2_1 = 57.2958 * (-3.14159 + cosine_rule(sqrt(xe_1 * xe_1 + ye_1 * ye_1), l1, l2));
 
-    error1_1 = theta1_1 - theta1c_1 + zeroError1_1;
-    error2_1 = theta2_1 - theta2c_1 + zeroError2_1;
+    error1_1 = zeroError1_1 - theta1_1 - theta1c_1;
+    error2_1 = zeroError2_1 - theta2_1 - theta2c_1;
     
       c1_1 = PID(theta1_1, theta1c_1, zeroError1_1 , (Kp1+1.5) , (Kd1+2.2) , prev_error1_1);
     c2_1 = PID(theta2_1, theta2c_1, zeroError2_1 , Kp2 , Kd2 , prev_error2_1);
@@ -956,11 +1018,11 @@ void loop(){
 
     //----------------------------------------------------44444444444444444444-----------------------------------------------------------------------
 
-    theta1_4 = 57.2958 * (cosine_rule(l1, l2, sqrt(xe_4 * xe_4 + ye_4 * ye_4)) + alpha_4);
-    theta2_4 = 57.2958 * (-3.14159 + cosine_rule(sqrt(xe_4 * xe_4 + ye_4 * ye_4), l1, l2));
+//    theta1_4 = 57.2958 * (cosine_rule(l1, l2, sqrt(xe_4 * xe_4 + ye_4 * ye_4)) + alpha_4);
+//    theta2_4 = 57.2958 * (-3.14159 + cosine_rule(sqrt(xe_4 * xe_4 + ye_4 * ye_4), l1, l2));
 
-    error1_4 = theta1_4 - theta1c_4 + zeroError1_4;
-    error2_4 = theta2_4 - theta2c_4 + zeroError2_4;
+    error1_4 = zeroError1_4 - theta1_4 - theta1c_4;
+    error2_4 = zeroError2_4 - theta2_4 - theta2c_4;
     
     c1_4 = PID(theta1_4, theta1c_4, zeroError1_4 , (Kp1+1.8) , (Kd1+1.8) , prev_error1_4);
     c2_4 = PID(theta2_4, theta2c_4, zeroError2_4 , Kp2 , Kd2 , prev_error2_4);
@@ -1091,7 +1153,6 @@ void loop(){
       analogWrite(motor2pwm_4, abs(correction2_4));
     }
 
-    
     d1_1 = 0;
     d2_1 = 0;
     d1_2 = 0;
@@ -1178,8 +1239,8 @@ void loop(){
       theta2c_4 = -(counter2_4 * 0.3);
     }
 
-      ierror1_1 = theta1_1 - theta1c_1 + zeroError1_1;
-      ierror2_1 = theta2_1 - theta2c_1 + zeroError2_1;
+      ierror1_1 = zeroError1_1 - theta1_1 - theta1c_1;
+      ierror2_1 = zeroError2_1 - theta2_1 - theta2c_1;
 
       ierror1_2 = theta1_2 - theta1c_2 + zeroError1_2;
       ierror2_2 = theta2_2 - theta2c_2 + zeroError2_2;
@@ -1187,8 +1248,8 @@ void loop(){
       ierror1_3 = theta1_3 - theta1c_3 + zeroError1_3;
       ierror2_3 = theta2_3 - theta2c_3 + zeroError2_3;
 
-      ierror1_4 = theta1_4 - theta1c_4 + zeroError1_4;
-      ierror2_4 = theta2_4 - theta2c_4 + zeroError2_4;
+      ierror1_4 = zeroError1_4 - theta1_4 - theta1c_4;
+      ierror2_4 = zeroError2_4 - theta2_4 - theta2c_4;
 
       if (error1_1 < 0 ) {
         if(ierror1_1>-1){
@@ -1497,4 +1558,12 @@ void ai5_4() {
     counter2_4--;
   }
 //  state2_4 = !state2_4;
+}
+
+double cosine1(){
+  return (acos((a*a + c*c - b*b)/(2*a*c)))*90/acos(0);
+}
+
+double cosine2(){
+  return (acos((a*a + b*b - c*c)/(2*a*b)))*90/acos(0);
 }

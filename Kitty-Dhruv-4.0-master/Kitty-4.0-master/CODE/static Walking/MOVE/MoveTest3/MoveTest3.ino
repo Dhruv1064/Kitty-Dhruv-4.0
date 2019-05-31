@@ -43,8 +43,8 @@ void setup() {
   pinMode(motor2, OUTPUT);
   pinMode(motor2pwm, OUTPUT);
 
-  d = -2;
-  y = -45;
+  d = 2;
+  y = -43;
   c = sqrt(d*d + y*y);
   double theta = atan(abs(y/d))*90/acos(0);
   zeroError1 = theta - cosine1();
