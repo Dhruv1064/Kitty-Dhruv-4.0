@@ -17,7 +17,7 @@ double cosine2(){
 
 
 int main() {
-	x = 3;
+	x = -8;
 	y = -43;
 	c = sqrt(x*x + y*y);
     angle = atan(abs(y/x))*90/acos(0);

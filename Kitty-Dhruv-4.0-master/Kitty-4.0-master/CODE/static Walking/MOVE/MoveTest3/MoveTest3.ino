@@ -14,7 +14,7 @@ int A_1 = 5, A_2 = -1;
 
 //bool state1 = true, state2 = true;
 
-float pwmx1=120, pwmx2=50, pwmx4=150;
+float pwmx1=90, pwmx2=40, pwmx4=150;
 float theta1c=0, theta2c=0, zeroError1 = 69.513, zeroError2=51.58, minAngle1 = 21.3, minAngle2 = 30.0+5;  //62.513  51.58
 int x;
 
