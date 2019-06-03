@@ -43,15 +43,15 @@ void setup() {
   pinMode(motor2, OUTPUT);
   pinMode(motor2pwm, OUTPUT);
 
-  d = 2;
-  y = -43;
+  d = -4;
+  y = -45;
   c = sqrt(d*d + y*y);
   double theta = atan(abs(y/d))*90/acos(0);
   zeroError1 = theta - cosine1();
   if(d>0){
     zeroError1 = 180 - theta - cosine1();
   }
-  zeroError2 = 180 - cosine2();
+  zeroError2 = 180 - cosine2(); 
   
   while(!Serial.available())
   {

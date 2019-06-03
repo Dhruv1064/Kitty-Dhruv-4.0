@@ -1,4 +1,4 @@
- #include <PinChangeInt.h>
+//#include <PinChangeInt.h>
 
 #define motor1  40
 #define motor1pwm  8
@@ -14,7 +14,7 @@ int A_1 = 3, A_2 = 2;
 bool state1 = true, state2 = true;
 
 float pwmx1=100, pwmx2=40, pwmx4=120; 
-float theta1c=0, theta2c=0, zeroError1 = 72.4462, zeroError2 = 49.55, minAngle1 = 19.8,minAngle2 = 35.1-5;  //zeroError1 = 72.4462, zeroError2 = 49.55
+float theta1c=0, theta2c=0, zeroError1 = 72.4462, zeroError2 = 49.55, minAngle1 = 19.8+3,minAngle2 = 35.1-2;  //zeroError1 = 72.4462, zeroError2 = 49.55
 int x;
 
 volatile int temp1, counter1 = 0;
@@ -40,8 +40,8 @@ void setup() {
   pinMode(motor2, OUTPUT);
   pinMode(motor2pwm, OUTPUT);
 
-  d = 4;
-  y = -43;
+  d = 0;
+  y = -45;
   c = sqrt(d*d + y*y);
   double theta = atan(abs(y/d))*90/acos(0);
   zeroError1 = theta - cosine1();

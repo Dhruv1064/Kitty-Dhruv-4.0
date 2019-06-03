@@ -366,7 +366,7 @@ void loop(){
     c1_2 = PID(theta1_2, theta1c_2, zeroError1_2 , (Kp1+1.2) , (Kd1+2.2) , prev_error1_2);
     c2_2 = PID(theta2_2, theta2c_2, zeroError2_2 , Kp2 , Kd2+1.8 , prev_error2_2);
 
-    ll1=0.0, lm1=40.0, ul1=29.5, um1=35.0;
+    ll1=0.0, lm1=40.0, ul1=58.5, um1=69.0;
     ll2=0.0, lm2=90.0, ul2=20.0, um2=40.0;
 
     correction1_2 = ((um1-ul1)/(lm1-ll1)*abs(c1_2)+ul1);
@@ -390,7 +390,7 @@ void loop(){
     c1_3 = PID(theta1_3, theta1c_3, zeroError1_3 , (Kp1+1.3) , (Kd1+2.4) , prev_error1_3);
     c2_3 = PID(theta2_3, theta2c_3, zeroError2_3 , Kp2 , Kd2+2.4 , prev_error2_3);
 
-    ll1=0.0, lm1=40.0, ul1=28, um1=35.0;    
+    ll1=0.0, lm1=40.0, ul1=58, um1=69.0;    
     ll2=0.0, lm2=90.0, ul2=20.0, um2=45.0;
 
     correction1_3 = ((um1-ul1)/(lm1-ll1)*abs(c1_3)+ul1);
@@ -793,7 +793,7 @@ void loop(){
 //    }
 //  
   }
-
+  
   for (double t = 0.1, u = 1; t <= 1.01, u <= 10.01; t = t + 0.1, u = u + 1)
   { 
     double xe_1 = 2 - u ;
@@ -906,7 +906,7 @@ void loop(){
     c1_1 = PID(theta1_1, theta1c_1, zeroError1_1 , (Kp1+1.5) , (Kd1+2.2) , prev_error1_1);
     c2_1 = PID(theta2_1, theta2c_1, zeroError2_1 , Kp2 , Kd2+1.5 , prev_error2_1);
 
-    ll1=0.0, lm1=40.0, ul1=23, um1=34.0;    
+    ll1=0.0, lm1=40.0, ul1=52, um1=64.0;    
     ll2=0.0, lm2=90.0, ul2=32.0, um2=44.0;
 
     correction1_1 = ((um1-ul1)/(lm1-ll1)*abs(c1_1)+ul1);
@@ -1026,7 +1026,7 @@ void loop(){
     c1_4 = PID(theta1_4, theta1c_4, zeroError1_4 , (Kp1+1.65) , (Kd1+1.8) , prev_error1_4);
     c2_4 = PID(theta2_4, theta2c_4, zeroError2_4 , Kp2 , Kd2+1.5 , prev_error2_4);
 
-    ll1=0.0, lm1=30.0, ul1=22, um1=30;
+    ll1=0.0, lm1=30.0, ul1=48, um1=60;
     ll2=0.0, lm2=40.0, ul2=18.0, um2=25.0;
 
     correction1_4 = ((um1-ul1)/(lm1-ll1)*abs(c1_4)+ul1);

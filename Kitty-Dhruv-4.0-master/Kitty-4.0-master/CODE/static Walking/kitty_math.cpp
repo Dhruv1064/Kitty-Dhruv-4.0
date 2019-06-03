@@ -17,14 +17,20 @@ double cosine2(){
 
 
 int main() {
-	x = -8;
-	y = -43;
+	x = -4;
+	y = -45;
 	c = sqrt(x*x + y*y);
     angle = atan(abs(y/x))*90/acos(0);
+    if(x==0){
+    	theta1 = 90 - cosine1();
+	}
+	else{
+	
     theta1 = angle - cosine1();
     if(x>0){
       theta1 = 180 - angle - cosine1();
     }
+}
     theta2= 180 - cosine2();
     cout<<"theta1 "<<theta1<<endl;
     cout<<"theta2 "<<theta2<<endl;

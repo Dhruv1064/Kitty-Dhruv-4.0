@@ -8,13 +8,13 @@ int A_1 = 4, A_2 = 5;
   
 #define a1 19
 #define b1 A3
-#define a2 18
+#define a2 18.
 #define b2 51
-//bool state1 = true, state2 = true;
+bool state1 = true, state2 = true;
 
 float pwmx1=90, pwmx2=45, pwmx4=150;
-float theta1c=0, theta2c=0, zeroError1 = 0, zeroError2 = 0, minAngle1 = 21.6, minAngle2 = 28.5+5;  //53.728  42.68
-int x; 
+float theta1c=0, theta2c=0, zeroError1 = 0, zeroError2 = 0, minAngle1 = 21.6+3, minAngle2 = 28.5+6;  //53.728  42.68
+int x;  
 
 volatile int temp1, counter1 = 0; 
 volatile int temp2, counter2 = 0;
@@ -38,10 +38,10 @@ void setup() {
   pinMode(motor1pwm, OUTPUT);
   pinMode(motor2, OUTPUT);
   pinMode(motor2pwm, OUTPUT);
-
   
-  d = -8;
-  y = -43;
+  
+  d = -10;
+  y = -45;
   c = sqrt(d*d + y*y);
   double theta = atan(abs(y/d))*90/acos(0);
   zeroError1 = theta - cosine1();
